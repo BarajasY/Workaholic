@@ -1,0 +1,40 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --background: #ece9e8;
+  
+  --color1: #2c1f1f;
+  --color2: #0479f6;
+  --color3: #a59c9c;
+  --color4: #163967;
+  --color5: #1746a8;
+  --color6: #95adc4;
+  --color7: #3b3b3e;
+  --color8: #2e3182;
+  --error: #ee0a28;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  outline: none;
+  font-family: 'Tilt Warp';
+  transition: .2s;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: black;
+}

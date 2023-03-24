@@ -1,0 +1,43 @@
+.homeContainer {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background: var(--background);
+}
+
+.homeContainer h1 {
+    display: flex;
+}
+
+.homeContainer h1 span{
+    display: block;
+    position: relative;
+    font-size: 130px;
+    color: var(--color8);
+    cursor:default;
+    text-shadow: 0px 5px 10px var(--color8);
+}
+
+.homeContainer h1 span:hover {
+    transform: translateY(-20px) rotate(10deg);
+    color: var(--color8);
+}
+
+.homeButtons a {
+    position: relative;
+    display: block;
+    color: var(--color5);
+    font-size: 20px;
+    border: 2px solid var(--color5);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px var(--color5);
+}
+
+.homeButtons a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 10px var(--color5) inset;
+}
