@@ -12,6 +12,8 @@ import com.yahir.Workaholic.Company.Company;
 import com.yahir.Workaholic.Company.CompanyRepository;
 import com.yahir.Workaholic.Postings.Postings;
 import com.yahir.Workaholic.Postings.PostingsRepository;
+import com.yahir.Workaholic.Workers.Worker;
+import com.yahir.Workaholic.Workers.WorkerRepository;
 
 @SpringBootApplication
 @RestController
@@ -20,12 +22,14 @@ public class WorkaholicApplication {
 
 	private final PostingsRepository postingRepository;
 	private final CompanyRepository companyRepository;
+	private final WorkerRepository workerRepository;
 
-	public WorkaholicApplication(PostingsRepository postingRepository, CompanyRepository companyRepository) {
+	public WorkaholicApplication(PostingsRepository postingRepository, CompanyRepository companyRepository, WorkerRepository workerRepository) {
 		this.postingRepository = postingRepository;
 		this.companyRepository = companyRepository;
+		this.workerRepository = workerRepository;
 	}
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(WorkaholicApplication.class, args);
 	}
@@ -43,6 +47,11 @@ public class WorkaholicApplication {
 	@GetMapping("/company/all")
 	List<Company> Test3() {
 		return companyRepository.findAll();
+	}
+
+	@GetMapping("/worker/all")
+	List<Worker> Test4() {
+		return workerRepository.findAll();
 	}
 
 }

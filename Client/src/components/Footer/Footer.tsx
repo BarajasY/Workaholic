@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import uanl from '../../assets/uanl.png'
-import fime from '../../assets/logofime.png'
+import fime from '../../assets/logofime2.png'
 import './Footer.css';
 
 const Footer = () => {

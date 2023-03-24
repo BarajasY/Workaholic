@@ -11,6 +11,7 @@ function App() {
           <Index.Navbar/>
           <Routes>
             <Route path="/" element={<Index.Home/>} />
+            <Route path="/signup" element={<Index.Signup/>} />
           </Routes>
           <Index.Footer/>
       </BrowserRouter>

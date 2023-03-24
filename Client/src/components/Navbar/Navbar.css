@@ -60,9 +60,11 @@
     background: var(--color8);
     color: var(--color6);
     border-radius: 10px;
+    border: 2px solid transparent;
 }
 
 #signup:hover {
-    background: var(--color6);
+    background: var(--background);
     color: var(--color8);
+    border: 2px solid black;
 }

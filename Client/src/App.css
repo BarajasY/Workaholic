@@ -13,12 +13,17 @@
   
   --color1: #2c1f1f;
   --color2: #0479f6;
+  --blend2: #0770E8;
+  --blend3: #0D62D3;
+  --blend4: #1059C4;
+  --blend5: #144FB6;
   --color3: #a59c9c;
   --color4: #163967;
   --color5: #1746a8;
   --color6: #95adc4;
   --color7: #3b3b3e;
   --color8: #2e3182;
+  --selected: #efb43a;
   --error: #ee0a28;
 }
 
@@ -33,6 +38,7 @@
 
 ::-webkit-scrollbar {
   width: 8px;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
