@@ -75,6 +75,12 @@ public class WorkerController {
         } 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    
+    @GetMapping("wadaw")
+    public Object Test() {
+        storageService.store(null);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     /* @ExceptionHandler(StorageFileNotFoundException.class) */
 	public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
