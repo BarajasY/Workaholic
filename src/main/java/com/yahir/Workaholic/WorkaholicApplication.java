@@ -2,8 +2,12 @@ package com.yahir.Workaholic;
 
 import java.util.List;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,10 +18,14 @@ import com.yahir.Workaholic.Postings.Postings;
 import com.yahir.Workaholic.Postings.PostingsRepository;
 import com.yahir.Workaholic.Workers.Worker;
 import com.yahir.Workaholic.Workers.WorkerRepository;
+import com.yahir.Workaholic.Workers.Storage.StorageProperties;
+import com.yahir.Workaholic.Workers.Storage.StorageService;
 
 @SpringBootApplication
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/")
+@EnableConfigurationProperties(StorageProperties.class)
 public class WorkaholicApplication {
 
 	private final PostingsRepository postingRepository;
@@ -52,6 +60,14 @@ public class WorkaholicApplication {
 	@GetMapping("/worker/all")
 	List<Worker> Test4() {
 		return workerRepository.findAll();
+	}
+
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+			storageService.deleteAll();
+			storageService.init();
+		};
 	}
 
 }

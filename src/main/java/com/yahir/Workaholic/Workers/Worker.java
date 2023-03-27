@@ -26,17 +26,15 @@ public class Worker {
     private String lname;
     private String country;
     private String email;
-    private String cvLocation;
     private String password;
     private String tags;
     
-    public Worker(Integer id, String fname, String lname, String country, String email, String cvLocation, String password, String tags) {
+    public Worker(Integer id, String fname, String lname, String country, String email, String password, String tags) {
         this.id = id;
         this.fname = fname;
         this.lname = lname;
         this.country = country;
         this.email = email;
-        this.cvLocation = cvLocation;
         this.password = password;
         this.tags = tags;
     }
@@ -49,12 +47,12 @@ public class Worker {
             return false;
         }
         Worker worker = (Worker) o;
-        return Objects.equals(id, worker.id) && Objects.equals(fname, worker.fname) && Objects.equals(lname, worker.lname) && Objects.equals(country, worker.country) && Objects.equals(cvLocation, worker.cvLocation) && Objects.equals(password, worker.password) && Objects.equals(tags, worker.tags) && Objects.equals(email, worker.email);
+        return Objects.equals(id, worker.id) && Objects.equals(fname, worker.fname) && Objects.equals(lname, worker.lname) && Objects.equals(country, worker.country) && Objects.equals(password, worker.password) && Objects.equals(tags, worker.tags) && Objects.equals(email, worker.email);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(id, fname, lname, country, cvLocation, password, tags, email);
+        return Objects.hash(id, fname, lname, country, password, tags, email);
     }
 
     public String getEmail() {
@@ -95,14 +93,6 @@ public class Worker {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getCvLocation() {
-        return this.cvLocation;
-    }
-
-    public void setCvLocation(String cvLocation) {
-        this.cvLocation = cvLocation;
     }
 
     public String getPassword() {

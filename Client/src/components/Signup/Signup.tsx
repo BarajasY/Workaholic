@@ -9,6 +9,7 @@ const Signup = () => {
   const [Country, setCountry] = useState("")
   const [userTags, setUserTags] = useState([""])
   const [CV, setCV] = useState<File>()
+  const formData = new FormData()
   const [ErrorMessage, setErrorMessage] = useState("")
   const tags = ["Software", "Medicina", "Limpieza", "Ciberseguridad", "Investigación", "Construcción", "Atención al cliente", "Docente"]
 
@@ -31,8 +32,38 @@ const Signup = () => {
     } else {
       //Remove error message
       setErrorMessage("")
-      
+      SendUserData()
+      SendUserCV()
     }
+  }
+
+  const SendUserData = async () => {
+    const Post = await fetch("http://localhost:8080/api/v1/worker/data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "FName": FName,
+        "LName": LName,
+        "Email": Email,
+        "Password": Password,
+        "Country": Country,
+        "Tags": userTags,
+      })
+    })
+  }
+
+  const SendUserCV = async () => {
+    formData.append('File', CV!);
+    formData.append('Email', Email)
+    const Post = await fetch("http://localhost:8080/api/v1/worker/resume", {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      body: formData,
+    })
   }
 
   return (
