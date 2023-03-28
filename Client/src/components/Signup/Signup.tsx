@@ -55,13 +55,13 @@ const Signup = () => {
   }
 
   const SendUserCV = async () => {
-    formData.append('File', CV!);
-    formData.append('Email', Email)
-    const Post = await fetch("http://localhost:8080/api/v1/worker/resume", {
+    formData.append('file', CV!);
+    console.log(formData.get("file"));
+    const Post = await fetch("http://localhost:8080/api/v1/upload", {
       method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data"
-      },
+/*       headers: {
+        "Content-Type": "multipart/form-data",
+      }, */
       body: formData,
     })
   }
