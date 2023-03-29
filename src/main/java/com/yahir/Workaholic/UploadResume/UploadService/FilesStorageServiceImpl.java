@@ -25,7 +25,7 @@ public class FilesStorageServiceImpl implements FileStorageService{
     }
 
     @Override
-    public void save(MultipartFile file) {
+    public void save(MultipartFile file, String email) {
         try {
             Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class FilesStorageServiceImpl implements FileStorageService{
             Path file = root.resolve(filename);
             Resource resource = new UrlResource(file.toUri());
         } catch (Exception e) {
-            // TODO: handle exception
+
         }
     } */
 

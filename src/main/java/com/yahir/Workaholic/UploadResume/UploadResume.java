@@ -2,12 +2,10 @@ package com.yahir.Workaholic.UploadResume;
 
 import java.util.Objects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
@@ -25,38 +23,15 @@ public class UploadResume {
     )
     private Integer id;
     private String email;
-    @Lob
-    @Column(name = "file", columnDefinition="BLOB")
-    private Byte[] file;
-    private String url;
-
-    public UploadResume(Integer id, String email, Byte[] file, String url) {
-        this.id = id;
-        this.email = email;
-        this.file = file;
-        this.url = url;
-    }
-
-    public String getUrl() {
-        return this.url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public UploadResume url(String url) {
-        setUrl(url);
-        return this;
-    }
+    private String filename;
 
     public UploadResume() {
     }
 
-    public UploadResume(Integer id, String email, Byte[] file) {
+    public UploadResume(Integer id, String email, String filename) {
         this.id = id;
         this.email = email;
-        this.file = file;
+        this.filename = filename;
     }
 
     public Integer getId() {
@@ -75,12 +50,12 @@ public class UploadResume {
         this.email = email;
     }
 
-    public Byte[] getFile() {
-        return this.file;
+    public String getFilename() {
+        return this.filename;
     }
 
-    public void setFile(Byte[] file) {
-        this.file = file;
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public UploadResume id(Integer id) {
@@ -93,8 +68,8 @@ public class UploadResume {
         return this;
     }
 
-    public UploadResume file(Byte[] file) {
-        setFile(file);
+    public UploadResume filename(String filename) {
+        setFilename(filename);
         return this;
     }
 
@@ -106,12 +81,12 @@ public class UploadResume {
             return false;
         }
         UploadResume uploadResume = (UploadResume) o;
-        return Objects.equals(id, uploadResume.id) && Objects.equals(email, uploadResume.email) && Objects.equals(file, uploadResume.file);
+        return Objects.equals(id, uploadResume.id) && Objects.equals(email, uploadResume.email) && Objects.equals(filename, uploadResume.filename);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, file);
+        return Objects.hash(id, email, filename);
     }
 
     @Override
@@ -119,7 +94,9 @@ public class UploadResume {
         return "{" +
             " id='" + getId() + "'" +
             ", email='" + getEmail() + "'" +
-            ", file='" + getFile() + "'" +
+            ", filename='" + getFilename() + "'" +
             "}";
     }
+
+   
 }

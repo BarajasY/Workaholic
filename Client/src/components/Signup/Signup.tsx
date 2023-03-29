@@ -7,10 +7,11 @@ const Signup = () => {
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
   const [Country, setCountry] = useState("")
-  const [userTags, setUserTags] = useState([""])
+  const [userTags, setUserTags] = useState<String[]>([])
   const [CV, setCV] = useState<File>()
   const formData = new FormData()
   const [ErrorMessage, setErrorMessage] = useState("")
+  const [CompleteSignup, setCompleteSignup] = useState(false)
   const tags = ["Software", "Medicina", "Limpieza", "Ciberseguridad", "Investigación", "Construcción", "Atención al cliente", "Docente"]
 
   const AddTag = (tag:string) => {
@@ -33,10 +34,9 @@ const Signup = () => {
       //Remove error message
       setErrorMessage("")
       SendUserData()
-      SendUserCV()
     }
   }
-
+  
   const SendUserData = async () => {
     const Post = await fetch("http://localhost:8080/api/v1/worker/data", {
       method: "POST",
@@ -49,13 +49,23 @@ const Signup = () => {
         "Email": Email,
         "Password": Password,
         "Country": Country,
-        "Tags": userTags,
+        "Tags": userTags.toString(),
       })
+    })
+    .then(response => {
+      console.clear()
+      if(response.status === 401) {
+        window.scrollTo({top: 0, behavior: 'smooth'})
+        setErrorMessage("An account with that email already exists.")
+      } else {
+        SendUserCV()
+      }
     })
   }
 
   const SendUserCV = async () => {
     formData.append('file', CV!);
+    formData.append('email', Email);
     console.log(formData.get("file"));
     const Post = await fetch("http://localhost:8080/api/v1/upload", {
       method: "POST",
@@ -64,6 +74,19 @@ const Signup = () => {
       }, */
       body: formData,
     })
+    .then(response => {
+      console.clear()
+      if(response.status === 200) {
+        setErrorMessage("")
+        setCompleteSignup(true)
+      }
+    })
+  }
+
+  if(CompleteSignup) {
+    return (
+      <h1>Hola</h1>
+    )
   }
 
   return (

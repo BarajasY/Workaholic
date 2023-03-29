@@ -6,7 +6,7 @@ public interface FileStorageService {
     
     public void init();
 
-    public void save(MultipartFile file);
+    public void save(MultipartFile file, String email);
 
     /* public Resource load(String filename); */
 

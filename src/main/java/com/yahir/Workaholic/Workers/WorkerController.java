@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/api/v1/worker")
 @CrossOrigin
@@ -20,7 +21,7 @@ public class WorkerController {
     private final WorkerRepository repository;
 
     @Autowired
-    public WorkerController(WorkerRepository repository/* , StorageService storageService */) {
+    public WorkerController(WorkerRepository repository) {
         this.repository = repository;
     }
 
@@ -30,7 +31,7 @@ public class WorkerController {
         String Email,
         String Password,
         String Country,
-        String[] Tags
+        String Tags
     ) {}
 
     @GetMapping("")
@@ -40,7 +41,17 @@ public class WorkerController {
 
     @PostMapping("data")
     public Object RegisterWorker(@RequestBody NewWorkerDataRequest request) {
-        
+        if(repository.existsByEmail(request.Email())) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        Worker Worker = new Worker(null, null, null, null, null, null, null);
+        Worker.setFname(request.FName());
+        Worker.setLname(request.LName());
+        Worker.setEmail(request.Email());
+        Worker.setPassword(request.Password());
+        Worker.setCountry(request.Country());
+        Worker.setTags(request.Tags());
+        repository.save(Worker);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

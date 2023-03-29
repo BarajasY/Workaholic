@@ -10,6 +10,9 @@ import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class Postings {
+
+    public Postings(){}
+
     @Id
     @SequenceGenerator (
         name="id_sequence_generator",

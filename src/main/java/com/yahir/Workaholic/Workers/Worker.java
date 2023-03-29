@@ -10,6 +10,8 @@ import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class Worker {
+
+    public Worker(){}
     
     @Id
     @SequenceGenerator(

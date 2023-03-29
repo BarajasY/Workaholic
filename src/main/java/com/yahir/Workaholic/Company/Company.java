@@ -10,6 +10,8 @@ import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class Company {
+
+    public Company() {}
     
     @Id
     @SequenceGenerator(

@@ -25,10 +25,10 @@ public class UploadResumeController {
     FileStorageService storageService;
 
     @PostMapping("")
-    public Object uploadFile(@RequestParam("file") MultipartFile file) {
+    public Object uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("email") String email) {
         String message = "";
         try {
-            storageService.save(file);
+            storageService.save(file, email);
 
             message = "Uploaded file successfully" + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
