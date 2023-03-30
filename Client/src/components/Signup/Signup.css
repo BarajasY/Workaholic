@@ -1,13 +1,13 @@
 .signupContainer {
     width: 100%;
     height: fit-content;
-    background: var(--background);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 #signupHeader {
+    margin-top: 70px;
     font-size: 60px;
     color: var(--color4);
     text-align: center;

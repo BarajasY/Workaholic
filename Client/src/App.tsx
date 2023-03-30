@@ -10,8 +10,10 @@ function App() {
       <BrowserRouter>
           <Index.Navbar/>
           <Routes>
-            <Route path="/" element={<Index.Home/>} />
+            <Route path="/" element={<Index.Intro/>} />
+            <Route path="/home" element={<Index.Home/>} />
             <Route path="/signup" element={<Index.Signup/>} />
+            <Route path="/login" element={<Index.Login/>} />
           </Routes>
           <Index.Footer/>
       </BrowserRouter>

@@ -33,6 +33,7 @@ const Signup = () => {
       setErrorMessage("Porfavor rellene todos los espacios")
     } else {
       //Remove error message
+      //Make calls to the API with user data.
       setErrorMessage("")
       SendUserData()
     }
@@ -79,6 +80,7 @@ const Signup = () => {
       console.clear()
       if(response.status === 200) {
         setErrorMessage("")
+        window.scrollTo({top: 0, behavior: 'smooth'})
         setCompleteSignup(true)
       }
     })

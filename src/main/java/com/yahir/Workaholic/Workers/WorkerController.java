@@ -34,6 +34,11 @@ public class WorkerController {
         String Tags
     ) {}
 
+    record NewWorkerLogin(
+        String Email,
+        String Password
+    ){}
+
     @GetMapping("")
     List<Worker> Testing() {
         return repository.findAll();
@@ -53,5 +58,18 @@ public class WorkerController {
         Worker.setTags(request.Tags());
         repository.save(Worker);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("login")
+    public Object LoginWorker(@RequestBody NewWorkerLogin request) {
+        Boolean Verify = repository.existsByEmail(request.Email());
+        if(Verify) {
+            Worker DatabaseWorker = repository.findWorkerByEmail(request.Email());
+            if(DatabaseWorker.getPassword().equals(request.Password())) {
+                return DatabaseWorker;
+            }
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
