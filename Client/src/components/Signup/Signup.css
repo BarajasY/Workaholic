@@ -98,3 +98,29 @@ input:focus {
 #signupError {
     color: var(--error);
 }
+
+.completeSignup {
+    width: 100%;
+    height: 100vh;
+    background: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.completeSignup section {
+    font-size: 35px;
+    padding: 50px;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.completeSignup section h1 {
+    color: var(--color4);
+}
+
+.completeSignup section h1 a {
+    color: var(--blend5);
+}
+

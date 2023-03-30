@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Signup.css';
 
 const Signup = () => {
@@ -85,7 +86,12 @@ const Signup = () => {
 
   if(CompleteSignup) {
     return (
-      <h1>Hola</h1>
+      <div className="completeSignup">
+        <section>
+          <h1>Signup has been completed!</h1>
+          <h1>You may now head to <Link to="./login">Login</Link></h1>
+        </section>
+      </div>
     )
   }
 

@@ -26,8 +26,9 @@ public class FilesStorageServiceImpl implements FileStorageService{
 
     @Override
     public void save(MultipartFile file, String email) {
+        String filename = email + ".pdf";
         try {
-            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+            Files.copy(file.getInputStream(), this.root.resolve(filename));
         } catch (Exception e) {
             if (e instanceof FileAlreadyExistsException) {
                 throw new RuntimeException("A file of that name already exists");

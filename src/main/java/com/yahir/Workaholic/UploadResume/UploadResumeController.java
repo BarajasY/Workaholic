@@ -24,6 +24,12 @@ public class UploadResumeController {
     @Autowired
     FileStorageService storageService;
 
+    private final UploadResumeRepository repository;
+
+    public UploadResumeController(UploadResumeRepository repository) {
+        this.repository = repository;
+    }
+
     @PostMapping("")
     public Object uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("email") String email) {
         String message = "";
@@ -31,6 +37,10 @@ public class UploadResumeController {
             storageService.save(file, email);
 
             message = "Uploaded file successfully" + file.getOriginalFilename();
+            UploadResume uResume = new UploadResume();
+            uResume.setEmail(email);
+            uResume.setFilename(file.getOriginalFilename());
+            repository.save(uResume);
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         } catch (Exception e) {
             message = "Could not upload the file" + file.getOriginalFilename() + ". Error: " + e.getMessage();
