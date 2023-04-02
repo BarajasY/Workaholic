@@ -6,16 +6,12 @@ const Browse = () => {
         queryKey: ["postingsData"],
         queryFn: () => fetch("http://localhost:8080/api/v1/postings/all").then(res => res.json())
     })
-
     if(isLoading) return <h1>Loading</h1>
-
     if(error) console.log(error);
-
-    console.log(data)
 
   return (
     <div className="browseContainer">
-        <h1>Hola</h1>
+        <h1>Hehe browse some jobs.</h1>
     </div>
   )
 }

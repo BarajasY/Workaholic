@@ -15,6 +15,6 @@
     font-family: 'Tilt Warp';
     display: block;
     position: relative;
-    color: darkgreen;
+    color: var(--blend5);
     text-shadow: 0px 2px 10px black;
 }

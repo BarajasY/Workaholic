@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import Cookies from 'universal-cookie';
 import './Login.css'
+import { storeWorker } from '../../redux/workerSlice';
+import { workerInterface } from '../../types';
 
 const Login = () => {
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
   const [ErrorMessage, setErrorMessage] = useState("")
+  const dispatch = useDispatch();
   const navigate = useNavigate()
 
   const Login = () => {
@@ -35,11 +40,26 @@ const Login = () => {
         console.clear()
         setErrorMessage("La contraseña es incorrecta.")
       } else if(response.status === 200) {
-        navigate("/home")
+        response.json().then(data => {
+          storeLogin(data);
+        })
       }
     })
   }
 
+  const storeLogin = (data: workerInterface) => {
+    const cookies = new Cookies();
+    cookies.set('logged', true)
+    cookies.set('email', data.email);
+    cookies.set('fname', data.fname);
+    cookies.set('lname', data.lname);
+    cookies.set('country', data.country);
+    cookies.set('tags', data.tags);
+    const cookieData = cookies.getAll();
+    console.log(cookieData);
+    dispatch(storeWorker(cookieData))
+    navigate("/browse")
+  }
 
   return (
     <div className="loginContainer">

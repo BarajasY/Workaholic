@@ -1,30 +1,33 @@
-import * as Index from './components/Index'
-import './App.css'
-import { BrowserRouter } from 'react-router-dom'
-import { Route, Routes } from 'react-router'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import * as Index from "./components/Index";
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Provider } from "react-redux";
+import store from './redux/store';
 
 function App() {
-
   const queryClient = new QueryClient();
 
   return (
     <div className="App">
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-            <Index.Navbar/>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <Index.Navbar />
             <Routes>
-              <Route path="/" element={<Index.Intro/>} />
-              <Route path="/home" element={<Index.Home/>} />
-              <Route path="/signup" element={<Index.Signup/>} />
-              <Route path="/login" element={<Index.Login/>} />
-              <Route path="/browse" element={<Index.Browse/>} />
+              <Route path="/" element={<Index.Intro />} />
+              <Route path="/home" element={<Index.Home />} />
+              <Route path="/signup" element={<Index.Signup />} />
+              <Route path="/login" element={<Index.Login />} />
+              <Route path="/browse" element={<Index.Browse />} />
             </Routes>
-            <Index.Footer/>
-        </BrowserRouter>
-      </QueryClientProvider>
+            <Index.Footer />
+          </BrowserRouter>
+        </QueryClientProvider>
+      </Provider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

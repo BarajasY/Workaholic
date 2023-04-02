@@ -25,14 +25,14 @@ public class WorkerController {
         this.repository = repository;
     }
 
-    record NewWorkerDataRequest (
+    record NewWorkerDataRequest(
         String FName,
         String LName,
         String Email,
         String Password,
         String Country,
         String Tags
-    ) {}
+    ){}
 
     record NewWorkerLogin(
         String Email,
