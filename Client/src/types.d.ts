@@ -16,3 +16,7 @@ export interface workerStateInterface {
     Tags: String[],
     Logged: Boolean
 }
+
+export type WorkerType = {
+    worker: WorkerStateInterface
+}

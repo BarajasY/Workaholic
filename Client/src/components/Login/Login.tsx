@@ -49,14 +49,13 @@ const Login = () => {
 
   const storeLogin = (data: workerInterface) => {
     const cookies = new Cookies();
-    cookies.set('logged', true)
-    cookies.set('email', data.email);
-    cookies.set('fname', data.fname);
-    cookies.set('lname', data.lname);
-    cookies.set('country', data.country);
-    cookies.set('tags', data.tags);
+    cookies.set('Logged', true, {path: "/"})
+    cookies.set('Email', data.email, {path: "/"});
+    cookies.set('FName', data.fname, {path: "/"});
+    cookies.set('LName', data.lname, {path: "/"});
+    cookies.set('Country', data.country, {path: "/"});
+    cookies.set('Tags', data.tags, {path: "/"});
     const cookieData = cookies.getAll();
-    console.log(cookieData);
     dispatch(storeWorker(cookieData))
     navigate("/browse")
   }

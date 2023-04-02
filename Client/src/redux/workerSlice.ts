@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import { workerStateInterface } from '../types';
 
-const initialState = {
+export const WorkerInitialState = {
     FName: "",
     LName: "",
     Email: "",
@@ -13,7 +13,7 @@ const initialState = {
 
 export const workerSlice = createSlice({
     name: "workerSlice",
-    initialState,
+    initialState: WorkerInitialState,
     reducers: {
         storeWorker: (state, action) => {
             const {FName, LName, Email, Country, Tags, Logged} = action.payload;

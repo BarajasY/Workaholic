@@ -1,13 +1,18 @@
 import React from 'react'
-import {useSelector } from 'react-redux';
+import {CgProfile} from 'react-icons/cg';
+import {useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
 import './Navbar.css';
-import { workerStateInterface } from '../../types';
+import { WorkerType, workerStateInterface } from '../../types';
+import Cookies from 'universal-cookie';
+import { storeWorker } from '../../redux/workerSlice';
 
 const Navbar = () => {
-/*   const worker = useSelector((state: workerStateInterface) => state.worker); */
-  const Logged = useSelector((state:any) => state.worker);
-  console.log(Logged);
+  const cookies = new Cookies();
+  const allCokies = cookies.getAll();
+  const dispatch = useDispatch();
+  dispatch(storeWorker(allCokies));
+  const worker = useSelector((state: WorkerType) => state.worker);
 
   return (
     <div className="navbarContainer">
@@ -15,15 +20,16 @@ const Navbar = () => {
             <Link to="/home">Workaholic</Link>
         </div>
         <div className="links">
-          {Logged === 'true'
+          {worker.Logged === 'true'
           ?
           <>
-            <h1>Hola</h1>
+            <Link to="./browse" id="browse">Browse</Link>
+            <Link to="./profile" id="profile"><CgProfile/></Link>
           </>
           :
           <>
-            <Link to="./Login" id="login">Login</Link>
-            <Link to="./Signup" id="signup">Signup</Link>
+            <Link to="./login" id="login">Login</Link>
+            <Link to="./signup" id="signup">Signup</Link>
           </>
           }
         </div>

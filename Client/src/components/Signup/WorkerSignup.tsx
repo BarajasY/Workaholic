@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Signup.css";
-import { useMutation, useQuery } from "@tanstack/react-query";
 
 const Signup = () => {
   const [FName, setFName] = useState("");
