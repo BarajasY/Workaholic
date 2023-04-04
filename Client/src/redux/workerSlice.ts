@@ -23,9 +23,10 @@ export const workerSlice = createSlice({
             state.Country = Country;
             state.Tags = Tags;
             state.Logged = Logged;
-        }
+        },
+        resetWorker: () => WorkerInitialState
     }
-})
+});
 
-export const {storeWorker} = workerSlice.actions;
+export const {storeWorker, resetWorker} = workerSlice.actions;
 export default workerSlice.reducer;

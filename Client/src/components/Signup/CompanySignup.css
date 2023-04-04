@@ -1,0 +1,78 @@
+.companySignupContainer {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.companySignupContainer h1 {
+    color: var(--blueishblack);
+}
+
+.companySignupContainer section {
+    margin: 10px;
+    width: 35%;
+}
+
+.companySignupContainer section h1 {
+    font-size: 25px;
+    color: var(--darkblue);
+}
+
+.companySignupContainer section input {
+    width: 100%;
+    border: 2px solid var(--darkblue);
+    padding: 10px;
+    font-size: 25px;
+    color: var(--darkblue);
+    border-radius: 10px;
+}
+
+.companySignupContainer section input:focus {
+    box-shadow: 0px 5px 10px var(--darkblue);
+}
+
+#tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.companyTags {
+    margin: 10px;
+    font-size: 20px;
+    border: 2px solid var(--darkblue);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.companyTags:hover {
+    color: var(--blueishblack);
+    background: var(--golden);
+    cursor: pointer;
+}
+
+.selected {
+    color: var(--blueishblack);
+    background: var(--golden);
+}
+
+.companySignupSubmit {
+    display: flex;
+    justify-content: center;
+}
+
+.companySignupSubmit button {
+    padding: 10px;
+    font-size: 25px;
+    border-radius: 10px;
+    color: var(--darkblue);
+}
+
+.companySignupSubmit button:hover {
+    background: var(--darkblue);
+    color: white;
+    cursor: pointer;
+}

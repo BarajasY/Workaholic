@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 
 const Signup = () => {
@@ -9,8 +9,10 @@ const Signup = () => {
   const [Password, setPassword] = useState("");
   const [Country, setCountry] = useState("");
   const [userTags, setUserTags] = useState<String[]>([]);
+  const [CompanySignupForm, setCompanySignupForm] = useState(true)
   const [CV, setCV] = useState<File>();
   const formData = new FormData();
+  const navigate = useNavigate();
   const [ErrorMessage, setErrorMessage] = useState("");
   const [CompleteSignup, setCompleteSignup] = useState(false);
   const tags = [
@@ -57,6 +59,7 @@ const Signup = () => {
   };
 
   const SendUserData = async () => {
+    //Sends all data except the PDF file to the endpoint.
     const Post = await fetch("http://localhost:8080/api/v1/worker/data", {
       method: "POST",
       headers: {
@@ -73,6 +76,7 @@ const Signup = () => {
     })
     .then(response => {
       console.clear()
+      // If response is 401, send an error message.
       if(response.status === 401) {
         window.scrollTo({top: 0, behavior: 'smooth'})
         setErrorMessage("An account with that email already exists.")
@@ -82,6 +86,7 @@ const Signup = () => {
     })
   }
 
+  //Sends the user pdf file to a different api endpoint.
   const SendUserCV = async () => {
     formData.append("file", CV!);
     formData.append("email", Email);
@@ -93,14 +98,19 @@ const Signup = () => {
      body: formData,
     }).then((response) => {
       console.clear();
+      // If response is 200 OK, complete signup.
       if (response.status === 200) {
         setErrorMessage("");
         window.scrollTo({ top: 0, behavior: "smooth" });
         setCompleteSignup(true);
       }
+    })
+    .catch(error => {
+      console.log(error);
     });
   };
 
+  // If CompleteSignup variable is true, the next UI will be shown.
   if (CompleteSignup) {
     return (
       <div className="completeSignup">
@@ -114,10 +124,21 @@ const Signup = () => {
     );
   }
 
+  // Normal signup UI.
   return (
     <div className="signupContainer">
       <h1 id="signupHeader">Signup to Workaholic</h1>
       <div className="signupContent">
+        {CompanySignupForm 
+        ? 
+        <section className="isCompanySignup">
+          <h1>¿Buscas registrar un negocio?</h1>
+          <button id="yes" onClick={() => navigate("./company")}>Sí</button>
+          <button id="no" onClick={() => setCompanySignupForm(false)}>No</button>
+        </section>
+        :
+        null
+        }
         <h1 id="signupError">{ErrorMessage}</h1>
         <section>
           <h1>Nombre</h1>
@@ -155,8 +176,7 @@ const Signup = () => {
             <h1
               key={i}
               className={
-                userTags.includes(text) ? "signupTags selected" : "signupTags"
-              }
+                userTags.includes(text) ? "signupTags selected" : "signupTags"}
               onClick={() => AddTag(text)}
             >
               {text}

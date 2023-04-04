@@ -26,35 +26,21 @@ public class Company {
     private Integer id;
     private String name;
     private String location;
+    private String password;
     private String owner;
     private String email;
     private String country;
     private String tags;
 
-    public Company(Integer id, String name, String location, String owner, String email, String country, String tags) {
+    public Company(Integer id, String name, String location, String password, String owner, String email, String country, String tags) {
         this.id = id;
         this.name = name;
         this.location = location;
+        this.password = password;
         this.owner = owner;
         this.email = email;
         this.country = country;
         this.tags = tags;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Company)) {
-            return false;
-        }
-        Company company = (Company) o;
-        return Objects.equals(id, company.id) && Objects.equals(name, company.name) && Objects.equals(location, company.location) && Objects.equals(owner, company.owner) && Objects.equals(email, company.email) && Objects.equals(country, company.country) && Objects.equals(tags, company.tags);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, location, owner, email, country, tags);
     }
 
     public Integer getId() {
@@ -79,6 +65,14 @@ public class Company {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getOwner() {
@@ -111,6 +105,76 @@ public class Company {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public Company id(Integer id) {
+        setId(id);
+        return this;
+    }
+
+    public Company name(String name) {
+        setName(name);
+        return this;
+    }
+
+    public Company location(String location) {
+        setLocation(location);
+        return this;
+    }
+
+    public Company password(String password) {
+        setPassword(password);
+        return this;
+    }
+
+    public Company owner(String owner) {
+        setOwner(owner);
+        return this;
+    }
+
+    public Company email(String email) {
+        setEmail(email);
+        return this;
+    }
+
+    public Company country(String country) {
+        setCountry(country);
+        return this;
+    }
+
+    public Company tags(String tags) {
+        setTags(tags);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Company)) {
+            return false;
+        }
+        Company company = (Company) o;
+        return Objects.equals(id, company.id) && Objects.equals(name, company.name) && Objects.equals(location, company.location) && Objects.equals(password, company.password) && Objects.equals(owner, company.owner) && Objects.equals(email, company.email) && Objects.equals(country, company.country) && Objects.equals(tags, company.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, location, password, owner, email, country, tags);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", location='" + getLocation() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", owner='" + getOwner() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", country='" + getCountry() + "'" +
+            ", tags='" + getTags() + "'" +
+            "}";
     }
 
 }

@@ -10,20 +10,27 @@
   -webkit-text-size-adjust: 100%;
 
   --background: #ece9e8;
-  
+  --whiteshade: #EDEADE;
+
+  --success2: #009900;
+  --success: #00CC33;
   --color1: #2c1f1f;
   --color2: #0479f6;
   --blend2: #0770E8;
   --blend3: #0D62D3;
   --blend4: #1059C4;
   --blend5: #144FB6;
-  --color3: #a59c9c;
+  --color3: #0000FF;
+  --blueishblack: #000033;
+  --purple: #6633FF;
+  --clearblue: #00CCFF;
+  --darkblue: #000099;
   --color4: #163967;
   --color5: #1746a8;
   --color6: #95adc4;
   --color7: #3b3b3e;
   --color8: #2e3182;
-  --selected: #efb43a;
+  --golden: #efb43a;
   --error: #ee0a28;
 }
 

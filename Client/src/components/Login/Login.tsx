@@ -44,6 +44,8 @@ const Login = () => {
           storeLogin(data);
         })
       }
+    }).catch(error => {
+      console.log(error)
     })
   }
 

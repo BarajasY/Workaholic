@@ -43,6 +43,45 @@ input:focus {
     align-items: center;
 }
 
+.isCompanySignup {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    background: var(--whiteshade);
+    padding: 20px 0px;
+    border-radius: 15px;
+    border: 2px solid black;
+    transform: translateX(10px);
+}
+
+.isCompanySignup h1 {
+    background: none;
+}
+
+.isCompanySignup button {
+    margin: 10px;
+    background: none;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 50px;
+    border: 2px solid transparent;
+}
+
+#yes:hover {
+    color: var(--success2);
+}
+
+#no:hover {
+    color: var(--error);
+}
+
+#yes:hover, #no:hover {
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
 .signupContent section {
     margin: 20px;
     width: 60%;
@@ -91,7 +130,7 @@ input:focus {
 
 .signupSubmit button:hover {
     color: var(--blend5);
-    background: var(--selected);
+    background: var(--golden);
     cursor: pointer;
 }
 
