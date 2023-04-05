@@ -31,6 +31,7 @@ public class WorkerController {
         String Email,
         String Password,
         String Country,
+        String Role,
         String Tags
     ){}
 
@@ -49,13 +50,14 @@ public class WorkerController {
         if(repository.existsByEmail(request.Email())) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        Worker Worker = new Worker(null, null, null, null, null, null, null);
+        Worker Worker = new Worker();
         Worker.setFname(request.FName());
         Worker.setLname(request.LName());
         Worker.setEmail(request.Email());
         Worker.setPassword(request.Password());
         Worker.setCountry(request.Country());
         Worker.setTags(request.Tags());
+        Worker.setRole(request.Role());
         repository.save(Worker);
         return new ResponseEntity<>(HttpStatus.OK);
     }

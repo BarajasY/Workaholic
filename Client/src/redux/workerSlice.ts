@@ -8,6 +8,7 @@ export const WorkerInitialState = {
     Password: "",
     Country: "",
     Tags: [""],
+    Role: "",
     Logged: false
 } as workerStateInterface
 

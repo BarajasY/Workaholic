@@ -26,6 +26,7 @@ public class CompanyController {
         String email,
         String password,
         String country,
+        String role,
         String tags
     ){}
 
@@ -42,6 +43,7 @@ public class CompanyController {
         company.setPassword(request.password());
         company.setCountry(request.country());
         company.setTags(request.tags());
+        company.setRole(request.role());
         repository.save(company);
         return new ResponseEntity<>(HttpStatus.OK);
     }

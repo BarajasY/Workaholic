@@ -43,6 +43,7 @@ const CompanySignup = () => {
           email: CompanyEmail,
           country: CompanyCountry,
           password: CompanyPassword,
+          role: "company",
           tags: CompanyTags.toString(),
         }),
       })

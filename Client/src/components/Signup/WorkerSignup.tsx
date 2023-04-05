@@ -71,6 +71,7 @@ const Signup = () => {
         "Email": Email,
         "Password": Password,
         "Country": Country,
+        "Role": "worker",
         "Tags": userTags.toString(),
       })
     })
@@ -92,9 +93,9 @@ const Signup = () => {
     formData.append("email", Email);
     const Post = await fetch("http://localhost:8080/api/v1/upload", {
       method: "POST",
-             headers: {
+/*              headers: {
         "Content-Type": "multipart/form-data",
-      },
+      }, */
      body: formData,
     }).then((response) => {
       console.clear();

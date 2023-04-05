@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
 import './Login.css'
 import { storeWorker } from '../../redux/workerSlice';
-import { workerInterface } from '../../types';
+import { companyInterface, workerInterface } from '../../types';
+import { storeCompany } from '../../redux/companySlice';
 
 const Login = () => {
   const [Email, setEmail] = useState("")
@@ -22,7 +23,7 @@ const Login = () => {
   }
 
   const SendLogin = () => {
-    const post = fetch("http://localhost:8080/api/v1/worker/login", {
+    const post = fetch("http://localhost:8080/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -41,7 +42,14 @@ const Login = () => {
         setErrorMessage("La contraseña es incorrecta.")
       } else if(response.status === 200) {
         response.json().then(data => {
-          storeLogin(data);
+          switch(data.role) {
+            case "worker":
+              storeWorkerLogin(data);
+              break;
+            case "company":
+              storeCompanyLogin(data);
+              break;
+          }
         })
       }
     }).catch(error => {
@@ -49,16 +57,33 @@ const Login = () => {
     })
   }
 
-  const storeLogin = (data: workerInterface) => {
+  const storeWorkerLogin = (data: workerInterface) => {
     const cookies = new Cookies();
     cookies.set('Logged', true, {path: "/"})
     cookies.set('Email', data.email, {path: "/"});
     cookies.set('FName', data.fname, {path: "/"});
     cookies.set('LName', data.lname, {path: "/"});
     cookies.set('Country', data.country, {path: "/"});
+    cookies.set("Role", data.role, {path: "/"});
     cookies.set('Tags', data.tags, {path: "/"});
     const cookieData = cookies.getAll();
     dispatch(storeWorker(cookieData))
+    navigate("/browse")
+  }
+  
+  const storeCompanyLogin = (data: companyInterface) => {
+    const cookies = new Cookies();
+    cookies.set('Logged', true, {path: "/"})
+    cookies.set('Name', data.name, {path: "/"})
+    cookies.set('Password', data.password, {path: "/"})
+    cookies.set('Email', data.email, {path: "/"})
+    cookies.set('Owner', data.owner, {path: "/"})
+    cookies.set('Country', data.country, {path: "/"})
+    cookies.set('Location', data.location, {path: "/"})
+    cookies.set("Role", data.role, {path: "/"})
+    cookies.set("Tags", data.tags, {path: "/"})
+    const cookieData = cookies.getAll();
+    dispatch(storeCompany(cookieData))
     navigate("/browse")
   }
 

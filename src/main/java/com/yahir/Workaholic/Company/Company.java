@@ -31,8 +31,9 @@ public class Company {
     private String email;
     private String country;
     private String tags;
+    private String role;
 
-    public Company(Integer id, String name, String location, String password, String owner, String email, String country, String tags) {
+    public Company(Integer id, String name, String location, String password, String owner, String email, String country, String tags, String role) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -41,6 +42,7 @@ public class Company {
         this.email = email;
         this.country = country;
         this.tags = tags;
+        this.role = role;
     }
 
     public Integer getId() {
@@ -107,6 +109,14 @@ public class Company {
         this.tags = tags;
     }
 
+    public String getRole() {
+        return this.role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Company id(Integer id) {
         setId(id);
         return this;
@@ -147,6 +157,11 @@ public class Company {
         return this;
     }
 
+    public Company role(String role) {
+        setRole(role);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -155,12 +170,12 @@ public class Company {
             return false;
         }
         Company company = (Company) o;
-        return Objects.equals(id, company.id) && Objects.equals(name, company.name) && Objects.equals(location, company.location) && Objects.equals(password, company.password) && Objects.equals(owner, company.owner) && Objects.equals(email, company.email) && Objects.equals(country, company.country) && Objects.equals(tags, company.tags);
+        return Objects.equals(id, company.id) && Objects.equals(name, company.name) && Objects.equals(location, company.location) && Objects.equals(password, company.password) && Objects.equals(owner, company.owner) && Objects.equals(email, company.email) && Objects.equals(country, company.country) && Objects.equals(tags, company.tags) && Objects.equals(role, company.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, location, password, owner, email, country, tags);
+        return Objects.hash(id, name, location, password, owner, email, country, tags, role);
     }
 
     @Override
@@ -174,6 +189,7 @@ public class Company {
             ", email='" + getEmail() + "'" +
             ", country='" + getCountry() + "'" +
             ", tags='" + getTags() + "'" +
+            ", role='" + getRole() + "'" +
             "}";
     }
 

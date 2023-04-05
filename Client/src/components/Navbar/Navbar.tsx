@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {CgProfile} from 'react-icons/cg';
 import {useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
@@ -8,11 +8,12 @@ import Cookies from 'universal-cookie';
 import { storeWorker } from '../../redux/workerSlice';
 
 const Navbar = () => {
-  const cookies = new Cookies();
-  const allCokies = cookies.getAll();
-  const dispatch = useDispatch();
-  dispatch(storeWorker(allCokies));
-  const worker = useSelector((state: WorkerType) => state.worker);
+    const cookies = new Cookies();
+    const allCokies = cookies.getAll();
+    const dispatch = useDispatch();
+    dispatch(storeWorker(allCokies));
+    const worker = useSelector((state: WorkerType) => state.worker);
+  
 
   return (
     <div className="navbarContainer">
