@@ -1,20 +1,23 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { workerStateInterface } from '../types';
+import { userStateInterface, workerStateInterface } from '../types';
 
-export const WorkerInitialState = {
+export const userInitialState = {
     FName: "",
+    CompanyName: "",
     LName: "",
     Email: "",
     Password: "",
     Country: "",
     Tags: [""],
     Role: "",
-    Logged: false
-} as workerStateInterface
+    Logged: false,
+    CompanyOwner: "",
+    CompanyLocation: "",
+} as userStateInterface
 
 export const workerSlice = createSlice({
     name: "workerSlice",
-    initialState: WorkerInitialState,
+    initialState: userInitialState,
     reducers: {
         storeWorker: (state, action) => {
             const {FName, LName, Email, Country, Tags, Logged} = action.payload;
@@ -25,9 +28,20 @@ export const workerSlice = createSlice({
             state.Tags = Tags;
             state.Logged = Logged;
         },
-        resetWorker: () => WorkerInitialState
+        storeCompany: (state, action) => {
+            const {CompanyName, CompanyLocation, CompanyOwner, Email, Role, Country, Tags, Logged} = action.payload;
+            state.CompanyName = CompanyName;
+            state.CompanyLocation = CompanyLocation;
+            state.CompanyOwner = CompanyOwner;
+            state.Email = Email;
+            state.Role = Role;
+            state.Country = Country;
+            state.Tags = Tags;
+            state.Logged = Logged;
+        },
+        resetUser: () => userInitialState,
     }
 });
 
-export const {storeWorker, resetWorker} = workerSlice.actions;
+export const {storeWorker, resetUser, storeCompany} = workerSlice.actions;
 export default workerSlice.reducer;

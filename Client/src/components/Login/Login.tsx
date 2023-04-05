@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
 import './Login.css'
-import { storeWorker } from '../../redux/workerSlice';
+import { storeWorker, storeCompany } from '../../redux/workerSlice';
 import { companyInterface, workerInterface } from '../../types';
-import { storeCompany } from '../../redux/companySlice';
 
 const Login = () => {
   const [Email, setEmail] = useState("")
@@ -74,12 +73,12 @@ const Login = () => {
   const storeCompanyLogin = (data: companyInterface) => {
     const cookies = new Cookies();
     cookies.set('Logged', true, {path: "/"})
-    cookies.set('Name', data.name, {path: "/"})
+    cookies.set('CompanyName', data.name, {path: "/"})
     cookies.set('Password', data.password, {path: "/"})
     cookies.set('Email', data.email, {path: "/"})
-    cookies.set('Owner', data.owner, {path: "/"})
+    cookies.set('CompanyOwner', data.owner, {path: "/"})
     cookies.set('Country', data.country, {path: "/"})
-    cookies.set('Location', data.location, {path: "/"})
+    cookies.set('CompanyLocation', data.location, {path: "/"})
     cookies.set("Role", data.role, {path: "/"})
     cookies.set("Tags", data.tags, {path: "/"})
     const cookieData = cookies.getAll();

@@ -41,6 +41,28 @@ export interface workerStateInterface {
     Logged: Boolean
 }
 
+export interface userStateInterface {
+    FName: String,
+    CompanyName: String,
+    LName: String,
+    Email: String,
+    Password: String,
+    Country: String,
+    Tags: String[],
+    Role: String,
+    CompanyOwner: String,
+    CompanyLocation:String
+    Logged: Boolean
+}
+
 export type WorkerType = {
     worker: WorkerStateInterface
+}
+
+export type CompanyType = {
+    company: CompanyStateInterface
+}
+
+export type userType = {
+    worker: userStateInterface
 }

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import './Browse.css'
 
 const Browse = () => {
     const { isLoading, error , data} = useQuery({
@@ -11,7 +12,7 @@ const Browse = () => {
 
   return (
     <div className="browseContainer">
-        <h1>Hehe browse some jobs.</h1>
+        <h1>Here supposedly lies the jobs.</h1>
     </div>
   )
 }
