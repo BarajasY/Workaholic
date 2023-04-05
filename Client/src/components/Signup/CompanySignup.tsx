@@ -22,6 +22,14 @@ const CompanySignup = () => {
       "Docente",
     ];
 
+    const sendData = () => {
+      if(CompanyName !== "" && CompanyLocation !== "" && CompanyCountry !== "" && CompanyPassword !== "" && CompanyTags[1] !== undefined && CompanyOwner !== "") {
+        registerCompany();
+      } else {
+        setErrorMessage("Todos los campos son obligatorios");
+      }
+    }
+
     const registerCompany = () => {
       fetch("http://localhost:8080/api/v1/company/register", {
         method: "POST",
@@ -35,14 +43,14 @@ const CompanySignup = () => {
           email: CompanyEmail,
           country: CompanyCountry,
           password: CompanyPassword,
-          tags: CompanyTags,
+          tags: CompanyTags.toString(),
         }),
       })
       .then((response) =>  {
         if(response.status === 409) {
           setErrorMessage("Ya existe una cuenta registrada con el correo colocado.")
           window.scrollTo({top: 0, behavior:"smooth"})
-        } else {
+        } else if (response.status === 200) {
           setErrorMessage("")
           setSuccessfullyRegistered(true);
         }
@@ -60,6 +68,12 @@ const CompanySignup = () => {
       setCompanyTags([...CompanyTags, tag]);
     }
   };
+
+  if(SuccessfullyRegistered) {
+    return (
+      <h1>Registrado!</h1>
+      )
+  }
 
   return (
     <div className="companySignupContainer">
@@ -101,7 +115,7 @@ const CompanySignup = () => {
         ))}
       </section>
       <section className='companySignupSubmit'>
-        <button>Enviar</button>
+        <button onClick={() => sendData()}>Enviar</button>
       </section>
     </div>
   )
