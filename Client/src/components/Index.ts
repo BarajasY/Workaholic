@@ -7,3 +7,4 @@ export {default as Profile } from './Profile/Profile';
 export { default as Intro } from './Intro/Intro';
 export {default as Login} from './Login/Login';
 export {default as Browse } from './Browse/Browse';
+export {default as AddPosting} from './AddPosting/AddPosting';

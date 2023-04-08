@@ -22,6 +22,7 @@ function App() {
               <Route path="/signup/company" element={<Index.CompanySignup />} />
               <Route path="/profile" element={<Index.Profile />} />
               <Route path="/login" element={<Index.Login />} />
+              <Route path="/add" element={<Index.AddPosting />} />
               <Route path="/browse" element={<Index.Browse />} />
             </Routes>
             <Index.Footer />

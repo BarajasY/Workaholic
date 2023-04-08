@@ -25,6 +25,12 @@ const Navbar = () => {
           {User?.Logged
           ?
           <>
+            {User?.Role === "company" 
+              ? 
+              <Link to="./add" id="add">Add job</Link>
+              :
+              null
+            } 
             <Link to="./browse" id="browse">Browse</Link>
             <Link to="./profile" id="profile"><CgProfile/></Link>
           </>

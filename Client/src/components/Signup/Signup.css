@@ -24,7 +24,7 @@
 }
 
 .signupContainer input {
-    border-radius: 15px;
+    border-radius: 10px;
     width: 100%;
     padding: 20px;
     font-size: 24px;
@@ -50,7 +50,7 @@ input:focus {
     display: flex;
     background: var(--whiteshade);
     padding: 20px 0px;
-    border-radius: 15px;
+    border-radius: 10px;
     border: 2px solid black;
     transform: translateX(10px);
 }
