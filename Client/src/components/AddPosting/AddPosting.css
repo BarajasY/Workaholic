@@ -70,6 +70,13 @@ textarea {
     color: var(--emerald);
     background: var(--navyblue);
     border-color: var(--navyblue);
+    cursor:pointer;
+}
+
+.JobTypeSelected {
+    color: var(--emerald) !important;
+    background: var(--navyblue);
+    border-color: var(--navyblue) !important;
 }
 
 .PostingAddress, .PostingDuration {
@@ -97,6 +104,11 @@ textarea {
     box-shadow:none !important;
 }
 
+.Unchangeable {
+    cursor: not-allowed;
+    box-shadow: none !important;
+}
+
 .PostingDurationMonths{
     display: flex;
 }
@@ -108,6 +120,7 @@ textarea {
 }
 
 .PostingDurationMonths h1 {
+    margin-left: 10px;
     font-size: 30px;
 }
 
