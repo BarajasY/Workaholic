@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
+import {AiOutlineDelete} from 'react-icons/ai'
 import './AddPosting.css';
 
 const AddPosting = () => {
   const [val, setVal] = useState('')
-  const [BenefitsArray, setBenefitsArray] = useState([])
+  const [BenefitsArray, setBenefitsArray] = useState([""])
   const [Benefit, setBenefit] = useState("")
   const JobTypeArray = ["Full-Time", "Part-Time", "Freelance"]
 
@@ -73,12 +74,19 @@ const AddPosting = () => {
           <section>
             <h1>Beneficios</h1>
             <article className="PostingBenefits">
-              <input type="text" />
-              <button>Enlistar</button>
+              <input type="text" onChange={(e) => setBenefit(e.target.value)}/>
+              <button onClick={() => BenefitsArray[0] === "" ? setBenefitsArray([Benefit]) : setBenefitsArray([...BenefitsArray, Benefit])}>Enlistar</button>
             </article>
             <ul>
-              
+              {BenefitsArray.map((Benefit, i) => (
+                <li key={i}>{Benefit}<AiOutlineDelete className='PostingIcon'
+                onClick={() => setBenefitsArray(BenefitsArray.filter(item => item !== Benefit))}/>
+                </li>
+              ))}
             </ul>
+          </section>
+          <section>
+            <button>Subir</button>
           </section>
         </div>
     </div>

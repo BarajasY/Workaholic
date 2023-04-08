@@ -33,7 +33,7 @@
     box-shadow: 0px 5px 10px var(--navyblue);
 }
 .addPostingForm section{ 
-    margin: 10px;
+    margin: 20px 0px;
 }
 
 textarea {
@@ -128,5 +128,24 @@ textarea {
     color: var(--emerald);
     background: var(--navyblue);
     border-color: var(--navyblue);
+    cursor: pointer;
+}
+
+section ul {
+    margin-top: 10px;
+}
+
+section ul li {
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+}
+
+.PostingIcon {
+    color: var(--navyblue);
+}
+
+.PostingIcon:hover {
+    color: var(--cherryred);
     cursor: pointer;
 }
