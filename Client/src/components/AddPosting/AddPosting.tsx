@@ -1,11 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {AiOutlineDelete} from 'react-icons/ai'
 import './AddPosting.css';
+import { useSelector } from 'react-redux';
+import { userType } from '../../types';
+import { useNavigate } from 'react-router-dom';
 
 const AddPosting = () => {
+  const user = useSelector((state: userType) => state.worker)
+  const navigate = useNavigate()
+
   const [Salary, setSalary] = useState('')
   const [SalaryRate, setSalaryRate] = useState("/hr")
-  const [SalaryCurrency, setSalaryCurrency] = useState("")
+  const [SalaryCurrency, setSalaryCurrency] = useState("MXN")
   const [BenefitsArray, setBenefitsArray] = useState([""])
   const [PostingTitle, setPostingTitle] = useState("")
   const [PostingDescription, setPostingDescription] = useState("")
@@ -15,8 +21,26 @@ const AddPosting = () => {
   const [Location, setLocation] = useState("")
   const [Duration, setDuration] = useState("")
   const [Benefit, setBenefit] = useState("")
-  const [PostingDate, setPostingDate] = useState("")
+  const [PostingDate, setPostingDate] = useState()
+  const [PostingTags, setPostingTags] = useState<String[]>([])
   const JobType = ["Full-Time", "Part-Time", "Freelance"]
+  const tags = [
+    "Software",
+    "Medicina",
+    "Limpieza",
+    "Ciberseguridad",
+    "Investigación",
+    "Construcción",
+    "Atención al cliente",
+    "Docente",
+  ];
+
+  useEffect(() => {
+    if(user.Role !== "company") {
+      navigate('/home')
+    }
+  }, [])
+  
 
   const EnlistBenefits = () => {
     const benefitChecker = Benefit === "" || Benefit === " "
@@ -29,6 +53,17 @@ const AddPosting = () => {
         setBenefit(""); 
       }
     }
+  }
+
+  const AddPostingTag = (tag:string) => {
+    const TagAlreadyIn = PostingTags.includes(tag);
+    if (TagAlreadyIn) {
+      // remove tag from the list.
+      setPostingTags(PostingTags.filter((t) => t!== tag));
+    } else {
+      // adad tag to the list.
+      setPostingTags([...PostingTags, tag]);
+      }
   }
 
   const AddJobType = (type:string) => {
@@ -52,6 +87,36 @@ const AddPosting = () => {
     setIsIndefinite(!IsIndefinite)
     setDuration("Indefinite")
   }
+
+  const AddPosting = () => {
+    const date = new Date()
+
+    const post = fetch("http://localhost:8080/api/v1/postings/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        businessName: user.CompanyName,
+        title: PostingTitle,
+        description: PostingDescription,
+        jobType: JobTypeArray.toString(),
+        salary: Number(Salary),
+        salaryCurrency: SalaryCurrency,
+        salaryRate: SalaryRate,
+        location: Location,
+        country: user.Country,
+        duration: Duration,
+        date: date.getTime(),
+        tags: PostingTags.toString(),
+        benefits: BenefitsArray.toString(),
+      })
+    }).then(response => {
+      console.log(response.status)
+    })
+  }
+/*   const test = "Hola como estás, muy bien y tu?"
+  console.log(test.split(", ")) */
 
   return (
     <div className="addPostingContainer">
@@ -143,7 +208,15 @@ const AddPosting = () => {
             </ul>
           </section>
           <section>
-            <button>Subir</button>
+            <h1>Seleccione la categoría relacionada con el puesto:</h1>
+            <div className="PostingTagsContainer">
+            {tags.map((tag, i) => (
+              <p key={i} className={PostingTags.includes(tag) ? "PostingTag Selected" : 'PostingTag'} onClick={() => AddPostingTag(tag)}>{tag}</p>
+              ))}
+            </div>
+          </section>
+          <section className='PostingSubmitContainer'>
+            <button onClick={() => AddPosting()}>Subir</button>
           </section>
         </div>
     </div>

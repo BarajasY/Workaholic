@@ -50,27 +50,6 @@ public class WorkaholicApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(WorkaholicApplication.class, args);
 	}
-
-	@GetMapping
-	String Testing() {
-		return "Hola";
-	}
-
-	@GetMapping("/postings/all")
-	List<Postings> Test2() {
-		return postingRepository.findAll();
-	}
-
-	@GetMapping("/company/all")
-	List<Company> Test3() {
-		return companyRepository.findAll();
-	}
-
-	@GetMapping("/worker/all")
-	List<Worker> Test4() {
-		return workerRepository.findAll();
-	}
-
 	record NewUserLoginRequest(
 		String Email,
 		String Password

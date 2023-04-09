@@ -162,3 +162,51 @@ section ul li {
     color: var(--cherryred);
     cursor: pointer;
 }
+
+.PostingTagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.PostingTag {
+    margin: 5px;
+    font-size: 18px;
+    color: var(--cherryred) !important;
+    border: 2px solid var(--navyblue);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.PostingTag:hover {
+    color: var(--emerald) !important;
+    background: var(--navyblue);
+    border-color: var(--navyblue);
+    cursor: pointer;
+}
+
+.Selected {
+    color: var(--emerald) !important;
+    background: var(--navyblue);
+    border-color: var(--navyblue);
+}
+
+.PostingSubmitContainer {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.PostingSubmitContainer button {
+    padding: 10px 20px;
+    font-size: 25px;
+    border-radius: 5px;
+    color: var(--emerald);
+    background: var(--navyblue);
+    border: 2px solid var(--navyblue)
+}
+
+.PostingSubmitContainer button:hover {
+    color: var(--success2);
+    background: var(--background);
+    cursor: pointer;
+}

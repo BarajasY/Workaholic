@@ -29,24 +29,30 @@ public class Postings {
     private String description;
     private String jobType;
     private Number salary;
+    private String salaryCurrency;
+    private String salaryRate;
     private String location;
     private String country;
     private String duration;
-    private String date;
+    private Number date;
     private String tags;
+    private String benefits;
 
-    public Postings(Integer id, String businessName, String title, String description, String jobType, Number salary, String location, String country, String duration, String date, String tags) {
+    public Postings(Integer id, String businessName, String title, String description, String jobType, Number salary, String salaryCurrency, String salaryRate, String location, String country, String duration, Number date, String tags, String benefits) {
         this.id = id;
         this.businessName = businessName;
         this.title = title;
         this.description = description;
         this.jobType = jobType;
         this.salary = salary;
+        this.salaryCurrency = salaryCurrency;
+        this.salaryRate = salaryRate;
         this.location = location;
         this.country = country;
         this.duration = duration;
         this.date = date;
         this.tags = tags;
+        this.benefits = benefits;
     }
 
     public Integer getId() {
@@ -97,6 +103,22 @@ public class Postings {
         this.salary = salary;
     }
 
+    public String getSalaryCurrency() {
+        return this.salaryCurrency;
+    }
+
+    public void setSalaryCurrency(String salaryCurrency) {
+        this.salaryCurrency = salaryCurrency;
+    }
+
+    public String getSalaryRate() {
+        return this.salaryRate;
+    }
+
+    public void setSalaryRate(String salaryRate) {
+        this.salaryRate = salaryRate;
+    }
+
     public String getLocation() {
         return this.location;
     }
@@ -121,11 +143,11 @@ public class Postings {
         this.duration = duration;
     }
 
-    public String getDate() {
+    public Number getDate() {
         return this.date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Number date) {
         this.date = date;
     }
 
@@ -135,6 +157,14 @@ public class Postings {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public String getBenefits() {
+        return this.benefits;
+    }
+
+    public void setBenefits(String benefits) {
+        this.benefits = benefits;
     }
 
     public Postings id(Integer id) {
@@ -167,6 +197,16 @@ public class Postings {
         return this;
     }
 
+    public Postings salaryCurrency(String salaryCurrency) {
+        setSalaryCurrency(salaryCurrency);
+        return this;
+    }
+
+    public Postings salaryRate(String salaryRate) {
+        setSalaryRate(salaryRate);
+        return this;
+    }
+
     public Postings location(String location) {
         setLocation(location);
         return this;
@@ -182,13 +222,18 @@ public class Postings {
         return this;
     }
 
-    public Postings date(String date) {
+    public Postings date(Number date) {
         setDate(date);
         return this;
     }
 
     public Postings tags(String tags) {
         setTags(tags);
+        return this;
+    }
+
+    public Postings benefits(String benefits) {
+        setBenefits(benefits);
         return this;
     }
 
@@ -200,12 +245,12 @@ public class Postings {
             return false;
         }
         Postings postings = (Postings) o;
-        return Objects.equals(id, postings.id) && Objects.equals(businessName, postings.businessName) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobType, postings.jobType) && Objects.equals(salary, postings.salary) && Objects.equals(location, postings.location) && Objects.equals(country, postings.country) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(tags, postings.tags);
+        return Objects.equals(id, postings.id) && Objects.equals(businessName, postings.businessName) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobType, postings.jobType) && Objects.equals(salary, postings.salary) && Objects.equals(salaryCurrency, postings.salaryCurrency) && Objects.equals(salaryRate, postings.salaryRate) && Objects.equals(location, postings.location) && Objects.equals(country, postings.country) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(tags, postings.tags) && Objects.equals(benefits, postings.benefits);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, businessName, title, description, jobType, salary, location, country, duration, date, tags);
+        return Objects.hash(id, businessName, title, description, jobType, salary, salaryCurrency, salaryRate, location, country, duration, date, tags, benefits);
     }
 
     @Override
@@ -217,12 +262,14 @@ public class Postings {
             ", description='" + getDescription() + "'" +
             ", jobType='" + getJobType() + "'" +
             ", salary='" + getSalary() + "'" +
+            ", salaryCurrency='" + getSalaryCurrency() + "'" +
+            ", salaryRate='" + getSalaryRate() + "'" +
             ", location='" + getLocation() + "'" +
             ", country='" + getCountry() + "'" +
             ", duration='" + getDuration() + "'" +
             ", date='" + getDate() + "'" +
             ", tags='" + getTags() + "'" +
+            ", benefits='" + getBenefits() + "'" +
             "}";
     }
-
 }

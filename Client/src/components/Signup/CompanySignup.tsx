@@ -8,7 +8,7 @@ const CompanySignup = () => {
   const [CompanyEmail, setCompanyEmail] = useState("")
   const [CompanyCountry, setCompanyCountry] = useState("")
   const [CompanyPassword, setCompanyPassword] = useState("")
-  const [CompanyTags, setCompanyTags] = useState([""])
+  const [CompanyTags, setCompanyTags] = useState<String[]>([])
   const [ErrorMessage, setErrorMessage] = useState("")
   const [SuccessfullyRegistered, setSuccessfullyRegistered] = useState(false)
     const tags = [

@@ -94,7 +94,7 @@ const Login = () => {
         <p>Correo</p>
         <input type="text" onChange={(e) => setEmail(e.target.value)}/>
         <p>Contraseña</p>
-        <input type="password" onChange={(e) => setPassword(e.target.value)}/>
+        <input type="password" onKeyDown={(e) => e.key === "Enter" ? Login() : null} onChange={(e) => setPassword(e.target.value)}/>
       </div>
       <button className='loginSubmit' onClick={() => Login()}>Submit</button>
     </div>

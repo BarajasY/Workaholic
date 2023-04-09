@@ -40,7 +40,7 @@ public class WorkerController {
         String Password
     ){}
 
-    @GetMapping("")
+    @GetMapping("/all")
     List<Worker> Testing() {
         return repository.findAll();
     }
