@@ -10,9 +10,19 @@ const Browse = () => {
     if(isLoading) return <h1>Loading</h1>
     if(error) console.log(error);
 
+    console.log(data)
   return (
     <div className="browseContainer">
-        <h1>Here supposedly lies the jobs.</h1>
+        <h1>Jobs Found</h1>
+        <div className="jobsContainer">
+          {data.map((job:any)=> (
+            <div key={job.id} className="jobCard">
+              <div className="jobCardHeader">
+                <h1>{job.title}</h1>
+              </div>
+            </div>
+          ))}
+        </div>
     </div>
   )
 }

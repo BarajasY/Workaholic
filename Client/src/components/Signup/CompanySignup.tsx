@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import './CompanySignup.css';
 
 const CompanySignup = () => {
@@ -72,7 +73,10 @@ const CompanySignup = () => {
 
   if(SuccessfullyRegistered) {
     return (
-      <h1>Registrado!</h1>
+      <div className="companySignupSuccess">
+        <h1>Empresa registrada!</h1>
+        <p>Puedes dirigirte ahora a <Link to="/login">Login</Link></p>
+      </div>
       )
   }
 
@@ -104,7 +108,7 @@ const CompanySignup = () => {
         <h1>Ubicación</h1>
         <input type="text" onChange={(e) => setCompanyLocation(e.target.value)}/>
       </section>
-        <h1>Seleccione la(s) rama(s) de su negocio</h1>
+        <h1 style={{marginTop: '10px'}}>Seleccione la(s) rama(s) de su negocio</h1>
       <section id="tags">
         {tags.map((tag, i) => (
           <h1 

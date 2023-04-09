@@ -76,3 +76,30 @@
     color: white;
     cursor: pointer;
 }
+
+.companySignupSuccess {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.companySignupSuccess h1 {
+    font-size: 50px;
+    border-bottom: 2px solid black;
+}
+
+.companySignupSuccess p {
+    font-size: 25px;
+}
+
+.companySignupSuccess p a {
+    color: var(--cherryred);
+    border-bottom: 2px solid transparent;
+}
+
+.companySignupSuccess p a:hover {
+    border-bottom: 2px solid black;
+}

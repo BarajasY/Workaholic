@@ -23,6 +23,7 @@ const AddPosting = () => {
   const [Benefit, setBenefit] = useState("")
   const [PostingDate, setPostingDate] = useState()
   const [PostingTags, setPostingTags] = useState<String[]>([])
+  const [SuccessfullyPosted, setSuccessfullyPosted] = useState(false)
   const JobType = ["Full-Time", "Part-Time", "Freelance"]
   const tags = [
     "Software",
@@ -112,11 +113,19 @@ const AddPosting = () => {
         benefits: BenefitsArray.toString(),
       })
     }).then(response => {
-      console.log(response.status)
+      if(response.status === 200) {
+        setSuccessfullyPosted(true)
+      }
     })
   }
-/*   const test = "Hola como estás, muy bien y tu?"
-  console.log(test.split(", ")) */
+
+  if(SuccessfullyPosted) {
+    return (
+      <div className="SuccessfullyPostedContainer">
+        <h1>Se ha subido tu oferta de trabajo!</h1>
+      </div>
+    )
+  }
 
   return (
     <div className="addPostingContainer">
