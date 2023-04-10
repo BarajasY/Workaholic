@@ -26,16 +26,16 @@ public class PostingsController {
         String businessName,
         String title,
         String description,
-        String jobType,
+        String[] jobType,
         Number salary,
         String salaryCurrency,
         String salaryRate,
         String location,
         String country,
         String duration,
-        Number date,
-        String tags,
-        String benefits
+        String date,
+        String[] tags,
+        String[] benefits
     ){}
 
     @PostMapping("/add")

@@ -24,7 +24,7 @@ const CompanySignup = () => {
     ];
 
     const sendData = () => {
-      if(CompanyName !== "" && CompanyLocation !== "" && CompanyCountry !== "" && CompanyPassword !== "" && CompanyTags[1] !== undefined && CompanyOwner !== "") {
+      if(CompanyName !== "" && CompanyLocation !== "" && CompanyCountry !== "" && CompanyPassword !== "" && CompanyTags[0] !== "" && CompanyOwner !== "") {
         registerCompany();
       } else {
         setErrorMessage("Todos los campos son obligatorios");
@@ -55,6 +55,7 @@ const CompanySignup = () => {
         } else if (response.status === 200) {
           setErrorMessage("")
           setSuccessfullyRegistered(true);
+          window.scrollTo({top: 0, behavior:"smooth"})
         }
       })
       .catch((err) => console.log(err))

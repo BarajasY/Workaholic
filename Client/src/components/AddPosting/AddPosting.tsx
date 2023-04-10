@@ -10,7 +10,7 @@ const AddPosting = () => {
   const navigate = useNavigate()
 
   const [Salary, setSalary] = useState('')
-  const [SalaryRate, setSalaryRate] = useState("/hr")
+  const [SalaryRate, setSalaryRate] = useState("hr")
   const [SalaryCurrency, setSalaryCurrency] = useState("MXN")
   const [BenefitsArray, setBenefitsArray] = useState([""])
   const [PostingTitle, setPostingTitle] = useState("")
@@ -21,7 +21,6 @@ const AddPosting = () => {
   const [Location, setLocation] = useState("")
   const [Duration, setDuration] = useState("")
   const [Benefit, setBenefit] = useState("")
-  const [PostingDate, setPostingDate] = useState()
   const [PostingTags, setPostingTags] = useState<String[]>([])
   const [SuccessfullyPosted, setSuccessfullyPosted] = useState(false)
   const JobType = ["Full-Time", "Part-Time", "Freelance"]
@@ -91,7 +90,6 @@ const AddPosting = () => {
 
   const AddPosting = () => {
     const date = new Date()
-
     const post = fetch("http://localhost:8080/api/v1/postings/add", {
       method: "POST",
       headers: {
@@ -101,20 +99,21 @@ const AddPosting = () => {
         businessName: user.CompanyName,
         title: PostingTitle,
         description: PostingDescription,
-        jobType: JobTypeArray.toString(),
+        jobType: JobTypeArray,
         salary: Number(Salary),
         salaryCurrency: SalaryCurrency,
         salaryRate: SalaryRate,
         location: Location,
         country: user.Country,
         duration: Duration,
-        date: date.getTime(),
-        tags: PostingTags.toString(),
-        benefits: BenefitsArray.toString(),
+        date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
+        tags: PostingTags,
+        benefits: BenefitsArray,
       })
     }).then(response => {
       if(response.status === 200) {
         setSuccessfullyPosted(true)
+        window.scrollTo({top: 0, behavior: "smooth"})
       }
     })
   }

@@ -27,18 +27,18 @@ public class Postings {
     private String businessName;
     private String title;
     private String description;
-    private String jobType;
+    private String[] jobType;
     private Number salary;
     private String salaryCurrency;
     private String salaryRate;
     private String location;
     private String country;
     private String duration;
-    private Number date;
-    private String tags;
-    private String benefits;
+    private String date;
+    private String[] tags;
+    private String[] benefits;
 
-    public Postings(Integer id, String businessName, String title, String description, String jobType, Number salary, String salaryCurrency, String salaryRate, String location, String country, String duration, Number date, String tags, String benefits) {
+    public Postings(Integer id, String businessName, String title, String description, String[] jobType, Number salary, String salaryCurrency, String salaryRate, String location, String country, String duration, String date, String[] tags, String[] benefits) {
         this.id = id;
         this.businessName = businessName;
         this.title = title;
@@ -87,11 +87,11 @@ public class Postings {
         this.description = description;
     }
 
-    public String getJobType() {
+    public String[] getJobType() {
         return this.jobType;
     }
 
-    public void setJobType(String jobType) {
+    public void setJobType(String[] jobType) {
         this.jobType = jobType;
     }
 
@@ -143,27 +143,27 @@ public class Postings {
         this.duration = duration;
     }
 
-    public Number getDate() {
+    public String getDate() {
         return this.date;
     }
 
-    public void setDate(Number date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public String getTags() {
+    public String[] getTags() {
         return this.tags;
     }
 
-    public void setTags(String tags) {
+    public void setTags(String[] tags) {
         this.tags = tags;
     }
 
-    public String getBenefits() {
+    public String[] getBenefits() {
         return this.benefits;
     }
 
-    public void setBenefits(String benefits) {
+    public void setBenefits(String[] benefits) {
         this.benefits = benefits;
     }
 
@@ -187,7 +187,7 @@ public class Postings {
         return this;
     }
 
-    public Postings jobType(String jobType) {
+    public Postings jobType(String[] jobType) {
         setJobType(jobType);
         return this;
     }
@@ -222,17 +222,17 @@ public class Postings {
         return this;
     }
 
-    public Postings date(Number date) {
+    public Postings date(String date) {
         setDate(date);
         return this;
     }
 
-    public Postings tags(String tags) {
+    public Postings tags(String[] tags) {
         setTags(tags);
         return this;
     }
 
-    public Postings benefits(String benefits) {
+    public Postings benefits(String[] benefits) {
         setBenefits(benefits);
         return this;
     }
@@ -272,4 +272,6 @@ public class Postings {
             ", benefits='" + getBenefits() + "'" +
             "}";
     }
+
+    
 }
