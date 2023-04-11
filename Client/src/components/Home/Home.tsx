@@ -30,7 +30,7 @@ const Home = () => {
             <span>c</span>
         </h1>
         <div className="homeButtons">
-            <Link to="/browse">Buscar empleo</Link>
+            <Link to="/signup">Buscar empleo</Link>
         </div>
     </div>
   )

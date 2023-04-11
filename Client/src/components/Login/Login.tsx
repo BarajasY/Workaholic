@@ -33,7 +33,7 @@ const Login = () => {
       })
     })
     .then(response => {
-      if(response.status === 404) {
+      if(response.status === 500) {
         console.clear()
         setErrorMessage("El correo no existe.")
       } else if(response.status === 409) {
