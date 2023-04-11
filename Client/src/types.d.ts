@@ -66,3 +66,19 @@ export type CompanyType = {
 export type userType = {
     worker: userStateInterface
 }
+
+export type PostingType = {
+    id: Number,
+    businessName: String,
+    title: String,
+    description: String,
+    jobType: String[],
+    salary: Number,
+    salaryCurrency: String,
+    salaryRate: String,
+    location: String,
+    duration: String,
+    date: String,
+    tags: string[],
+    benefits: string[]
+}

@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PostingsRepository extends JpaRepository<Postings, Integer> {
     
+    Postings findPostingsById(Number id);
 }

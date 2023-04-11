@@ -1,8 +1,20 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import {Link, useNavigate} from 'react-router-dom'
 import './Home.css'
+import { useSelector } from 'react-redux';
+import { userType } from '../../types';
 
 const Home = () => {
+  const navigate = useNavigate();
+  const user = useSelector((state:userType) => state.worker)
+
+  useEffect(() => {
+    if(user.Logged) {
+      navigate('/browse')
+    }
+  }, [])
+  
+
   return (
     <div className="homeContainer">
         <h1>

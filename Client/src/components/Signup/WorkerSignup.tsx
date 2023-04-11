@@ -118,7 +118,7 @@ const Signup = () => {
         <section>
           <h1>Signup has been completed!</h1>
           <h1>
-            You may now head to <Link to="./login">Login</Link>
+            You may now head to <Link to="/login">Login</Link>
           </h1>
         </section>
       </div>

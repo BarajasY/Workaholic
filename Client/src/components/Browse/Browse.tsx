@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import './Browse.css'
+import { useNavigate } from 'react-router-dom';
 
-const Browse = () => {
+const Browse:React.FC = () => {
+  const navigate = useNavigate()
     const { isLoading, error , data} = useQuery({
         queryKey: ["postingsData"],
         queryFn: () => fetch("http://localhost:8080/api/v1/postings/all")
@@ -11,14 +13,12 @@ const Browse = () => {
     if(isLoading) return <h1>Loading</h1>
     if(error) console.log(error);
 
-    console.log(data)
-
   return (
     <div className="browseContainer">
         <h1>Jobs Found</h1>
         <div className="jobsContainer">
           {data.map((job:any)=> (
-            <div key={job.id} className="jobCard">
+            <div key={job.id} className="jobCard" onClick={() => navigate(`./${job.id}`)}>
               <div className="jobCardHeader">
                 <h1 className='jobTitle'>{job.title}</h1>
                 <p className='jobDate'>{job.date}</p>
