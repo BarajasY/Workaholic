@@ -31,8 +31,9 @@
 }
 
 .jobCard:hover {
-    transform: translateY(-10px);
+    transform: translateY(-3px);
     cursor: pointer;
+    box-shadow: 0px 5px 20px black;
 }
 
 .jobCardHeader {

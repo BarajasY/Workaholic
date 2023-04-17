@@ -15,13 +15,13 @@
 }
 
 .logo a {
-    font-family: 'Tilt Warp';
     color: var(--color4);
     font-size: 30px;
+    font-weight: 700;
 }
 
 .links a {
-    font-family: 'Tilt Warp';
+    font-weight: 500;
     margin: 10px;
     font-size: 20px;
     padding: 10px 15px;

@@ -2,10 +2,15 @@ package com.yahir.Workaholic.Postings;
 
 import java.util.Objects;
 
+import com.yahir.Workaholic.Company.Company;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
@@ -37,8 +42,11 @@ public class Postings {
     private String date;
     private String[] tags;
     private String[] benefits;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
-    public Postings(Integer id, String businessName, String title, String description, String[] jobType, Number salary, String salaryCurrency, String salaryRate, String location, String country, String duration, String date, String[] tags, String[] benefits) {
+    public Postings(Integer id, String businessName, String title, String description, String[] jobType, Number salary, String salaryCurrency, String salaryRate, String location, String country, String duration, String date, String[] tags, String[] benefits, Company company) {
         this.id = id;
         this.businessName = businessName;
         this.title = title;
@@ -53,6 +61,7 @@ public class Postings {
         this.date = date;
         this.tags = tags;
         this.benefits = benefits;
+        this.company = company;
     }
 
     public Integer getId() {
@@ -167,6 +176,14 @@ public class Postings {
         this.benefits = benefits;
     }
 
+    public Company getCompany() {
+        return this.company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     public Postings id(Integer id) {
         setId(id);
         return this;
@@ -237,6 +254,11 @@ public class Postings {
         return this;
     }
 
+    public Postings company(Company company) {
+        setCompany(company);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -245,12 +267,12 @@ public class Postings {
             return false;
         }
         Postings postings = (Postings) o;
-        return Objects.equals(id, postings.id) && Objects.equals(businessName, postings.businessName) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobType, postings.jobType) && Objects.equals(salary, postings.salary) && Objects.equals(salaryCurrency, postings.salaryCurrency) && Objects.equals(salaryRate, postings.salaryRate) && Objects.equals(location, postings.location) && Objects.equals(country, postings.country) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(tags, postings.tags) && Objects.equals(benefits, postings.benefits);
+        return Objects.equals(id, postings.id) && Objects.equals(businessName, postings.businessName) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobType, postings.jobType) && Objects.equals(salary, postings.salary) && Objects.equals(salaryCurrency, postings.salaryCurrency) && Objects.equals(salaryRate, postings.salaryRate) && Objects.equals(location, postings.location) && Objects.equals(country, postings.country) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(tags, postings.tags) && Objects.equals(benefits, postings.benefits) && Objects.equals(company, postings.company);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, businessName, title, description, jobType, salary, salaryCurrency, salaryRate, location, country, duration, date, tags, benefits);
+        return Objects.hash(id, businessName, title, description, jobType, salary, salaryCurrency, salaryRate, location, country, duration, date, tags, benefits, company);
     }
 
     @Override
@@ -270,8 +292,7 @@ public class Postings {
             ", date='" + getDate() + "'" +
             ", tags='" + getTags() + "'" +
             ", benefits='" + getBenefits() + "'" +
+            ", company='" + getCompany() + "'" +
             "}";
     }
-
-    
 }

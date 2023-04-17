@@ -108,3 +108,16 @@
     background: var(--backgroundshade);
     color: var(--navyblue);
 }
+
+.jobPostApplyButton button{
+    padding: 20px;
+    font-size: 30px;
+    color: var(--bluegreen);
+    border-radius: 15px;
+}
+
+.jobPostApplyButton button:hover {
+    background: var(--bluegreen);
+    color: white;
+    cursor: pointer;
+}

@@ -8,6 +8,8 @@ public interface FileStorageService {
 
     public void save(MultipartFile file, String email);
 
+    public Object load(String email);
+
     /* public Resource load(String filename); */
 
     /* public void deleteAll();

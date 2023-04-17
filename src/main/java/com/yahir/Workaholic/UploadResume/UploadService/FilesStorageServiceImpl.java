@@ -1,14 +1,16 @@
 package com.yahir.Workaholic.UploadResume.UploadService;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 
 @Service
 public class FilesStorageServiceImpl implements FileStorageService{
@@ -37,15 +39,15 @@ public class FilesStorageServiceImpl implements FileStorageService{
         }
     }
 
-    /* @Override
-    public Resource load(String filename) {
+    @Override
+    public Object load(String email) {
         try {
-            Path file = root.resolve(filename);
-            Resource resource = new UrlResource(file.toUri());
+            String filename = email + ".pdf";
+            URI filepath = root.toAbsolutePath().toUri().resolve(filename);
+            Resource resource = new UrlResource(filepath);
+            return resource;
         } catch (Exception e) {
-
+            return e;
         }
-    } */
-
-
+    }
 }

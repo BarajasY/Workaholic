@@ -169,7 +169,7 @@ const Signup = () => {
         </section>
         <section>
           <h1>Inserte su más reciente currículum</h1>
-          <input type="file" onChange={(e) => setCV(e.target.files![0])} />
+          <input type="file" accept=".pdf" onChange={(e) => setCV(e.target.files![0])} />
         </section>
         <h1>Seleccione sus intereses</h1>
         <section id="tagsSection">

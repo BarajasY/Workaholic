@@ -18,7 +18,11 @@
   --success2: #009900;
   --success: #00CC33;
   --darkgreen: #336633;
-  --color1: #2c1f1f;
+  --bluegreen: #00c8aa;
+  --teal: #008080;
+  --skyblue: #87CEEB;
+  --turquoise: #40E0D0;
+  --eblue: #035096;
   --cobaltblue: #0047ab;
   --color2: #0479f6;
   --blend2: #0770E8;
@@ -46,7 +50,7 @@
   padding: 0;
   text-decoration: none;
   outline: none;
-  font-family: 'Tilt Warp';
+  font-family: 'Poppins';
   transition: .2s;
   background: var(--background);
 }

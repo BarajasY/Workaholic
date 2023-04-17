@@ -1,22 +1,24 @@
 import React, {useState} from 'react';
 import './JobPost.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { PostingType } from '../../types';
+import { PostingType, userType } from '../../types';
+import { useSelector } from 'react-redux';
 
 const JobPost = () => {
+  const user = useSelector((state:userType) => state.worker)
     const {id} = useParams();
     const navigate = useNavigate()
-
+    
     const { isLoading, error, data} = useQuery({
-        queryKey: [`jobPost`, id],
-        queryFn: async ({queryKey}) => {
-          const data = await fetch(`http://localhost:8080/api/v1/postings/${queryKey[1]}`)
-          if(data.status === 404) {
-            navigate("/browse")
-          }
-          return data.json()
-          },
+      queryKey: [`jobPost`, id],
+      queryFn: async ({queryKey}) => {
+        const data = await fetch(`http://localhost:8080/api/v1/postings/${queryKey[1]}`)
+        if(data.status === 404) {
+          navigate("/browse")
+        }
+        return data.json()
+      },
     })
     if(isLoading) return <h1>Loading...</h1>
     if(error) console.log(error);
@@ -59,6 +61,16 @@ const JobPost = () => {
             ))}
         </section>
       </div>
+      {user.Role === "worker" 
+       ?
+            <div className="jobPostApplyButton">
+              <Link to="./apply">
+                <button>Apply</button>
+              </Link>
+            </div>
+       :
+            null
+       }
     </div>
   )
 }
