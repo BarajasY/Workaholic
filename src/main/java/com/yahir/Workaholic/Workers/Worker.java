@@ -176,5 +176,4 @@ public class Worker {
             ", role='" + getRole() + "'" +
             "}";
     }
-
 }

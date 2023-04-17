@@ -65,6 +65,7 @@ const Login = () => {
     cookies.set('Country', data.country, {path: "/"});
     cookies.set("Role", data.role, {path: "/"});
     cookies.set('Tags', data.tags, {path: "/"});
+    cookies.set('Id', data.id, {path: "/"});
     const cookieData = cookies.getAll();
     dispatch(storeWorker(cookieData))
     navigate("/browse")
@@ -81,6 +82,7 @@ const Login = () => {
     cookies.set('CompanyLocation', data.location, {path: "/"})
     cookies.set("Role", data.role, {path: "/"})
     cookies.set("Tags", data.tags, {path: "/"})
+    cookies.set("Id", data.id, {path: "/"})
     const cookieData = cookies.getAll();
     dispatch(storeCompany(cookieData))
     navigate("/browse")

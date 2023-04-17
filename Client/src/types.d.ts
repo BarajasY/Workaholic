@@ -1,4 +1,5 @@
 export interface workerInterface {
+    id: Number,
     fname: String,
     lname: String,
     email: String,
@@ -9,6 +10,7 @@ export interface workerInterface {
 }
 
 export interface companyInterface {
+    id: Number,
     name: String,
     owner: String,
     password: String,
@@ -20,6 +22,7 @@ export interface companyInterface {
 }
 
 export interface companyStateInterface {
+    Id: Number,
     Name: String,
     Owner: String,
     Password: String,
@@ -32,6 +35,7 @@ export interface companyStateInterface {
 }
 
 export interface workerStateInterface {
+    Id: Number,
     FName: String,
     LName: String,
     Email: String,
@@ -42,6 +46,7 @@ export interface workerStateInterface {
 }
 
 export interface userStateInterface {
+    Id: Number,
     FName: String,
     CompanyName: String,
     LName: String,

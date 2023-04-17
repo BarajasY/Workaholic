@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import { userStateInterface, workerStateInterface } from '../types';
 
 export const userInitialState = {
+    Id: 0,
     FName: "",
     CompanyName: "",
     LName: "",
@@ -20,16 +21,17 @@ export const workerSlice = createSlice({
     initialState: userInitialState,
     reducers: {
         storeWorker: (state, action) => {
-            const {FName, LName, Email, Country, Tags, Logged} = action.payload;
+            const {FName, LName, Email, Country, Tags, Logged, Id} = action.payload;
             state.FName = FName;
             state.LName = LName;
             state.Email = Email;
             state.Country = Country;
             state.Tags = Tags;
             state.Logged = Logged;
+            state.Id = Id;
         },
         storeCompany: (state, action) => {
-            const {CompanyName, CompanyLocation, CompanyOwner, Email, Role, Country, Tags, Logged} = action.payload;
+            const {CompanyName, CompanyLocation, CompanyOwner, Email, Role, Country, Tags, Logged, Id} = action.payload;
             state.CompanyName = CompanyName;
             state.CompanyLocation = CompanyLocation;
             state.CompanyOwner = CompanyOwner;
@@ -38,6 +40,7 @@ export const workerSlice = createSlice({
             state.Country = Country;
             state.Tags = Tags;
             state.Logged = Logged;
+            state.Id = Id
         },
         resetUser: () => userInitialState,
     }

@@ -36,7 +36,8 @@ public class PostingsController {
         String duration,
         String date,
         String[] tags,
-        String[] benefits
+        String[] benefits,
+        Integer business_id
     ){}
 
     @PostMapping("/add")
@@ -55,6 +56,7 @@ public class PostingsController {
         Posting.setDate(request.date());
         Posting.setTags(request.tags());
         Posting.setBenefits(request.benefits());
+        Posting.setBusiness_id(request.business_id());
         repository.save(Posting);
         return new ResponseEntity<>(HttpStatus.OK);
     }

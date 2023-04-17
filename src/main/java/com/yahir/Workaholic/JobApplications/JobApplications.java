@@ -2,18 +2,11 @@ package com.yahir.Workaholic.JobApplications;
 
 import java.util.Objects;
 
-import com.yahir.Workaholic.Company.Company;
-import com.yahir.Workaholic.Postings.Postings;
-import com.yahir.Workaholic.Workers.Worker;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
@@ -30,15 +23,12 @@ public class JobApplications {
         generator = "jobApplication_id_generator"
     )
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="worker_id")
-    private Worker worker;
-    @OneToOne(fetch = FetchType.LAZY)
+    private Integer worker_id;
     @JoinColumn(name="company_id")
-    private Company company;
-    @OneToOne(fetch = FetchType.LAZY)
+    private Integer company_id;
     @JoinColumn(name="posting_id")
-    private Postings posting;
+    private Integer postings_id;
     private String workerln;
     private String wemail;
     private String posting_title;
@@ -46,9 +36,11 @@ public class JobApplications {
     public JobApplications() {
     }
 
-    public JobApplications(Integer id, Worker worker, String workerln, String wemail, String posting_title) {
+    public JobApplications(Integer id, Integer worker_id, Integer company_id, Integer postings_id, String workerln, String wemail, String posting_title) {
         this.id = id;
-        this.worker = worker;
+        this.worker_id = worker_id;
+        this.company_id = company_id;
+        this.postings_id = postings_id;
         this.workerln = workerln;
         this.wemail = wemail;
         this.posting_title = posting_title;
@@ -62,12 +54,28 @@ public class JobApplications {
         this.id = id;
     }
 
-    public Worker getWorker() {
-        return this.worker;
+    public Integer getWorker_id() {
+        return this.worker_id;
     }
 
-    public void setWorker(Worker worker) {
-        this.worker = worker;
+    public void setWorker_id(Integer worker_id) {
+        this.worker_id = worker_id;
+    }
+
+    public Integer getCompany_id() {
+        return this.company_id;
+    }
+
+    public void setCompany_id(Integer company_id) {
+        this.company_id = company_id;
+    }
+
+    public Integer getPostings_id() {
+        return this.postings_id;
+    }
+
+    public void setPostings_id(Integer postings_id) {
+        this.postings_id = postings_id;
     }
 
     public String getWorkerln() {
@@ -99,8 +107,18 @@ public class JobApplications {
         return this;
     }
 
-    public JobApplications worker(Worker worker) {
-        setWorker(worker);
+    public JobApplications worker_id(Integer worker_id) {
+        setWorker_id(worker_id);
+        return this;
+    }
+
+    public JobApplications company_id(Integer company_id) {
+        setCompany_id(company_id);
+        return this;
+    }
+
+    public JobApplications postings_id(Integer postings_id) {
+        setPostings_id(postings_id);
         return this;
     }
 
@@ -127,22 +145,26 @@ public class JobApplications {
             return false;
         }
         JobApplications jobApplications = (JobApplications) o;
-        return Objects.equals(id, jobApplications.id) && Objects.equals(worker, jobApplications.worker) && Objects.equals(workerln, jobApplications.workerln) && Objects.equals(wemail, jobApplications.wemail) && Objects.equals(posting_title, jobApplications.posting_title);
+        return Objects.equals(id, jobApplications.id) && Objects.equals(worker_id, jobApplications.worker_id) && Objects.equals(company_id, jobApplications.company_id) && Objects.equals(postings_id, jobApplications.postings_id) && Objects.equals(workerln, jobApplications.workerln) && Objects.equals(wemail, jobApplications.wemail) && Objects.equals(posting_title, jobApplications.posting_title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, worker, workerln, wemail, posting_title);
+        return Objects.hash(id, worker_id, company_id, postings_id, workerln, wemail, posting_title);
     }
 
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", worker='" + getWorker() + "'" +
+            ", worker_id='" + getWorker_id() + "'" +
+            ", company_id='" + getCompany_id() + "'" +
+            ", postings_id='" + getPostings_id() + "'" +
             ", workerln='" + getWorkerln() + "'" +
             ", wemail='" + getWemail() + "'" +
             ", posting_title='" + getPosting_title() + "'" +
             "}";
     }
+
+
 }
