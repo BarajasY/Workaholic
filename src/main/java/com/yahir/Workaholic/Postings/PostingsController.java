@@ -12,15 +12,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yahir.Workaholic.Company.Company;
+import com.yahir.Workaholic.Company.CompanyRepository;
+
 @RestController
 @RequestMapping("api/v1/postings")
 @CrossOrigin
 public class PostingsController {
     
     private final PostingsRepository repository;
+    private final CompanyRepository companyRepository;
 
-    public PostingsController(PostingsRepository repository) {
+    public PostingsController(PostingsRepository repository, CompanyRepository companyRepository) {
         this.repository = repository;
+        this.companyRepository = companyRepository;
     }
 
     record newPostingRequest(
@@ -37,12 +42,13 @@ public class PostingsController {
         String date,
         String[] tags,
         String[] benefits,
-        Integer business_id
+        Number company_id
     ){}
 
     @PostMapping("/add")
     public Object addJobPosting(@RequestBody newPostingRequest request) {
         Postings Posting = new Postings();
+        Company company = companyRepository.findById(request.company_id());
         Posting.setBusinessName(request.businessName());
         Posting.setTitle(request.title());
         Posting.setDescription(request.description());
@@ -56,7 +62,7 @@ public class PostingsController {
         Posting.setDate(request.date());
         Posting.setTags(request.tags());
         Posting.setBenefits(request.benefits());
-        Posting.setBusiness_id(request.business_id());
+        Posting.setCompany(company);
         repository.save(Posting);
         return new ResponseEntity<>(HttpStatus.OK);
     }

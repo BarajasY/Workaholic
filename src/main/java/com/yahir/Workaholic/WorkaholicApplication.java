@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yahir.Workaholic.Company.Company;
 import com.yahir.Workaholic.Company.CompanyRepository;
+import com.yahir.Workaholic.JobApplications.JobApplicationsRepository;
 import com.yahir.Workaholic.Postings.PostingsRepository;
 import com.yahir.Workaholic.UploadResume.UploadResumeRepository;
 import com.yahir.Workaholic.UploadResume.UploadService.FileStorageService;
@@ -35,13 +36,15 @@ public class WorkaholicApplication implements CommandLineRunner {
 	private final PostingsRepository postingRepository;
 	private final CompanyRepository companyRepository;
 	private final WorkerRepository workerRepository;
+	private final JobApplicationsRepository jobApplicationsRepository;
 
-	public WorkaholicApplication(FileStorageService storageService, UploadResumeRepository uploadResumeRepository, PostingsRepository postingRepository, CompanyRepository companyRepository, WorkerRepository workerRepository) {
+	public WorkaholicApplication(FileStorageService storageService, UploadResumeRepository uploadResumeRepository, PostingsRepository postingRepository, CompanyRepository companyRepository, WorkerRepository workerRepository, JobApplicationsRepository jobApplicationsRepository) {
 		this.storageService = storageService;
 		this.uploadResumeRepository = uploadResumeRepository;
 		this.postingRepository = postingRepository;
 		this.companyRepository = companyRepository;
 		this.workerRepository = workerRepository;
+		this.jobApplicationsRepository = jobApplicationsRepository;
 	}
 
 	public static void main(String[] args) {

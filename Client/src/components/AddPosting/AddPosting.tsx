@@ -109,7 +109,7 @@ const AddPosting = () => {
         date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
         tags: PostingTags,
         benefits: BenefitsArray,
-        business_id: user.Id
+        company_id: user.Id
       })
     }).then(response => {
       if(response.status === 200) {

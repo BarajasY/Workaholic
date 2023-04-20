@@ -2,11 +2,17 @@ package com.yahir.Workaholic.JobApplications;
 
 import java.util.Objects;
 
+import com.yahir.Workaholic.Company.Company;
+import com.yahir.Workaholic.Postings.Postings;
+import com.yahir.Workaholic.Workers.Worker;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
@@ -23,24 +29,24 @@ public class JobApplications {
         generator = "jobApplication_id_generator"
     )
     private Integer id;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="worker_id")
-    private Integer worker_id;
+    private Worker worker;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="company_id")
-    private Integer company_id;
+    private Company company;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="posting_id")
-    private Integer postings_id;
+    private Postings posting;
     private String workerln;
     private String wemail;
     private String posting_title;
 
-    public JobApplications() {
-    }
-
-    public JobApplications(Integer id, Integer worker_id, Integer company_id, Integer postings_id, String workerln, String wemail, String posting_title) {
+    public JobApplications(Integer id, Worker worker, Company company, Postings posting, String workerln, String wemail, String posting_title) {
         this.id = id;
-        this.worker_id = worker_id;
-        this.company_id = company_id;
-        this.postings_id = postings_id;
+        this.worker = worker;
+        this.company = company;
+        this.posting = posting;
         this.workerln = workerln;
         this.wemail = wemail;
         this.posting_title = posting_title;
@@ -54,28 +60,28 @@ public class JobApplications {
         this.id = id;
     }
 
-    public Integer getWorker_id() {
-        return this.worker_id;
+    public Worker getWorker() {
+        return this.worker;
     }
 
-    public void setWorker_id(Integer worker_id) {
-        this.worker_id = worker_id;
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
-    public Integer getCompany_id() {
-        return this.company_id;
+    public Company getCompany() {
+        return this.company;
     }
 
-    public void setCompany_id(Integer company_id) {
-        this.company_id = company_id;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
-    public Integer getPostings_id() {
-        return this.postings_id;
+    public Postings getPosting() {
+        return this.posting;
     }
 
-    public void setPostings_id(Integer postings_id) {
-        this.postings_id = postings_id;
+    public void setPosting(Postings posting) {
+        this.posting = posting;
     }
 
     public String getWorkerln() {
@@ -107,18 +113,18 @@ public class JobApplications {
         return this;
     }
 
-    public JobApplications worker_id(Integer worker_id) {
-        setWorker_id(worker_id);
+    public JobApplications worker(Worker worker) {
+        setWorker(worker);
         return this;
     }
 
-    public JobApplications company_id(Integer company_id) {
-        setCompany_id(company_id);
+    public JobApplications company(Company company) {
+        setCompany(company);
         return this;
     }
 
-    public JobApplications postings_id(Integer postings_id) {
-        setPostings_id(postings_id);
+    public JobApplications posting(Postings posting) {
+        setPosting(posting);
         return this;
     }
 
@@ -145,26 +151,28 @@ public class JobApplications {
             return false;
         }
         JobApplications jobApplications = (JobApplications) o;
-        return Objects.equals(id, jobApplications.id) && Objects.equals(worker_id, jobApplications.worker_id) && Objects.equals(company_id, jobApplications.company_id) && Objects.equals(postings_id, jobApplications.postings_id) && Objects.equals(workerln, jobApplications.workerln) && Objects.equals(wemail, jobApplications.wemail) && Objects.equals(posting_title, jobApplications.posting_title);
+        return Objects.equals(id, jobApplications.id) && Objects.equals(worker, jobApplications.worker) && Objects.equals(company, jobApplications.company) && Objects.equals(posting, jobApplications.posting) && Objects.equals(workerln, jobApplications.workerln) && Objects.equals(wemail, jobApplications.wemail) && Objects.equals(posting_title, jobApplications.posting_title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, worker_id, company_id, postings_id, workerln, wemail, posting_title);
+        return Objects.hash(id, worker, company, posting, workerln, wemail, posting_title);
     }
 
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", worker_id='" + getWorker_id() + "'" +
-            ", company_id='" + getCompany_id() + "'" +
-            ", postings_id='" + getPostings_id() + "'" +
+            ", worker='" + getWorker() + "'" +
+            ", company='" + getCompany() + "'" +
+            ", posting='" + getPosting() + "'" +
             ", workerln='" + getWorkerln() + "'" +
             ", wemail='" + getWemail() + "'" +
             ", posting_title='" + getPosting_title() + "'" +
             "}";
     }
 
+    public JobApplications() {
+    }
 
 }

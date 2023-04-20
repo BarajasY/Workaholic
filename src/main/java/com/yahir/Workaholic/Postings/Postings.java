@@ -2,11 +2,15 @@ package com.yahir.Workaholic.Postings;
 
 import java.util.Objects;
 
+import com.yahir.Workaholic.Company.Company;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
@@ -38,10 +42,11 @@ public class Postings {
     private String date;
     private String[] tags;
     private String[] benefits;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name =  "company_id")
-    private Integer business_id;
+    private Company company;
 
-    public Postings(Integer id, String businessName, String title, String description, String[] jobType, Number salary, String salaryCurrency, String salaryRate, String location, String country, String duration, String date, String[] tags, String[] benefits, Integer business_id) {
+    public Postings(Integer id, String businessName, String title, String description, String[] jobType, Number salary, String salaryCurrency, String salaryRate, String location, String country, String duration, String date, String[] tags, String[] benefits, Company company) {
         this.id = id;
         this.businessName = businessName;
         this.title = title;
@@ -56,7 +61,7 @@ public class Postings {
         this.date = date;
         this.tags = tags;
         this.benefits = benefits;
-        this.business_id = business_id;
+        this.company = company;
     }
 
     public Integer getId() {
@@ -171,12 +176,12 @@ public class Postings {
         this.benefits = benefits;
     }
 
-    public Integer getBusiness_id() {
-        return this.business_id;
+    public Company getCompany() {
+        return this.company;
     }
 
-    public void setBusiness_id(Integer business_id) {
-        this.business_id = business_id;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Postings id(Integer id) {
@@ -249,8 +254,8 @@ public class Postings {
         return this;
     }
 
-    public Postings business_id(Integer business_id) {
-        setBusiness_id(business_id);
+    public Postings company(Company company) {
+        setCompany(company);
         return this;
     }
 
@@ -262,12 +267,12 @@ public class Postings {
             return false;
         }
         Postings postings = (Postings) o;
-        return Objects.equals(id, postings.id) && Objects.equals(businessName, postings.businessName) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobType, postings.jobType) && Objects.equals(salary, postings.salary) && Objects.equals(salaryCurrency, postings.salaryCurrency) && Objects.equals(salaryRate, postings.salaryRate) && Objects.equals(location, postings.location) && Objects.equals(country, postings.country) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(tags, postings.tags) && Objects.equals(benefits, postings.benefits) && Objects.equals(business_id, postings.business_id);
+        return Objects.equals(id, postings.id) && Objects.equals(businessName, postings.businessName) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobType, postings.jobType) && Objects.equals(salary, postings.salary) && Objects.equals(salaryCurrency, postings.salaryCurrency) && Objects.equals(salaryRate, postings.salaryRate) && Objects.equals(location, postings.location) && Objects.equals(country, postings.country) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(tags, postings.tags) && Objects.equals(benefits, postings.benefits) && Objects.equals(company, postings.company);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, businessName, title, description, jobType, salary, salaryCurrency, salaryRate, location, country, duration, date, tags, benefits, business_id);
+        return Objects.hash(id, businessName, title, description, jobType, salary, salaryCurrency, salaryRate, location, country, duration, date, tags, benefits, company);
     }
 
     @Override
@@ -287,7 +292,8 @@ public class Postings {
             ", date='" + getDate() + "'" +
             ", tags='" + getTags() + "'" +
             ", benefits='" + getBenefits() + "'" +
-            ", business_id='" + getBusiness_id() + "'" +
+            ", company='" + getCompany() + "'" +
             "}";
     }
+
 }
