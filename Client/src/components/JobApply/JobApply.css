@@ -1,6 +1,6 @@
 .jobApplyContainer {
     width: 100%;
-    height: 120vh;
+    height: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,8 +8,18 @@
 }
 
 .jobApplyContent {
+    margin-top: 90px;
     display: flex;
     flex-direction: column;
+    text-align: center;
+}
+
+.jobApplyContent h1:nth-child(1) {
+    color: var(--teal);
+}
+
+.jobApplyContent h1:nth-child(1) span {
+    color: var(--navyblue);
 }
 
 .jobApplyNames {
@@ -88,4 +98,26 @@
 .jobApplyButton button:hover {
     color: var(--teal);
     background: var(--background);
+}
+
+.jobApplyLetter {
+    margin: 30px 0px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.jobApplyLetter h1 {
+    color: var(--teal);
+}
+
+.jobApplyLetter h1 span {
+    font-size: 20px;
+    color: var(--navyblue);
+}
+
+.jobApplyLetter textarea {
+    padding: 10px;
+    font-size: 20px;
 }

@@ -3,10 +3,12 @@ import './JobPost.css';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { PostingType, userType } from '../../types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { storePosting } from '../../redux/PostingSlice';
 
 const JobPost = () => {
   const user = useSelector((state:userType) => state.worker)
+  const dispatch = useDispatch()
     const {id} = useParams();
     const navigate = useNavigate()
     
@@ -22,6 +24,20 @@ const JobPost = () => {
     })
     if(isLoading) return <h1>Loading...</h1>
     if(error) console.log(error);
+
+    /* const test = {
+      id: data.id,
+      title: data.title,
+      company: {
+        id: data.company.id
+      }
+    }
+
+    console.log(data) */
+
+    const storePostingData = () => {
+      dispatch(storePosting(data))
+    }
 
   return (
     <div className="jobPostContainer">
@@ -64,8 +80,8 @@ const JobPost = () => {
       {user.Role === "worker" 
        ?
             <div className="jobPostApplyButton">
-              <Link to="./apply">
-                <button>Apply</button>
+              <Link to="./apply" onClick={() => storePostingData()}>
+                <button onClick={() => storePostingData()}>Apply</button>
               </Link>
             </div>
        :

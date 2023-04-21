@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./JobApply.css";
 import { useSelector } from "react-redux";
 import { userType } from "../../types";
@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 
 const JobApply = () => {
   const user = useSelector((state: userType) => state.worker);
+  const post = useSelector((state: any) => state.posting)
+  const [CoverLetter, setCoverLetter] = useState("")
   const email = user.Email;
 
   const { isLoading, error, data } = useQuery({
@@ -23,7 +25,7 @@ const JobApply = () => {
   return (
     <div className="jobApplyContainer">
       <div className="jobApplyContent">
-        <h1>Usted aplicará al puesto con la siguiente información</h1>
+        <h1>Usted aplicará al puesto <span>{post.title}</span> con la siguiente información</h1>
         <div className="jobApplyNames">
           <section>
             <h1>
@@ -39,6 +41,10 @@ const JobApply = () => {
         <div className="jobApplyResume">
           <h1>Resume</h1>
           <iframe src={data} width="500px" height="500px"></iframe>
+        </div>
+        <div className="jobApplyLetter">
+          <h1>Escribir carta de presentación <span>(Recomendado)</span> </h1>
+          <textarea cols={70} rows={20} onChange={(e) => setCoverLetter(e.target.value)} placeholder="Carta de presentación"></textarea>
         </div>
         <div className="jobApplyButton">
           <button>Aplicar</button>

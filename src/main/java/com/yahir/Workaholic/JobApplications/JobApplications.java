@@ -38,18 +38,15 @@ public class JobApplications {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="posting_id")
     private Postings posting;
-    private String workerln;
-    private String wemail;
-    private String posting_title;
 
-    public JobApplications(Integer id, Worker worker, Company company, Postings posting, String workerln, String wemail, String posting_title) {
+    public JobApplications() {
+    }
+
+    public JobApplications(Integer id, Worker worker, Company company, Postings posting) {
         this.id = id;
         this.worker = worker;
         this.company = company;
         this.posting = posting;
-        this.workerln = workerln;
-        this.wemail = wemail;
-        this.posting_title = posting_title;
     }
 
     public Integer getId() {
@@ -84,30 +81,6 @@ public class JobApplications {
         this.posting = posting;
     }
 
-    public String getWorkerln() {
-        return this.workerln;
-    }
-
-    public void setWorkerln(String workerln) {
-        this.workerln = workerln;
-    }
-
-    public String getWemail() {
-        return this.wemail;
-    }
-
-    public void setWemail(String wemail) {
-        this.wemail = wemail;
-    }
-
-    public String getPosting_title() {
-        return this.posting_title;
-    }
-
-    public void setPosting_title(String posting_title) {
-        this.posting_title = posting_title;
-    }
-
     public JobApplications id(Integer id) {
         setId(id);
         return this;
@@ -128,21 +101,6 @@ public class JobApplications {
         return this;
     }
 
-    public JobApplications workerln(String workerln) {
-        setWorkerln(workerln);
-        return this;
-    }
-
-    public JobApplications wemail(String wemail) {
-        setWemail(wemail);
-        return this;
-    }
-
-    public JobApplications posting_title(String posting_title) {
-        setPosting_title(posting_title);
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -151,12 +109,12 @@ public class JobApplications {
             return false;
         }
         JobApplications jobApplications = (JobApplications) o;
-        return Objects.equals(id, jobApplications.id) && Objects.equals(worker, jobApplications.worker) && Objects.equals(company, jobApplications.company) && Objects.equals(posting, jobApplications.posting) && Objects.equals(workerln, jobApplications.workerln) && Objects.equals(wemail, jobApplications.wemail) && Objects.equals(posting_title, jobApplications.posting_title);
+        return Objects.equals(id, jobApplications.id) && Objects.equals(worker, jobApplications.worker) && Objects.equals(company, jobApplications.company) && Objects.equals(posting, jobApplications.posting);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, worker, company, posting, workerln, wemail, posting_title);
+        return Objects.hash(id, worker, company, posting);
     }
 
     @Override
@@ -166,13 +124,6 @@ public class JobApplications {
             ", worker='" + getWorker() + "'" +
             ", company='" + getCompany() + "'" +
             ", posting='" + getPosting() + "'" +
-            ", workerln='" + getWorkerln() + "'" +
-            ", wemail='" + getWemail() + "'" +
-            ", posting_title='" + getPosting_title() + "'" +
             "}";
     }
-
-    public JobApplications() {
-    }
-
 }
