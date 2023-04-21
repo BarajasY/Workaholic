@@ -5,9 +5,11 @@ import { userType } from "../../types";
 import { useQuery } from "@tanstack/react-query";
 
 const JobApply = () => {
-  const user = useSelector((state: userType) => state.worker);
-  const post = useSelector((state: any) => state.posting)
+  const [ApplicationSent, setApplicationSent] = useState(false)
   const [CoverLetter, setCoverLetter] = useState("")
+
+  const user = useSelector((state: userType) => state.worker);
+  const posting = useSelector((state: any) => state.posting)
   const email = user.Email;
 
   const { isLoading, error, data } = useQuery({
@@ -22,10 +24,32 @@ const JobApply = () => {
     },
   });
 
+  const sendApplication = async () => {
+    const post = await fetch("http://localhost:8080/api/v1/jobapplication/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        worker_id: user.Id,
+        company_id: posting.company.id,
+        posting_id: posting.id,
+        coverLetter: CoverLetter
+      })
+    })
+    if(post.status === 200) {
+      setApplicationSent(true)
+    }
+
+    /* console.log(user.Id)
+    console.log(posting.id)
+    console.log(posting.company.id) */
+  }
+
   return (
     <div className="jobApplyContainer">
       <div className="jobApplyContent">
-        <h1>Usted aplicará al puesto <span>{post.title}</span> con la siguiente información</h1>
+        <h1>Usted aplicará al puesto <span>{posting.title}</span> con la siguiente información</h1>
         <div className="jobApplyNames">
           <section>
             <h1>
@@ -47,8 +71,13 @@ const JobApply = () => {
           <textarea cols={70} rows={20} onChange={(e) => setCoverLetter(e.target.value)} placeholder="Carta de presentación"></textarea>
         </div>
         <div className="jobApplyButton">
-          <button>Aplicar</button>
+          <button onClick={() => sendApplication()}>Aplicar</button>
         </div>
+        {ApplicationSent && 
+          <div>
+            <h1>Hecho</h1>
+          </div>
+        }
       </div>
     </div>
   );

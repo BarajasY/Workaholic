@@ -41,7 +41,7 @@ public class WorkerController {
     ){}
 
     @GetMapping("/all")
-    List<Worker> Testing() {
+    public List<Worker> Testing() {
         return repository.findAll();
     }
 

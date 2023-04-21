@@ -32,11 +32,11 @@ public class WorkaholicApplication implements CommandLineRunner {
 	@Resource
 	FileStorageService storageService;
 
-	private final UploadResumeRepository uploadResumeRepository;
-	private final PostingsRepository postingRepository;
+	private UploadResumeRepository uploadResumeRepository;
+	private PostingsRepository postingRepository;
 	private final CompanyRepository companyRepository;
 	private final WorkerRepository workerRepository;
-	private final JobApplicationsRepository jobApplicationsRepository;
+	private JobApplicationsRepository jobApplicationsRepository;
 
 	public WorkaholicApplication(FileStorageService storageService, UploadResumeRepository uploadResumeRepository, PostingsRepository postingRepository, CompanyRepository companyRepository, WorkerRepository workerRepository, JobApplicationsRepository jobApplicationsRepository) {
 		this.storageService = storageService;

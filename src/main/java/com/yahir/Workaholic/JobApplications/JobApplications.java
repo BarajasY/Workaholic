@@ -38,15 +38,17 @@ public class JobApplications {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="posting_id")
     private Postings posting;
+    private String coverLetter;
 
     public JobApplications() {
     }
 
-    public JobApplications(Integer id, Worker worker, Company company, Postings posting) {
+    public JobApplications(Integer id, Worker worker, Company company, Postings posting, String coverLetter) {
         this.id = id;
         this.worker = worker;
         this.company = company;
         this.posting = posting;
+        this.coverLetter = coverLetter;
     }
 
     public Integer getId() {
@@ -81,6 +83,14 @@ public class JobApplications {
         this.posting = posting;
     }
 
+    public String getCoverLetter() {
+        return this.coverLetter;
+    }
+
+    public void setCoverLetter(String coverLetter) {
+        this.coverLetter = coverLetter;
+    }
+
     public JobApplications id(Integer id) {
         setId(id);
         return this;
@@ -101,6 +111,11 @@ public class JobApplications {
         return this;
     }
 
+    public JobApplications coverLetter(String coverLetter) {
+        setCoverLetter(coverLetter);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -109,12 +124,12 @@ public class JobApplications {
             return false;
         }
         JobApplications jobApplications = (JobApplications) o;
-        return Objects.equals(id, jobApplications.id) && Objects.equals(worker, jobApplications.worker) && Objects.equals(company, jobApplications.company) && Objects.equals(posting, jobApplications.posting);
+        return Objects.equals(id, jobApplications.id) && Objects.equals(worker, jobApplications.worker) && Objects.equals(company, jobApplications.company) && Objects.equals(posting, jobApplications.posting) && Objects.equals(coverLetter, jobApplications.coverLetter);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, worker, company, posting);
+        return Objects.hash(id, worker, company, posting, coverLetter);
     }
 
     @Override
@@ -124,6 +139,7 @@ public class JobApplications {
             ", worker='" + getWorker() + "'" +
             ", company='" + getCompany() + "'" +
             ", posting='" + getPosting() + "'" +
+            ", coverLetter='" + getCoverLetter() + "'" +
             "}";
     }
 }
