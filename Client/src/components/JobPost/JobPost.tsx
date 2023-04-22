@@ -25,16 +25,6 @@ const JobPost = () => {
     if(isLoading) return <h1>Loading...</h1>
     if(error) console.log(error);
 
-    /* const test = {
-      id: data.id,
-      title: data.title,
-      company: {
-        id: data.company.id
-      }
-    }
-
-    console.log(data) */
-
     const storePostingData = () => {
       dispatch(storePosting(data))
     }
@@ -58,7 +48,9 @@ const JobPost = () => {
       <div className="jobPostAbout">
         <section>
           <p>Descripción</p>
-          <h1 className="jobPostDescription">{data.description}</h1>
+          <div className="jobPostDescription">
+            <p>{data.description}</p>
+          </div>
         </section>
         <p className='jobPostLocation'>Ubicación: <span>{data.location}</span></p>
         <p className='jobPostDuration'>Duración: {data.duration === "Indefinite" ? <span>{data.duration}</span> : <span>{data.duration} Meses</span> }</p>

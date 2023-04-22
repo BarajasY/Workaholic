@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 const JobApply = () => {
   const [ApplicationSent, setApplicationSent] = useState(false)
   const [CoverLetter, setCoverLetter] = useState("")
+  const [ErrorMessage, setErrorMessage] = useState("")
 
   const user = useSelector((state: userType) => state.worker);
   const posting = useSelector((state: any) => state.posting)
@@ -24,6 +25,16 @@ const JobApply = () => {
     },
   });
 
+  const verifyApplication = async() => {
+    const get = await fetch(`http://localhost:8080/api/v1/jobapplication/verify/${user.Id}`)
+    if(get.status === 409) {
+      setErrorMessage("Ya aplicaste a este puesto.")
+      window.scrollTo({top: 0, behavior: "smooth"})
+    } else if (get.status === 200) {
+      sendApplication()
+    }
+  }
+
   const sendApplication = async () => {
     const post = await fetch("http://localhost:8080/api/v1/jobapplication/add", {
       method: "POST",
@@ -40,16 +51,13 @@ const JobApply = () => {
     if(post.status === 200) {
       setApplicationSent(true)
     }
-
-    /* console.log(user.Id)
-    console.log(posting.id)
-    console.log(posting.company.id) */
   }
 
   return (
     <div className="jobApplyContainer">
       <div className="jobApplyContent">
         <h1>Usted aplicará al puesto <span>{posting.title}</span> con la siguiente información</h1>
+        <p>{ErrorMessage}</p>
         <div className="jobApplyNames">
           <section>
             <h1>
@@ -71,7 +79,7 @@ const JobApply = () => {
           <textarea cols={70} rows={20} onChange={(e) => setCoverLetter(e.target.value)} placeholder="Carta de presentación"></textarea>
         </div>
         <div className="jobApplyButton">
-          <button onClick={() => sendApplication()}>Aplicar</button>
+          <button onClick={() => verifyApplication()}>Aplicar</button>
         </div>
         {ApplicationSent && 
           <div>
