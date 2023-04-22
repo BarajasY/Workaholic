@@ -63,9 +63,9 @@ public class JobApplicationsController {
         return repository.findAll();
     }
 
-    @GetMapping("verify/{id}")
-    public Object verifyJobApplication(@PathVariable Number id) {
-        if(repository.existsByWorker_id(id)) {
+    @GetMapping("verify/{worker_id}/{posting_id}")
+    public Object verifyJobApplication(@PathVariable Number worker_id, @PathVariable Number posting_id) {
+        if(repository.existsByWorker_idAndPosting_id(worker_id, posting_id)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(HttpStatus.OK);

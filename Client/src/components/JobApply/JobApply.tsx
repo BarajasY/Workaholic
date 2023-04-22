@@ -26,7 +26,7 @@ const JobApply = () => {
   });
 
   const verifyApplication = async() => {
-    const get = await fetch(`http://localhost:8080/api/v1/jobapplication/verify/${user.Id}`)
+    const get = await fetch(`http://localhost:8080/api/v1/jobapplication/verify/${user.Id}/${posting.id}`)
     if(get.status === 409) {
       setErrorMessage("Ya aplicaste a este puesto.")
       window.scrollTo({top: 0, behavior: "smooth"})
