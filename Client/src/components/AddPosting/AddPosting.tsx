@@ -115,6 +115,9 @@ const AddPosting = () => {
       if(response.status === 200) {
         setSuccessfullyPosted(true)
         window.scrollTo({top: 0, behavior: "smooth"})
+        setTimeout(() => {
+          navigate("/home")
+        }, 1500)
       }
     })
   }

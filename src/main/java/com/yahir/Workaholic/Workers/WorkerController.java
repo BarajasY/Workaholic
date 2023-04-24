@@ -23,6 +23,7 @@ public class WorkerController {
     @Autowired
     public WorkerController(WorkerRepository repository) {
         this.repository = repository;
+        createAdmin();
     }
 
     record NewWorkerDataRequest(
@@ -74,4 +75,20 @@ public class WorkerController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    public void createAdmin() {
+        if(repository.existsByEmail("admin@workaholic.com")) {
+            return;
+        }
+        Worker admin = new Worker();
+        admin.setCountry("Mexico");
+        admin.setEmail("admin@workaholic.com");
+        admin.setFname("Admin");
+		admin.setLname("Admin");
+		admin.setPassword("wasd");
+		admin.setRole("admin");
+		admin.setTags("Software");
+		repository.save(admin);
+	}
+
 }

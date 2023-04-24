@@ -15,7 +15,12 @@ const Browse:React.FC = () => {
 
   return (
     <div className="browseContainer">
-        <h1>Jobs Found</h1>
+      {data.length > 0 
+      ? 
+        <h1>{data.length} Jobs Found</h1>
+      :
+        <h1>No jobs Found</h1>
+      }
         <div className="jobsContainer">
           {data.map((job:any)=> (
             <div key={job.id} className="jobCard" onClick={() => navigate(`./${job.id}`)}>

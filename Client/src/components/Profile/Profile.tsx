@@ -4,7 +4,8 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetUser } from '../../redux/workerSlice';
-import { WorkerType, userType } from '../../types';
+import { motion } from 'framer-motion';
+import { userType } from '../../types';
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -33,10 +34,42 @@ const Profile = () => {
         navigate("/home")
     }
 
+    function renderColor(role: String) {
+        switch (role) {
+            case "admin":
+                return "var(--golden)"
+                break;
+            case "worker":
+                return "var(--teal)"
+                break;
+            case "company":
+                return "var(--cobaltblue)"
+            default:
+                break;
+        }
+    }
+
   return (
     <div className="profileContainer">
-        <h1>Este perfil es de un(a){User.Role}</h1>
-        <h1>Este es el perfil</h1>
+        <div className="profileContent">
+
+            <div className="profileSidebar">
+            </div>
+            {User.Role === "worker" 
+                ?
+                <div className="profileWorkerInformation">
+                    <h1>{User.FName} {User.LName}</h1>
+                    <p>{User.Email}</p>
+                </div> 
+                :
+                null
+            }
+            <div className="profileRole">
+                <motion.h1 
+                style={{color:renderColor(User.Role), borderColor:renderColor(User.Role)}}
+                >{User.Role}</motion.h1>
+            </div>
+        </div>
         <button onClick={() => Logout()}>Logout</button>
     </div>
   )

@@ -117,19 +117,15 @@
     color: var(--navyblue);
 }
 
-.jobPostApplyButton {
-    margin-bottom: 90px;
-}
-
 .jobPostApplyButton button{
-    padding: 20px;
+    padding: 10px 20px;
     font-size: 30px;
-    color: var(--bluegreen);
+    color: var(--teal);
     border-radius: 15px;
 }
 
 .jobPostApplyButton button:hover {
-    background: var(--bluegreen);
+    background: var(--teal);
     color: white;
     cursor: pointer;
 }

@@ -3,15 +3,21 @@ import "./JobApply.css";
 import { useSelector } from "react-redux";
 import { userType } from "../../types";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const JobApply = () => {
+  const navigate = useNavigate();
   const [ApplicationSent, setApplicationSent] = useState(false)
   const [CoverLetter, setCoverLetter] = useState("")
   const [ErrorMessage, setErrorMessage] = useState("")
 
   const user = useSelector((state: userType) => state.worker);
-  const posting = useSelector((state: any) => state.posting)
+  const posting = useSelector((state: any) => state.posting);
   const email = user.Email;
+
+  if(user.Role !== "worker") {
+    navigate("/home")
+  }
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["getFile", email],
@@ -50,7 +56,19 @@ const JobApply = () => {
     })
     if(post.status === 200) {
       setApplicationSent(true)
+      window.scrollTo({top: 0, behavior:"smooth"})
+      setTimeout(() => {
+        navigate("/browse")
+      }, 1500)
     }
+  }
+
+  if(ApplicationSent) {
+    return (
+      <div className="jobApplyCompleted">
+        <h1>Postulación enviada!</h1>
+      </div>
+    )
   }
 
   return (

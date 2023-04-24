@@ -22,7 +22,6 @@
 
 .links a {
     font-weight: 500;
-    margin: 10px;
     font-size: 20px;
     padding: 10px 15px;
     transition: .2s;
@@ -30,32 +29,16 @@
 
 #login {
     color: var(--color4);
-/*     border: 2px solid var(--color4); */
+    border: 2px solid transparent;
     border-radius: 10px;
     position: relative;
     background: transparent;
     z-index: 2;
-}
-
-#login:before {
-    content: '';
-    display: block;
-    position: absolute;
-    height: 50px;
-    width: 0px;
-    background: var(--color1);
-    transform: translateY(-10px) translateX(-20px);
-    border-radius: 10px;
-    transition: .2s;
-    z-index: -1;
-}
-
-#login:hover:before {
-    width: 90px;
+    margin: 10px;
 }
 
 #login:hover {
-    color: var(--color6);
+    border: 2px solid var(--color4);
 }
 
 #signup {

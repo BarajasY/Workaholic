@@ -33,7 +33,7 @@
 .jobCard:hover {
     transform: translateY(-3px);
     cursor: pointer;
-    box-shadow: 0px 5px 20px black;
+    box-shadow: 0px 5px 20px var(--eblue);
 }
 
 .jobCardHeader {
@@ -43,25 +43,27 @@
 }
 
 .jobTitle {
-    color: var(--navyblue);
+    color: var(--teal);
+    font-size: 25px;
 }
 
 .companyName {
-    color: var(--cherryred) !important;
+    color: var(--eblue) !important;
+    font-weight: 800;
 }
 
 .jobSalary {
     font-size: 20px;
-    color: var(--navyblue) !important;
+    color: var(--darkgreen) !important;
     padding: 5px 5px;
     border-radius: 4px;
-    background: var(--clearblue);
+    background: var(--backgroundshade);
     width: fit-content;
 }
 
 .jobSalary span {
     background: none;
-    color: var(--navyblue)
+    color: var(--darkgreen)
 }
 
 .jobTypeContainer {
@@ -83,5 +85,5 @@
     padding: 5px 5px;
     width: fit-content;
     border-radius: 4px;
-    color: var(--cherryred);
+    color: var(--teal);
 }

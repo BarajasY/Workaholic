@@ -7,9 +7,9 @@ import { CompanyType, WorkerType, companyStateInterface, userStateInterface, use
 import Cookies from 'universal-cookie';
 import { storeWorker, storeCompany } from '../../redux/workerSlice';
 import store from '../../redux/store';
+import { AiOutlineSetting } from 'react-icons/ai';
 
 const Navbar = () => {
-/*   const [User, setUser] = useState<workerStateInterface | companyStateInterface>() */
     const cookies = new Cookies();
     const allCokies = cookies.getAll();
     const dispatch = useDispatch();
@@ -19,10 +19,10 @@ const Navbar = () => {
   return (
     <div className="navbarContainer">
         <div className="logo">
-            <Link to="/home">Workaholic</Link>
+            <Link to={User.Logged ? "/browse" : "/home"}>Workaholic</Link>
         </div>
         <div className="links">
-          {User?.Logged
+          {User.Logged
           ?
           <>
             {User?.Role === "company" 
@@ -30,7 +30,13 @@ const Navbar = () => {
               <Link to="./add" id="add">Add job</Link>
               :
               null
-            } 
+            }
+            {User.Role === "admin" 
+             ?
+             <Link to="/settings"><AiOutlineSetting /></Link>
+             :
+             null
+             }
             <Link to="./browse" id="browse">Browse</Link>
             <Link to="./profile" id="profile"><CgProfile/></Link>
           </>

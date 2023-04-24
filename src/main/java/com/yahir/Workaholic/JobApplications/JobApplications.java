@@ -2,7 +2,6 @@ package com.yahir.Workaholic.JobApplications;
 
 import java.util.Objects;
 
-import com.yahir.Workaholic.Company.Company;
 import com.yahir.Workaholic.Postings.Postings;
 import com.yahir.Workaholic.Workers.Worker;
 
@@ -33,9 +32,6 @@ public class JobApplications {
     @JoinColumn(name="worker_id")
     private Worker worker;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="company_id")
-    private Company company;
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="posting_id")
     private Postings posting;
     private String coverLetter;
@@ -43,10 +39,9 @@ public class JobApplications {
     public JobApplications() {
     }
 
-    public JobApplications(Integer id, Worker worker, Company company, Postings posting, String coverLetter) {
+    public JobApplications(Integer id, Worker worker, Postings posting, String coverLetter) {
         this.id = id;
         this.worker = worker;
-        this.company = company;
         this.posting = posting;
         this.coverLetter = coverLetter;
     }
@@ -65,14 +60,6 @@ public class JobApplications {
 
     public void setWorker(Worker worker) {
         this.worker = worker;
-    }
-
-    public Company getCompany() {
-        return this.company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
     }
 
     public Postings getPosting() {
@@ -101,11 +88,6 @@ public class JobApplications {
         return this;
     }
 
-    public JobApplications company(Company company) {
-        setCompany(company);
-        return this;
-    }
-
     public JobApplications posting(Postings posting) {
         setPosting(posting);
         return this;
@@ -124,12 +106,12 @@ public class JobApplications {
             return false;
         }
         JobApplications jobApplications = (JobApplications) o;
-        return Objects.equals(id, jobApplications.id) && Objects.equals(worker, jobApplications.worker) && Objects.equals(company, jobApplications.company) && Objects.equals(posting, jobApplications.posting) && Objects.equals(coverLetter, jobApplications.coverLetter);
+        return Objects.equals(id, jobApplications.id) && Objects.equals(worker, jobApplications.worker) && Objects.equals(posting, jobApplications.posting) && Objects.equals(coverLetter, jobApplications.coverLetter);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, worker, company, posting, coverLetter);
+        return Objects.hash(id, worker, posting, coverLetter);
     }
 
     @Override
@@ -137,7 +119,6 @@ public class JobApplications {
         return "{" +
             " id='" + getId() + "'" +
             ", worker='" + getWorker() + "'" +
-            ", company='" + getCompany() + "'" +
             ", posting='" + getPosting() + "'" +
             ", coverLetter='" + getCoverLetter() + "'" +
             "}";

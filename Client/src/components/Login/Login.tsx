@@ -48,6 +48,9 @@ const Login = () => {
             case "company":
               storeCompanyLogin(data);
               break;
+            case "admin":
+              storeWorkerLogin(data);
+              break;
           }
         })
       }
