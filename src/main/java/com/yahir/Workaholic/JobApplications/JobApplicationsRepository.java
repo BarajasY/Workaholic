@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JobApplicationsRepository extends JpaRepository<JobApplications, Integer>{
     
-    Boolean existsByWorker_id(Number id);
+    Boolean existsByUser_id(Number id);
 
-    Boolean existsByWorker_idAndPosting_id(Number worker_id, Number posting_id);
+    Boolean existsByUser_idAndPosting_id(Number user_id, Number posting_id);
 }

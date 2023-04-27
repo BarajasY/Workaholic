@@ -3,22 +3,19 @@ package com.yahir.Workaholic;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yahir.Workaholic.Company.Company;
-import com.yahir.Workaholic.Company.CompanyRepository;
+import com.yahir.Workaholic.Currencies.CurrencyRepository;
 import com.yahir.Workaholic.JobApplications.JobApplicationsRepository;
+import com.yahir.Workaholic.JobTypes.JobTypeRepository;
 import com.yahir.Workaholic.Postings.PostingsRepository;
+import com.yahir.Workaholic.Rates.RateRepository;
+import com.yahir.Workaholic.Roles.RoleRepository;
 import com.yahir.Workaholic.UploadResume.UploadResumeRepository;
 import com.yahir.Workaholic.UploadResume.UploadService.FileStorageService;
-import com.yahir.Workaholic.Workers.Worker;
-import com.yahir.Workaholic.Workers.WorkerRepository;
+import com.yahir.Workaholic.Users.UserRepository;
 
 import jakarta.annotation.Resource;
 
@@ -33,17 +30,23 @@ public class WorkaholicApplication implements CommandLineRunner {
 
 	private UploadResumeRepository uploadResumeRepository;
 	private PostingsRepository postingRepository;
-	private final CompanyRepository companyRepository;
-	private final WorkerRepository workerRepository;
 	private JobApplicationsRepository jobApplicationsRepository;
+	private UserRepository userRepository;
+	private RoleRepository roleRepository;
+	private JobTypeRepository jobTypeRepository;
+	private RateRepository rateRepository;
+	private CurrencyRepository currencyRepository;
 
-	public WorkaholicApplication(FileStorageService storageService, UploadResumeRepository uploadResumeRepository, PostingsRepository postingRepository, CompanyRepository companyRepository, WorkerRepository workerRepository, JobApplicationsRepository jobApplicationsRepository) {
+	public WorkaholicApplication(FileStorageService storageService, UploadResumeRepository uploadResumeRepository, PostingsRepository postingRepository, JobApplicationsRepository jobApplicationsRepository, UserRepository userRepository, RoleRepository roleRepository, JobTypeRepository jobTypeRepository, RateRepository rateRepository, CurrencyRepository currencyRepository) {
 		this.storageService = storageService;
 		this.uploadResumeRepository = uploadResumeRepository;
 		this.postingRepository = postingRepository;
-		this.companyRepository = companyRepository;
-		this.workerRepository = workerRepository;
 		this.jobApplicationsRepository = jobApplicationsRepository;
+		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
+		this.jobTypeRepository = jobTypeRepository;
+		this.rateRepository = rateRepository;
+		this.currencyRepository = currencyRepository;
 	}
 
 	public static void main(String[] args) {
@@ -54,7 +57,7 @@ public class WorkaholicApplication implements CommandLineRunner {
 		String Password
 	){}
 
-	@PostMapping("/login")
+/* 	@PostMapping("/login")
 	public Object userLogin(@RequestBody NewUserLoginRequest request) {
 		Worker dbWorker = workerRepository.findWorkerByEmail(request.Email());
 		if(dbWorker == null) {
@@ -71,7 +74,7 @@ public class WorkaholicApplication implements CommandLineRunner {
 				return new ResponseEntity<>(HttpStatus.CONFLICT);
 			}
 		}
-	}	
+	}	 */
 	
 	@Override
 	public void run(String ...arg) throws Exception {

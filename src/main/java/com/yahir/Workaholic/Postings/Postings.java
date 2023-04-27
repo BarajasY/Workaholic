@@ -1,15 +1,23 @@
 package com.yahir.Workaholic.Postings;
 
+import java.sql.Date;
 import java.util.Objects;
+import java.util.Set;
 
-import com.yahir.Workaholic.Company.Company;
+import com.yahir.Workaholic.Currencies.Currency;
+import com.yahir.Workaholic.JobTypes.JobType;
+import com.yahir.Workaholic.Rates.Rate;
+import com.yahir.Workaholic.Users.User;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 
@@ -29,39 +37,46 @@ public class Postings {
         generator = "id_sequence_generator"
     )
     private Integer id;
-    private String businessName;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String description;
-    private String[] jobType;
+    @ManyToMany
+    @JoinTable(name = "posting_types", 
+                joinColumns = {@JoinColumn(name = "posting_id")},
+                inverseJoinColumns = {@JoinColumn(name = "jobtype_id")})
+    Set<JobType> jobTypes;
+    @Column(nullable = false)
     private Number salary;
-    private String salaryCurrency;
-    private String salaryRate;
-    private String location;
+    @ManyToOne
+    @JoinColumn(name = "currency_id", nullable = false)
+    private Currency currency;
+    @ManyToOne
+    @JoinColumn(name = "rate_id", nullable = false)
+    private Rate rate;
+    @Column(nullable = false)
     private String country;
+    @Column(nullable = false)
     private String duration;
-    private String date;
-    private String[] tags;
-    private String[] benefits;
+    private Date date;
+    private String benefits;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name =  "company_id")
-    private Company company;
+    @JoinColumn(name =  "company_id", nullable = false)
+    private User user;
 
-    public Postings(Integer id, String businessName, String title, String description, String[] jobType, Number salary, String salaryCurrency, String salaryRate, String location, String country, String duration, String date, String[] tags, String[] benefits, Company company) {
+    public Postings(Integer id, String title, String description, Set<JobType> jobTypes, Number salary, Currency currency, Rate rate, String country, String duration, Date date, String benefits, User user) {
         this.id = id;
-        this.businessName = businessName;
         this.title = title;
         this.description = description;
-        this.jobType = jobType;
+        this.jobTypes = jobTypes;
         this.salary = salary;
-        this.salaryCurrency = salaryCurrency;
-        this.salaryRate = salaryRate;
-        this.location = location;
+        this.currency = currency;
+        this.rate = rate;
         this.country = country;
         this.duration = duration;
         this.date = date;
-        this.tags = tags;
         this.benefits = benefits;
-        this.company = company;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -70,14 +85,6 @@ public class Postings {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getBusinessName() {
-        return this.businessName;
-    }
-
-    public void setBusinessName(String businessName) {
-        this.businessName = businessName;
     }
 
     public String getTitle() {
@@ -96,12 +103,12 @@ public class Postings {
         this.description = description;
     }
 
-    public String[] getJobType() {
-        return this.jobType;
+    public Set<JobType> getJobTypes() {
+        return this.jobTypes;
     }
 
-    public void setJobType(String[] jobType) {
-        this.jobType = jobType;
+    public void setJobTypes(Set<JobType> jobTypes) {
+        this.jobTypes = jobTypes;
     }
 
     public Number getSalary() {
@@ -112,28 +119,20 @@ public class Postings {
         this.salary = salary;
     }
 
-    public String getSalaryCurrency() {
-        return this.salaryCurrency;
+    public Currency getCurrency() {
+        return this.currency;
     }
 
-    public void setSalaryCurrency(String salaryCurrency) {
-        this.salaryCurrency = salaryCurrency;
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
-    public String getSalaryRate() {
-        return this.salaryRate;
+    public Rate getRate() {
+        return this.rate;
     }
 
-    public void setSalaryRate(String salaryRate) {
-        this.salaryRate = salaryRate;
-    }
-
-    public String getLocation() {
-        return this.location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public void setRate(Rate rate) {
+        this.rate = rate;
     }
 
     public String getCountry() {
@@ -152,45 +151,32 @@ public class Postings {
         this.duration = duration;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return this.date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String[] getTags() {
-        return this.tags;
-    }
-
-    public void setTags(String[] tags) {
-        this.tags = tags;
-    }
-
-    public String[] getBenefits() {
+    public String getBenefits() {
         return this.benefits;
     }
 
-    public void setBenefits(String[] benefits) {
+    public void setBenefits(String benefits) {
         this.benefits = benefits;
     }
 
-    public Company getCompany() {
-        return this.company;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Postings id(Integer id) {
         setId(id);
-        return this;
-    }
-
-    public Postings businessName(String businessName) {
-        setBusinessName(businessName);
         return this;
     }
 
@@ -204,8 +190,8 @@ public class Postings {
         return this;
     }
 
-    public Postings jobType(String[] jobType) {
-        setJobType(jobType);
+    public Postings jobTypes(Set<JobType> jobTypes) {
+        setJobTypes(jobTypes);
         return this;
     }
 
@@ -214,18 +200,13 @@ public class Postings {
         return this;
     }
 
-    public Postings salaryCurrency(String salaryCurrency) {
-        setSalaryCurrency(salaryCurrency);
+    public Postings currency(Currency currency) {
+        setCurrency(currency);
         return this;
     }
 
-    public Postings salaryRate(String salaryRate) {
-        setSalaryRate(salaryRate);
-        return this;
-    }
-
-    public Postings location(String location) {
-        setLocation(location);
+    public Postings rate(Rate rate) {
+        setRate(rate);
         return this;
     }
 
@@ -239,23 +220,18 @@ public class Postings {
         return this;
     }
 
-    public Postings date(String date) {
+    public Postings date(Date date) {
         setDate(date);
         return this;
     }
 
-    public Postings tags(String[] tags) {
-        setTags(tags);
-        return this;
-    }
-
-    public Postings benefits(String[] benefits) {
+    public Postings benefits(String benefits) {
         setBenefits(benefits);
         return this;
     }
 
-    public Postings company(Company company) {
-        setCompany(company);
+    public Postings user(User user) {
+        setUser(user);
         return this;
     }
 
@@ -267,33 +243,29 @@ public class Postings {
             return false;
         }
         Postings postings = (Postings) o;
-        return Objects.equals(id, postings.id) && Objects.equals(businessName, postings.businessName) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobType, postings.jobType) && Objects.equals(salary, postings.salary) && Objects.equals(salaryCurrency, postings.salaryCurrency) && Objects.equals(salaryRate, postings.salaryRate) && Objects.equals(location, postings.location) && Objects.equals(country, postings.country) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(tags, postings.tags) && Objects.equals(benefits, postings.benefits) && Objects.equals(company, postings.company);
+        return Objects.equals(id, postings.id) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobTypes, postings.jobTypes) && Objects.equals(salary, postings.salary) && Objects.equals(currency, postings.currency) && Objects.equals(rate, postings.rate) && Objects.equals(country, postings.country) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(benefits, postings.benefits) && Objects.equals(user, postings.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, businessName, title, description, jobType, salary, salaryCurrency, salaryRate, location, country, duration, date, tags, benefits, company);
+        return Objects.hash(id, title, description, jobTypes, salary, currency, rate, country, duration, date, benefits, user);
     }
 
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", businessName='" + getBusinessName() + "'" +
             ", title='" + getTitle() + "'" +
             ", description='" + getDescription() + "'" +
-            ", jobType='" + getJobType() + "'" +
+            ", jobTypes='" + getJobTypes() + "'" +
             ", salary='" + getSalary() + "'" +
-            ", salaryCurrency='" + getSalaryCurrency() + "'" +
-            ", salaryRate='" + getSalaryRate() + "'" +
-            ", location='" + getLocation() + "'" +
+            ", currency='" + getCurrency() + "'" +
+            ", rate='" + getRate() + "'" +
             ", country='" + getCountry() + "'" +
             ", duration='" + getDuration() + "'" +
             ", date='" + getDate() + "'" +
-            ", tags='" + getTags() + "'" +
             ", benefits='" + getBenefits() + "'" +
-            ", company='" + getCompany() + "'" +
+            ", user='" + getUser() + "'" +
             "}";
     }
-
 }

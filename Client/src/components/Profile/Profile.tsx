@@ -57,18 +57,22 @@ const Profile = () => {
             </div>
             {User.Role === "worker" 
                 ?
+                <>
                 <div className="profileWorkerInformation">
-                    <h1>{User.FName} {User.LName}</h1>
-                    <p>{User.Email}</p>
-                </div> 
+                    <div className="profileWorkerName">
+                        <h1 style={{color:renderColor(User.Role)}}>{User.FName} {User.LName} </h1>
+                        <h1 style={{color:renderColor(User.Role), borderColor:renderColor(User.Role)}}>{User.Role}</h1>
+                    </div>
+                    <p style={{color:renderColor(User.Role)}}>{User.Email}</p>
+                    <p>{User.Country.toUpperCase()}</p>
+                </div>
+                <div className="profileWorkerJobs">
+                    
+                </div>
+                </>
                 :
                 null
             }
-            <div className="profileRole">
-                <motion.h1 
-                style={{color:renderColor(User.Role), borderColor:renderColor(User.Role)}}
-                >{User.Role}</motion.h1>
-            </div>
         </div>
         <button onClick={() => Logout()}>Logout</button>
     </div>
