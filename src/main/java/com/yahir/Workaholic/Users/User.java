@@ -8,9 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import java.util.Objects;
 
+import com.yahir.Workaholic.Resume.Resume;
 import com.yahir.Workaholic.Roles.Role;
 
 @Entity
@@ -34,6 +36,9 @@ public class User {
     @Column(nullable = false)
     private String password;
     private String country;
+    @OneToOne
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
@@ -41,12 +46,13 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String name, String email, String password, String country, Role role) {
+    public User(Integer id, String name, String email, String password, String country, Resume resume, Role role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.country = country;
+        this.resume = resume;
         this.role = role;
     }
 
@@ -90,6 +96,14 @@ public class User {
         this.country = country;
     }
 
+    public Resume getResume() {
+        return this.resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
+    }
+
     public Role getRole() {
         return this.role;
     }
@@ -123,6 +137,11 @@ public class User {
         return this;
     }
 
+    public User resume(Resume resume) {
+        setResume(resume);
+        return this;
+    }
+
     public User role(Role role) {
         setRole(role);
         return this;
@@ -136,12 +155,12 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(country, user.country) && Objects.equals(role, user.role);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(country, user.country) && Objects.equals(resume, user.resume) && Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, country, role);
+        return Objects.hash(id, name, email, password, country, resume, role);
     }
 
     @Override
@@ -152,6 +171,7 @@ public class User {
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
             ", country='" + getCountry() + "'" +
+            ", resume='" + getResume() + "'" +
             ", role='" + getRole() + "'" +
             "}";
     }

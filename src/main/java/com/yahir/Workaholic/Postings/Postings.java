@@ -7,6 +7,7 @@ import java.util.Set;
 import com.yahir.Workaholic.Currencies.Currency;
 import com.yahir.Workaholic.JobTypes.JobType;
 import com.yahir.Workaholic.Rates.Rate;
+import com.yahir.Workaholic.Resume.Resume;
 import com.yahir.Workaholic.Users.User;
 
 import jakarta.persistence.CascadeType;
@@ -19,6 +20,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
@@ -47,7 +49,7 @@ public class Postings {
                 inverseJoinColumns = {@JoinColumn(name = "jobtype_id")})
     Set<JobType> jobTypes;
     @Column(nullable = false)
-    private Number salary;
+    private Integer salary;
     @ManyToOne
     @JoinColumn(name = "currency_id", nullable = false)
     private Currency currency;
@@ -55,16 +57,14 @@ public class Postings {
     @JoinColumn(name = "rate_id", nullable = false)
     private Rate rate;
     @Column(nullable = false)
-    private String country;
-    @Column(nullable = false)
-    private String duration;
+    private Integer duration;
     private Date date;
     private String benefits;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name =  "company_id", nullable = false)
     private User user;
 
-    public Postings(Integer id, String title, String description, Set<JobType> jobTypes, Number salary, Currency currency, Rate rate, String country, String duration, Date date, String benefits, User user) {
+    public Postings(Integer id, String title, String description, Set<JobType> jobTypes, Integer salary, Currency currency, Rate rate, Integer duration, Date date, String benefits, User user) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -72,7 +72,6 @@ public class Postings {
         this.salary = salary;
         this.currency = currency;
         this.rate = rate;
-        this.country = country;
         this.duration = duration;
         this.date = date;
         this.benefits = benefits;
@@ -111,11 +110,11 @@ public class Postings {
         this.jobTypes = jobTypes;
     }
 
-    public Number getSalary() {
+    public Integer getSalary() {
         return this.salary;
     }
 
-    public void setSalary(Number salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 
@@ -135,19 +134,11 @@ public class Postings {
         this.rate = rate;
     }
 
-    public String getCountry() {
-        return this.country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getDuration() {
+    public Integer getDuration() {
         return this.duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
@@ -195,7 +186,7 @@ public class Postings {
         return this;
     }
 
-    public Postings salary(Number salary) {
+    public Postings salary(Integer salary) {
         setSalary(salary);
         return this;
     }
@@ -210,12 +201,7 @@ public class Postings {
         return this;
     }
 
-    public Postings country(String country) {
-        setCountry(country);
-        return this;
-    }
-
-    public Postings duration(String duration) {
+    public Postings duration(Integer duration) {
         setDuration(duration);
         return this;
     }
@@ -243,12 +229,12 @@ public class Postings {
             return false;
         }
         Postings postings = (Postings) o;
-        return Objects.equals(id, postings.id) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobTypes, postings.jobTypes) && Objects.equals(salary, postings.salary) && Objects.equals(currency, postings.currency) && Objects.equals(rate, postings.rate) && Objects.equals(country, postings.country) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(benefits, postings.benefits) && Objects.equals(user, postings.user);
+        return Objects.equals(id, postings.id) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobTypes, postings.jobTypes) && Objects.equals(salary, postings.salary) && Objects.equals(currency, postings.currency) && Objects.equals(rate, postings.rate) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(benefits, postings.benefits) && Objects.equals(user, postings.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, jobTypes, salary, currency, rate, country, duration, date, benefits, user);
+        return Objects.hash(id, title, description, jobTypes, salary, currency, rate, duration, date, benefits, user);
     }
 
     @Override
@@ -261,7 +247,6 @@ public class Postings {
             ", salary='" + getSalary() + "'" +
             ", currency='" + getCurrency() + "'" +
             ", rate='" + getRate() + "'" +
-            ", country='" + getCountry() + "'" +
             ", duration='" + getDuration() + "'" +
             ", date='" + getDate() + "'" +
             ", benefits='" + getBenefits() + "'" +

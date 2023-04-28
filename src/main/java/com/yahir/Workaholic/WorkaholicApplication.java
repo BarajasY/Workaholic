@@ -12,6 +12,7 @@ import com.yahir.Workaholic.JobApplications.JobApplicationsRepository;
 import com.yahir.Workaholic.JobTypes.JobTypeRepository;
 import com.yahir.Workaholic.Postings.PostingsRepository;
 import com.yahir.Workaholic.Rates.RateRepository;
+import com.yahir.Workaholic.Resume.ResumeRepository;
 import com.yahir.Workaholic.Roles.RoleRepository;
 import com.yahir.Workaholic.UploadResume.UploadResumeRepository;
 import com.yahir.Workaholic.UploadResume.UploadService.FileStorageService;
@@ -36,8 +37,9 @@ public class WorkaholicApplication implements CommandLineRunner {
 	private JobTypeRepository jobTypeRepository;
 	private RateRepository rateRepository;
 	private CurrencyRepository currencyRepository;
+	private ResumeRepository resumeRepository;
 
-	public WorkaholicApplication(FileStorageService storageService, UploadResumeRepository uploadResumeRepository, PostingsRepository postingRepository, JobApplicationsRepository jobApplicationsRepository, UserRepository userRepository, RoleRepository roleRepository, JobTypeRepository jobTypeRepository, RateRepository rateRepository, CurrencyRepository currencyRepository) {
+	public WorkaholicApplication(FileStorageService storageService, UploadResumeRepository uploadResumeRepository, PostingsRepository postingRepository, JobApplicationsRepository jobApplicationsRepository, UserRepository userRepository, RoleRepository roleRepository, JobTypeRepository jobTypeRepository, RateRepository rateRepository, CurrencyRepository currencyRepository, ResumeRepository resumeRepository) {
 		this.storageService = storageService;
 		this.uploadResumeRepository = uploadResumeRepository;
 		this.postingRepository = postingRepository;
@@ -47,6 +49,7 @@ public class WorkaholicApplication implements CommandLineRunner {
 		this.jobTypeRepository = jobTypeRepository;
 		this.rateRepository = rateRepository;
 		this.currencyRepository = currencyRepository;
+		this.resumeRepository = resumeRepository;
 	}
 
 	public static void main(String[] args) {
