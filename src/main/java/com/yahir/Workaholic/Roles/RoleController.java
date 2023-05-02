@@ -16,7 +16,7 @@ public class RoleController {
     }
 
     public void createRole() {
-        Boolean roleExists = repository.findByName("worker");
+        Boolean roleExists = repository.existsByName("worker");
         if(roleExists) {
             return;
         }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yahir.Workaholic.Resume.Resume;
+import com.yahir.Workaholic.Resume.ResumeRepository;
 import com.yahir.Workaholic.UploadResume.UploadMessage.ResponseMessage;
 import com.yahir.Workaholic.UploadResume.UploadService.FileStorageService;
 
@@ -28,9 +30,11 @@ public class UploadResumeController {
     FileStorageService storageService;
 
     private final UploadResumeRepository repository;
+    private final ResumeRepository resumeRepository;
 
-    public UploadResumeController(UploadResumeRepository repository) {
+    public UploadResumeController(UploadResumeRepository repository, ResumeRepository resumeRepository) {
         this.repository = repository;
+        this.resumeRepository = resumeRepository;
     }
 
     @PostMapping("")
@@ -40,6 +44,10 @@ public class UploadResumeController {
             storageService.save(file, email);
 
             message = "Uploaded file successfully" + file.getOriginalFilename();
+            String resumePath = "uploads/" + email;
+            Resume resume = new Resume();
+            resume.setPath(resumePath);
+            resumeRepository.save(resume);
             UploadResume uResume = new UploadResume();
             uResume.setEmail(email);
             uResume.setFilename(file.getOriginalFilename());

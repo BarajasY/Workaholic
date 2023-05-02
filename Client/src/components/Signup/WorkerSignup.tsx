@@ -3,49 +3,25 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 
 const Signup = () => {
-  const [FName, setFName] = useState("");
-  const [LName, setLName] = useState("");
+  const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Country, setCountry] = useState("");
-  const [userTags, setUserTags] = useState<String[]>([]);
   const [CompanySignupForm, setCompanySignupForm] = useState(true)
   const [CV, setCV] = useState<File>();
+  const [Role, setRole] = useState("worker")
   const formData = new FormData();
   const navigate = useNavigate();
   const [ErrorMessage, setErrorMessage] = useState("");
   const [CompleteSignup, setCompleteSignup] = useState(false);
-  const tags = [
-    "Software",
-    "Medicina",
-    "Limpieza",
-    "Ciberseguridad",
-    "Investigación",
-    "Construcción",
-    "Atención al cliente",
-    "Docente",
-  ];
-
-  const AddTag = (tag: string) => {
-    const TagAlreadyIn = userTags.includes(tag);
-    if (TagAlreadyIn) {
-      // remove tag from the list.
-      setUserTags(userTags.filter((t) => t !== tag));
-    } else {
-      // adad tag to the list.
-      setUserTags([...userTags, tag]);
-    }
-  };
 
   const SubmitSignup = () => {
     // if any input doesn't have a value, show error message.
     if (
-      FName === "" ||
-      LName === "" ||
+      Name === "" ||
       Email === "" ||
       Password === "" ||
       Country === "" ||
-      userTags[1] === undefined ||
       CV === undefined
     ) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -54,25 +30,23 @@ const Signup = () => {
       //Remove error message
       //Make calls to the API with user data.
       setErrorMessage("");
-      SendUserData();
+      SendUserCV();
     }
   };
 
   const SendUserData = async () => {
     //Sends all data except the PDF file to the endpoint.
-    const Post = await fetch("http://localhost:8080/api/v1/worker/data", {
+    const Post = await fetch("http://localhost:8080/api/v1/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        "FName": FName,
-        "LName": LName,
-        "Email": Email,
-        "Password": Password,
-        "Country": Country,
-        "Role": "worker",
-        "Tags": userTags.toString(),
+        "name": Name,
+        "email": Email,
+        "password": Password,
+        "country": Country,
+        "role": Role,
       })
     })
     .then(response => {
@@ -82,7 +56,8 @@ const Signup = () => {
         window.scrollTo({top: 0, behavior: 'smooth'})
         setErrorMessage("An account with that email already exists.")
       } else {
-        SendUserCV()
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setCompleteSignup(true);
       }
     })
   }
@@ -102,8 +77,9 @@ const Signup = () => {
       // If response is 200 OK, complete signup.
       if (response.status === 200) {
         setErrorMessage("");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        setCompleteSignup(true);
+        setTimeout(() => {
+          SendUserData()
+        }, 3000)
       }
     })
     .catch(error => {
@@ -134,7 +110,7 @@ const Signup = () => {
         ? 
         <section className="isCompanySignup">
           <h1>¿Buscas registrar un negocio?</h1>
-          <button id="yes" onClick={() => navigate("./company")}>Sí</button>
+          <button id="yes" onClick={() => setRole("company")}>Sí</button>
           <button id="no" onClick={() => setCompanySignupForm(false)}>No</button>
         </section>
         :
@@ -143,11 +119,7 @@ const Signup = () => {
         <h1 id="signupError">{ErrorMessage}</h1>
         <section>
           <h1>Nombre</h1>
-          <input type="text" onChange={(e) => setFName(e.target.value)} />
-        </section>
-        <section>
-          <h1>Apellidos</h1>
-          <input type="text" onChange={(e) => setLName(e.target.value)} />
+          <input type="text" onChange={(e) => setName(e.target.value)} />
         </section>
         <section>
           <h1>Correo</h1>
@@ -170,19 +142,6 @@ const Signup = () => {
         <section>
           <h1>Inserte su más reciente currículum</h1>
           <input type="file" accept=".pdf" onChange={(e) => setCV(e.target.files![0])} />
-        </section>
-        <h1>Seleccione sus intereses</h1>
-        <section id="tagsSection">
-          {tags.map((text, i) => (
-            <h1
-              key={i}
-              className={
-                userTags.includes(text) ? "signupTags selected" : "signupTags"}
-              onClick={() => AddTag(text)}
-            >
-              {text}
-            </h1>
-          ))}
         </section>
         <section className="signupSubmit">
           <button onClick={() => SubmitSignup()}>Enviar</button>

@@ -40,7 +40,7 @@ public class User {
     @JoinColumn(name = "resume_id")
     private Resume resume;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id")
     private Role role;
 
     public User() {

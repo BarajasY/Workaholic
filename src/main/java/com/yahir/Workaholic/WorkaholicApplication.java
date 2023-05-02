@@ -3,6 +3,7 @@ package com.yahir.Workaholic;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import com.yahir.Workaholic.JobTypes.JobTypeRepository;
 import com.yahir.Workaholic.Postings.PostingsRepository;
 import com.yahir.Workaholic.Rates.RateRepository;
 import com.yahir.Workaholic.Resume.ResumeRepository;
+import com.yahir.Workaholic.Roles.Role;
 import com.yahir.Workaholic.Roles.RoleRepository;
 import com.yahir.Workaholic.UploadResume.UploadResumeRepository;
 import com.yahir.Workaholic.UploadResume.UploadService.FileStorageService;
@@ -59,28 +61,21 @@ public class WorkaholicApplication implements CommandLineRunner {
 		String Email,
 		String Password
 	){}
-
-/* 	@PostMapping("/login")
-	public Object userLogin(@RequestBody NewUserLoginRequest request) {
-		Worker dbWorker = workerRepository.findWorkerByEmail(request.Email());
-		if(dbWorker == null) {
-			Company dbCompany = companyRepository.findByEmail(request.Email());
-			if(dbCompany.getPassword().equals(request.Password())) {
-				return dbCompany;
-			} else {
-				return new ResponseEntity<>(HttpStatus.CONFLICT);
-			}
-		} else {
-			if(dbWorker.getPassword().equals(request.Password())) {
-				return dbWorker;
-			} else {
-				return new ResponseEntity<>(HttpStatus.CONFLICT);
-			}
-		}
-	}	 */
 	
 	@Override
 	public void run(String ...arg) throws Exception {
 		storageService.init();
+	}
+
+	@Bean
+	public CommandLineRunner createRoles(RoleRepository repository) {
+		return (args)-> {
+			if(repository.existsByName("worker")) {
+			} else {
+				repository.save(new Role(1, "worker"));
+				repository.save(new Role(2, "admin"));
+				repository.save(new Role(3, "company"));
+			}
+		};
 	}
 }
