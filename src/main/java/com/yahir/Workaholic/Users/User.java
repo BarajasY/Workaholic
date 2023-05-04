@@ -36,9 +36,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     private String country;
-    @OneToOne
-    @JoinColumn(name = "resume_id")
-    private Resume resume;
+    private String cvPath;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id")
     private Role role;
@@ -46,13 +44,13 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String name, String email, String password, String country, Resume resume, Role role) {
+    public User(Integer id, String name, String email, String password, String country, String cvPath, Role role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.country = country;
-        this.resume = resume;
+        this.cvPath = cvPath;
         this.role = role;
     }
 
@@ -96,12 +94,12 @@ public class User {
         this.country = country;
     }
 
-    public Resume getResume() {
-        return this.resume;
+    public String getCvPath() {
+        return this.cvPath;
     }
 
-    public void setResume(Resume resume) {
-        this.resume = resume;
+    public void setCvPath(String cvPath) {
+        this.cvPath = cvPath;
     }
 
     public Role getRole() {
@@ -137,8 +135,8 @@ public class User {
         return this;
     }
 
-    public User resume(Resume resume) {
-        setResume(resume);
+    public User cvPath(String cvPath) {
+        setCvPath(cvPath);
         return this;
     }
 
@@ -155,12 +153,12 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(country, user.country) && Objects.equals(resume, user.resume) && Objects.equals(role, user.role);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(country, user.country) && Objects.equals(cvPath, user.cvPath) && Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, country, resume, role);
+        return Objects.hash(id, name, email, password, country, cvPath, role);
     }
 
     @Override
@@ -171,7 +169,7 @@ public class User {
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
             ", country='" + getCountry() + "'" +
-            ", resume='" + getResume() + "'" +
+            ", cvPath='" + getCvPath() + "'" +
             ", role='" + getRole() + "'" +
             "}";
     }

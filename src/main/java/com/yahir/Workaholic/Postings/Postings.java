@@ -1,5 +1,6 @@
 package com.yahir.Workaholic.Postings;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 import java.util.Set;
@@ -12,6 +13,7 @@ import com.yahir.Workaholic.Users.User;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +26,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
-public class Postings {
+@Embeddable
+public class Postings implements Serializable {
 
     public Postings(){}
 
@@ -44,6 +47,7 @@ public class Postings {
     @Column(nullable = false)
     private String description;
     @ManyToMany
+    @Id
     @JoinTable(name = "posting_types", 
                 joinColumns = {@JoinColumn(name = "posting_id")},
                 inverseJoinColumns = {@JoinColumn(name = "jobtype_id")})

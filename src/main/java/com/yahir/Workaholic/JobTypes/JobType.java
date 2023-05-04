@@ -1,6 +1,7 @@
 package com.yahir.Workaholic.JobTypes;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +14,7 @@ import java.util.Set;
 import com.yahir.Workaholic.Postings.Postings;
 
 @Entity
+@Embeddable
 public class JobType {
     
     @Id

@@ -1,5 +1,7 @@
 package com.yahir.Workaholic.Users;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +38,8 @@ public class UserController {
         String email,
         String country,
         String password,
-        String role
+        String role,
+        String cvPath
     ){}
 
     @PostMapping("/register")
@@ -46,14 +49,12 @@ public class UserController {
         }
         User user = new User();
         Role role = roleRepository.findByName(request.role());
-        String path = "uploads/" + request.email();
-        Resume resume = resumeRepository.findByPath(path);
         user.setName(request.name());
         user.setEmail(request.email());
         user.setCountry(request.country());
         user.setPassword(request.password());
         user.setRole(role);
-        user.setResume(resume);
+        user.setCvPath(request.cvPath());
         repository.save(user);
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -62,5 +63,10 @@ public class UserController {
     @GetMapping("/hola")
     private String test() {
         return "Hola";
+    }
+
+    @GetMapping("/all")
+    public List<User> showUsers() {
+        return repository.findAll();
     }
 }

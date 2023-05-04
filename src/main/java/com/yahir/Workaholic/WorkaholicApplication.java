@@ -19,6 +19,7 @@ import com.yahir.Workaholic.Roles.RoleRepository;
 import com.yahir.Workaholic.UploadResume.UploadResumeRepository;
 import com.yahir.Workaholic.UploadResume.UploadService.FileStorageService;
 import com.yahir.Workaholic.Users.UserRepository;
+import com.yahir.Workaholic.postType.PostTypeRepository;
 
 import jakarta.annotation.Resource;
 
@@ -40,8 +41,9 @@ public class WorkaholicApplication implements CommandLineRunner {
 	private RateRepository rateRepository;
 	private CurrencyRepository currencyRepository;
 	private ResumeRepository resumeRepository;
+	private PostTypeRepository postTypeRepository;
 
-	public WorkaholicApplication(FileStorageService storageService, UploadResumeRepository uploadResumeRepository, PostingsRepository postingRepository, JobApplicationsRepository jobApplicationsRepository, UserRepository userRepository, RoleRepository roleRepository, JobTypeRepository jobTypeRepository, RateRepository rateRepository, CurrencyRepository currencyRepository, ResumeRepository resumeRepository) {
+	public WorkaholicApplication(FileStorageService storageService, UploadResumeRepository uploadResumeRepository, PostingsRepository postingRepository, JobApplicationsRepository jobApplicationsRepository, UserRepository userRepository, RoleRepository roleRepository, JobTypeRepository jobTypeRepository, RateRepository rateRepository, CurrencyRepository currencyRepository, ResumeRepository resumeRepository, PostTypeRepository postTypeRepository) {
 		this.storageService = storageService;
 		this.uploadResumeRepository = uploadResumeRepository;
 		this.postingRepository = postingRepository;
@@ -52,7 +54,9 @@ public class WorkaholicApplication implements CommandLineRunner {
 		this.rateRepository = rateRepository;
 		this.currencyRepository = currencyRepository;
 		this.resumeRepository = resumeRepository;
+		this.postTypeRepository = postTypeRepository;
 	}
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(WorkaholicApplication.class, args);
