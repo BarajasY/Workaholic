@@ -82,37 +82,26 @@ input:focus {
     cursor: pointer;
 }
 
+.CompanyActive {
+    color: var(--success2);
+    border: 2px solid var(--success2) !important;
+}
+
 .signupContent section {
     margin: 20px;
     width: 120%;
 }
 
-#tagsSection {
-    display: flex;
-    flex-wrap: wrap;
+.signupTagsInput input {
+    width: 70%;
 }
 
-#tagsSection h1 {
-    font-size: 20px;
-}
-
-.signupTags {
-    margin: 10px;
-    border: 2px solid black;
+.signupTagsInput button {
+    width: 20%;
+    font-size: 30px;
+    border-radius: 5px;
     padding: 10px;
-    border-radius: 15px;
-}
-
-.signupTags:hover {
-    color: white;
-    background: var(--blend5);
-    cursor: pointer;
-    border: 2px solid transparent;
-}
-
-.selected {
-    background: var(--selected);
-    color: white;
+    margin-left: 20px;
 }
 
 .signupSubmit {

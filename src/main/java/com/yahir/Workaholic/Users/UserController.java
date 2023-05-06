@@ -38,8 +38,7 @@ public class UserController {
         String email,
         String country,
         String password,
-        String role,
-        String cvPath
+        String role
     ){}
 
     @PostMapping("/register")
@@ -48,13 +47,14 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
         User user = new User();
+        String cvPath = "uploads/" + request.email();
         Role role = roleRepository.findByName(request.role());
         user.setName(request.name());
         user.setEmail(request.email());
         user.setCountry(request.country());
         user.setPassword(request.password());
         user.setRole(role);
-        user.setCvPath(request.cvPath());
+        user.setCvPath(cvPath);
         repository.save(user);
 
         return new ResponseEntity<>(HttpStatus.OK);

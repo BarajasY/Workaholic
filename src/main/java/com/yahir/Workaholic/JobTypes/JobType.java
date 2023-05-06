@@ -14,7 +14,6 @@ import java.util.Set;
 import com.yahir.Workaholic.Postings.Postings;
 
 @Entity
-@Embeddable
 public class JobType {
     
     @Id
@@ -31,26 +30,7 @@ public class JobType {
     @Column(nullable = false)
     private String type;
     @ManyToMany(mappedBy = "jobTypes")
-    private Set<Postings> postings;
-
-    public JobType(Integer id, String type, Set<Postings> postings) {
-        this.id = id;
-        this.type = type;
-        this.postings = postings;
-    }
-
-    public Set<Postings> getPostings() {
-        return this.postings;
-    }
-
-    public void setPostings(Set<Postings> postings) {
-        this.postings = postings;
-    }
-
-    public JobType postings(Set<Postings> postings) {
-        setPostings(postings);
-        return this;
-    }
+    Set<Postings> Postings;
 
     public JobType() {
     }

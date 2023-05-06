@@ -14,20 +14,4 @@ public class RoleController {
     public RoleController(RoleRepository repository) {
         this.repository = repository;
     }
-
-    public void createRole() {
-        Boolean roleExists = repository.existsByName("worker");
-        if(roleExists) {
-            return;
-        }
-        Role role = new Role();
-        Role role2 = new Role();
-        Role role3 = new Role();
-        role.name("worker");
-        role2.name("admin");
-        role3.name("company");
-        repository.save(role);
-        repository.save(role2);
-        repository.save(role3);
-    }
 }

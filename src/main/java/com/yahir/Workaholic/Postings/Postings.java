@@ -22,12 +22,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
-@Embeddable
-public class Postings implements Serializable {
+public class Postings{
 
     public Postings(){}
 
@@ -47,7 +45,6 @@ public class Postings implements Serializable {
     @Column(nullable = false)
     private String description;
     @ManyToMany
-    @Id
     @JoinTable(name = "posting_types", 
                 joinColumns = {@JoinColumn(name = "posting_id")},
                 inverseJoinColumns = {@JoinColumn(name = "jobtype_id")})
@@ -68,11 +65,10 @@ public class Postings implements Serializable {
     @JoinColumn(name =  "company_id", nullable = false)
     private User user;
 
-    public Postings(Integer id, String title, String description, Set<JobType> jobTypes, Integer salary, Currency currency, Rate rate, Integer duration, Date date, String benefits, User user) {
+    public Postings(Integer id, String title, String description, Integer salary, Currency currency, Rate rate, Integer duration, Date date, String benefits, User user) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.jobTypes = jobTypes;
         this.salary = salary;
         this.currency = currency;
         this.rate = rate;
@@ -104,14 +100,6 @@ public class Postings implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<JobType> getJobTypes() {
-        return this.jobTypes;
-    }
-
-    public void setJobTypes(Set<JobType> jobTypes) {
-        this.jobTypes = jobTypes;
     }
 
     public Integer getSalary() {
@@ -185,11 +173,6 @@ public class Postings implements Serializable {
         return this;
     }
 
-    public Postings jobTypes(Set<JobType> jobTypes) {
-        setJobTypes(jobTypes);
-        return this;
-    }
-
     public Postings salary(Integer salary) {
         setSalary(salary);
         return this;
@@ -233,12 +216,12 @@ public class Postings implements Serializable {
             return false;
         }
         Postings postings = (Postings) o;
-        return Objects.equals(id, postings.id) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(jobTypes, postings.jobTypes) && Objects.equals(salary, postings.salary) && Objects.equals(currency, postings.currency) && Objects.equals(rate, postings.rate) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(benefits, postings.benefits) && Objects.equals(user, postings.user);
+        return Objects.equals(id, postings.id) && Objects.equals(title, postings.title) && Objects.equals(description, postings.description) && Objects.equals(salary, postings.salary) && Objects.equals(currency, postings.currency) && Objects.equals(rate, postings.rate) && Objects.equals(duration, postings.duration) && Objects.equals(date, postings.date) && Objects.equals(benefits, postings.benefits) && Objects.equals(user, postings.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, jobTypes, salary, currency, rate, duration, date, benefits, user);
+        return Objects.hash(id, title, description, salary, currency, rate, duration, date, benefits, user);
     }
 
     @Override
@@ -247,7 +230,6 @@ public class Postings implements Serializable {
             " id='" + getId() + "'" +
             ", title='" + getTitle() + "'" +
             ", description='" + getDescription() + "'" +
-            ", jobTypes='" + getJobTypes() + "'" +
             ", salary='" + getSalary() + "'" +
             ", currency='" + getCurrency() + "'" +
             ", rate='" + getRate() + "'" +

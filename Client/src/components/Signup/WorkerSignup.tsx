@@ -87,6 +87,10 @@ const Signup = () => {
     });
   };
 
+  const fetchTags = async() => {
+    
+  }
+
   // If CompleteSignup variable is true, the next UI will be shown.
   if (CompleteSignup) {
     return (
@@ -110,7 +114,7 @@ const Signup = () => {
         ? 
         <section className="isCompanySignup">
           <h1>¿Buscas registrar un negocio?</h1>
-          <button id="yes" onClick={() => setRole("company")}>Sí</button>
+          <button id="yes" className={Role==="company" ? "CompanyActive" : ""} onClick={() => setRole("company")}>Sí</button>
           <button id="no" onClick={() => setCompanySignupForm(false)}>No</button>
         </section>
         :
@@ -142,6 +146,15 @@ const Signup = () => {
         <section>
           <h1>Inserte su más reciente currículum</h1>
           <input type="file" accept=".pdf" onChange={(e) => setCV(e.target.files![0])} />
+        </section>
+        <section>
+          <article className="signupTagsInput">
+            <input type="text" onClick={() => fetchTags()}/>
+            <button>Submit</button>
+          </article>
+          <article className="signupTagsDrop">
+
+          </article>
         </section>
         <section className="signupSubmit">
           <button onClick={() => SubmitSignup()}>Enviar</button>
