@@ -10,12 +10,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import com.yahir.Workaholic.Resume.Resume;
 import com.yahir.Workaholic.Roles.Role;
 import com.yahir.Workaholic.Tags.Tag;
 
@@ -44,16 +44,11 @@ public class User {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id")
     private Role role;
-    @ManyToMany
-    @JoinTable(name = "user_tags", 
-    joinColumns = {@JoinColumn(name = "user_id")},
-    inverseJoinColumns = {@JoinColumn(name = "tag_id")})
-    Set<Tag> tags;
 
     public User() {
     }
 
-    public User(Integer id, String name, String email, String password, String country, String cvPath, Role role, Set<Tag> tags) {
+    public User(Integer id, String name, String email, String password, String country, String cvPath, Role role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -61,7 +56,6 @@ public class User {
         this.country = country;
         this.cvPath = cvPath;
         this.role = role;
-        this.tags = tags;
     }
 
     public Integer getId() {
@@ -120,14 +114,6 @@ public class User {
         this.role = role;
     }
 
-    public Set<Tag> getTags() {
-        return this.tags;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
-    }
-
     public User id(Integer id) {
         setId(id);
         return this;
@@ -163,11 +149,6 @@ public class User {
         return this;
     }
 
-    public User tags(Set<Tag> tags) {
-        setTags(tags);
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -176,12 +157,12 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(country, user.country) && Objects.equals(cvPath, user.cvPath) && Objects.equals(role, user.role) && Objects.equals(tags, user.tags);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(country, user.country) && Objects.equals(cvPath, user.cvPath) && Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, country, cvPath, role, tags);
+        return Objects.hash(id, name, email, password, country, cvPath, role);
     }
 
     @Override
@@ -194,7 +175,12 @@ public class User {
             ", country='" + getCountry() + "'" +
             ", cvPath='" + getCvPath() + "'" +
             ", role='" + getRole() + "'" +
-            ", tags='" + getTags() + "'" +
             "}";
     }
+/*     private String[] tags; */
+/*     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_tags", 
+    joinColumns = {@JoinColumn(name = "user_id")},
+    inverseJoinColumns = {@JoinColumn(name = "tag_id")})
+    Set<Tag> tags = new HashSet<>(); */
 }

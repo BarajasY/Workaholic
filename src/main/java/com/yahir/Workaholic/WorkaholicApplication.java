@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yahir.Workaholic.Currencies.CurrencyRepository;
 import com.yahir.Workaholic.JobApplications.JobApplicationsRepository;
+import com.yahir.Workaholic.JobTypes.JobType;
 import com.yahir.Workaholic.JobTypes.JobTypeRepository;
 import com.yahir.Workaholic.Postings.PostingsRepository;
 import com.yahir.Workaholic.Rates.RateRepository;
@@ -89,25 +90,37 @@ public class WorkaholicApplication implements CommandLineRunner {
 	}
 
 	@Bean
+	public CommandLineRunner createJobTypes(JobTypeRepository repository) {
+		return (args) -> {
+			if (repository.existsByType("Full-Time")) {
+			} else {
+				repository.save(new JobType(1, "Full-Time"));
+				repository.save(new JobType(1, "Part-Time"));
+				repository.save(new JobType(1, "Freelance"));
+			}
+		};
+	}
+
+	@Bean
 	public CommandLineRunner createTags(TagRepository repository) {
 		return (args) -> {
 			if (repository.existsByTagName("Software")) {
 			} else {
-				repository.save(new Tag(1, "Software"));
-				repository.save(new Tag(2, "Cybersecurity"));
-				repository.save(new Tag(3, "Accountancy"));
-				repository.save(new Tag(4, "Law"));
-				repository.save(new Tag(5, "Human Resources"));
-				repository.save(new Tag(6, "Marketing"));
-				repository.save(new Tag(7, "Medicine"));
-				repository.save(new Tag(8, "Nursery"));
-				repository.save(new Tag(9, "Teaching"));
-				repository.save(new Tag(10, "Assistant"));
-				repository.save(new Tag(11, "Customer Service"));
-				repository.save(new Tag(12, "Data"));
-				repository.save(new Tag(13, "UI/UX"));
-				repository.save(new Tag(14, "Sales"));
-				repository.save(new Tag(15, "Secretary"));
+				repository.save(new Tag(null, "Software"));
+				repository.save(new Tag(null, "Cybersecurity"));
+				repository.save(new Tag(null, "Accuntancy"));
+				repository.save(new Tag(null, "Law"));
+				repository.save(new Tag(null, "Human Resources"));
+				repository.save(new Tag(null, "Marketing"));
+				repository.save(new Tag(null, "Medicine"));
+				repository.save(new Tag(null, "Nursery"));
+				repository.save(new Tag(null, "Teaching"));
+				repository.save(new Tag(null, "Assistant"));
+				repository.save(new Tag(null, "Customer Service"));
+				repository.save(new Tag(null, "Data"));
+				repository.save(new Tag(null, "UI/UX"));
+				repository.save(new Tag(null, "Sales"));
+				repository.save(new Tag(null, "Secretary"));
 			}
 		};
 	}

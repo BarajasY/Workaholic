@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
+
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,8 +28,6 @@ public class Tag {
     )
     private Integer id;
     private String tagName;
-    @ManyToMany(mappedBy = "tags")
-    Set<User> users;
 
     public Tag() {
     }
@@ -53,14 +53,6 @@ public class Tag {
         this.tagName = tagName;
     }
 
-    public Set<User> getUsers() {
-        return this.users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
     public Tag id(Integer id) {
         setId(id);
         return this;
@@ -68,11 +60,6 @@ public class Tag {
 
     public Tag tagName(String tagName) {
         setTagName(tagName);
-        return this;
-    }
-
-    public Tag users(Set<User> users) {
-        setUsers(users);
         return this;
     }
 
@@ -84,12 +71,12 @@ public class Tag {
             return false;
         }
         Tag tag = (Tag) o;
-        return Objects.equals(id, tag.id) && Objects.equals(tagName, tag.tagName) && Objects.equals(users, tag.users);
+        return Objects.equals(id, tag.id) && Objects.equals(tagName, tag.tagName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tagName, users);
+        return Objects.hash(id, tagName);
     }
 
     @Override
@@ -97,7 +84,8 @@ public class Tag {
         return "{" +
             " id='" + getId() + "'" +
             ", tagName='" + getTagName() + "'" +
-            ", users='" + getUsers() + "'" +
             "}";
     }
+/*     @ManyToMany(mappedBy = "tags")
+    private Set<User> users = new HashSet<>(); */
 }

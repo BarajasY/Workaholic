@@ -94,6 +94,8 @@ input:focus {
 
 .signupTagsInput input {
     width: 70%;
+    color: var(--eblue);
+    font-weight: 800;
 }
 
 .signupTagsInput button {
@@ -102,6 +104,55 @@ input:focus {
     border-radius: 5px;
     padding: 10px;
     margin-left: 20px;
+}
+
+.signupTagsInput button:hover {
+    background: var(--teal);
+    color: white;
+    cursor: pointer;
+}
+
+.signupTagsDrop {
+    margin-top: 20px;
+    height: 300px;
+    padding: 10px;
+    overflow-y: scroll;
+    border: 2px solid black;
+}
+
+.signupTagsDrop h1 {
+    background: none;
+    color: var(--teal);
+    padding: 5px;
+}
+
+.signupTagsDrop h1:hover {
+    color: white;
+    background: var(--navyblue);
+    cursor: pointer;
+}
+
+.signupUserTags {
+    margin: 5px 0px;
+    display: flex;
+    width: 600px !important;
+    height: fit-content;
+    flex-wrap: wrap;
+}
+
+.signupUserTags h1 {
+    height: 40px;
+    margin: 5px 5px;
+    padding: 10px;
+    border: 2px solid black;
+    width: fit-content;
+    border-radius: 5px;
+}
+
+.signupUserTags h1:hover {
+    background: var(--error);
+    color: white;
+    cursor: pointer;
 }
 
 .signupSubmit {

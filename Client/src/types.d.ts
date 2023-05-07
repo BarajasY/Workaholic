@@ -46,18 +46,18 @@ export interface workerStateInterface {
 }
 
 export interface userStateInterface {
-    Id: Number,
-    FName: String,
-    CompanyName: String,
-    LName: String,
-    Email: String,
-    Password: String,
-    Country: String,
-    Tags: String[],
-    Role: String,
-    CompanyOwner: String,
-    CompanyLocation:String
-    Logged: Boolean
+    id: Number,
+    name: String,
+    email: String,
+    country: String,
+    role: RoleType,
+    logged: Boolean,
+    password: String
+}
+
+export type RoleType = {
+    id: Number,
+    name: String
 }
 
 export type WorkerType = {
@@ -69,7 +69,13 @@ export type CompanyType = {
 }
 
 export type userType = {
-    worker: userStateInterface
+    user: userStateInterface
+}
+
+export type tagType = {
+    id: number,
+    tagName: string,
+    users: []
 }
 
 export type PostingType = {

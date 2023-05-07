@@ -1,6 +1,5 @@
 package com.yahir.Workaholic.Postings;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 import java.util.Set;
@@ -8,12 +7,10 @@ import java.util.Set;
 import com.yahir.Workaholic.Currencies.Currency;
 import com.yahir.Workaholic.JobTypes.JobType;
 import com.yahir.Workaholic.Rates.Rate;
-import com.yahir.Workaholic.Resume.Resume;
 import com.yahir.Workaholic.Users.User;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yahir.Workaholic.Resume.Resume;
 import com.yahir.Workaholic.Resume.ResumeRepository;
 import com.yahir.Workaholic.Roles.Role;
 import com.yahir.Workaholic.Roles.RoleRepository;
@@ -47,26 +46,43 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
         User user = new User();
-        String cvPath = "uploads/" + request.email();
         Role role = roleRepository.findByName(request.role());
         user.setName(request.name());
         user.setEmail(request.email());
         user.setCountry(request.country());
         user.setPassword(request.password());
-        user.setRole(role);
-        user.setCvPath(cvPath);
+        user.setRole(role);        
+        String cvPath = "uploads/" + request.email();
+        if(request.role().equals("company")) {
+            user.setCvPath("null");
+        } else {
+            user.setCvPath(cvPath);
+        }
         repository.save(user);
-
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/hola")
-    private String test() {
-        return "Hola";
     }
 
     @GetMapping("/all")
     public List<User> showUsers() {
         return repository.findAll();
+    }
+
+    record newUserLoginRequest(
+        String email,
+        String password
+    ){}
+
+    @PostMapping("/login")
+    public Object userLogin(@RequestBody newUserLoginRequest request) {
+        if(repository.existsByEmail(request.email())) {
+            User account1 = repository.findByEmail(request.email());
+            if(account1.getPassword().equals(request.password())) {
+                return account1;
+            } else {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

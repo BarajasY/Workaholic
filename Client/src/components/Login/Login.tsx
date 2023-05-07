@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
 import './Login.css'
 import { storeWorker, storeCompany } from '../../redux/workerSlice';
-import { companyInterface, workerInterface } from '../../types';
+import { companyInterface, userStateInterface, workerInterface } from '../../types';
+import { storeUser } from '../../redux/userSlice';
 
 const Login = () => {
   const [Email, setEmail] = useState("")
@@ -22,14 +23,14 @@ const Login = () => {
   }
 
   const SendLogin = () => {
-    const post = fetch("http://localhost:8080/api/v1/login", {
+    const post = fetch("http://localhost:8080/api/v1/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        Email,
-        Password
+        email: Email,
+        password: Password
       })
     })
     .then(response => {
@@ -41,17 +42,7 @@ const Login = () => {
         setErrorMessage("La contraseña es incorrecta.")
       } else if(response.status === 200) {
         response.json().then(data => {
-          switch(data.role) {
-            case "worker":
-              storeWorkerLogin(data);
-              break;
-            case "company":
-              storeCompanyLogin(data);
-              break;
-            case "admin":
-              storeWorkerLogin(data);
-              break;
-          }
+          storeUserLogin(data)
         })
       }
     }).catch(error => {
@@ -59,7 +50,7 @@ const Login = () => {
     })
   }
 
-  const storeWorkerLogin = (data: workerInterface) => {
+/*   const storeWorkerLogin = (data: workerInterface) => {
     const cookies = new Cookies();
     cookies.set('Logged', true, {path: "/"})
     cookies.set('Email', data.email, {path: "/"});
@@ -72,9 +63,23 @@ const Login = () => {
     const cookieData = cookies.getAll();
     dispatch(storeWorker(cookieData))
     navigate("/browse")
+  } */
+
+  const storeUserLogin = (data:userStateInterface) => {
+    const cookies = new Cookies();
+    cookies.set('logged', true)
+    cookies.set('id', data.id)
+    cookies.set('name', data.name)
+    cookies.set('email', data.email)
+    cookies.set('password', data.password)
+    cookies.set('country', data.country)
+    cookies.set('role', data.role)
+    const cookieData = cookies.getAll();
+    dispatch(storeUser(cookieData))
+    navigate("/browse")
   }
   
-  const storeCompanyLogin = (data: companyInterface) => {
+/*   const storeCompanyLogin = (data: companyInterface) => {
     const cookies = new Cookies();
     cookies.set('Logged', true, {path: "/"})
     cookies.set('CompanyName', data.name, {path: "/"})
@@ -89,7 +94,7 @@ const Login = () => {
     const cookieData = cookies.getAll();
     dispatch(storeCompany(cookieData))
     navigate("/browse")
-  }
+  } */
 
   return (
     <div className="loginContainer">

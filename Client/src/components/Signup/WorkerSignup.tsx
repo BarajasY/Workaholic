@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
+import { tagType } from "../../types";
 
 const Signup = () => {
   const [Name, setName] = useState("");
@@ -21,8 +22,7 @@ const Signup = () => {
       Name === "" ||
       Email === "" ||
       Password === "" ||
-      Country === "" ||
-      CV === undefined
+      Country === ""
     ) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       setErrorMessage("Porfavor rellene todos los espacios");
@@ -30,7 +30,7 @@ const Signup = () => {
       //Remove error message
       //Make calls to the API with user data.
       setErrorMessage("");
-      SendUserCV();
+      Role === "company" ? SendUserData() : SendUserCV()
     }
   };
 
@@ -47,6 +47,7 @@ const Signup = () => {
         "password": Password,
         "country": Country,
         "role": Role,
+/*         "tags": userTags */
       })
     })
     .then(response => {
@@ -77,19 +78,15 @@ const Signup = () => {
       // If response is 200 OK, complete signup.
       if (response.status === 200) {
         setErrorMessage("");
-        setTimeout(() => {
+/*         setTimeout(() => { */
           SendUserData()
-        }, 3000)
+/*         }, 1000) */
       }
     })
     .catch(error => {
       console.log(error);
     });
   };
-
-  const fetchTags = async() => {
-    
-  }
 
   // If CompleteSignup variable is true, the next UI will be shown.
   if (CompleteSignup) {
@@ -115,7 +112,7 @@ const Signup = () => {
         <section className="isCompanySignup">
           <h1>¿Buscas registrar un negocio?</h1>
           <button id="yes" className={Role==="company" ? "CompanyActive" : ""} onClick={() => setRole("company")}>Sí</button>
-          <button id="no" onClick={() => setCompanySignupForm(false)}>No</button>
+          <button id="no" onClick={() => {setCompanySignupForm(false), setRole("worker")}}>No</button>
         </section>
         :
         null
@@ -143,19 +140,15 @@ const Signup = () => {
             onChange={(e) => setCountry(e.target.value.toLowerCase())}
           />
         </section>
+        {Role === "worker" 
+        ? 
         <section>
           <h1>Inserte su más reciente currículum</h1>
           <input type="file" accept=".pdf" onChange={(e) => setCV(e.target.files![0])} />
         </section>
-        <section>
-          <article className="signupTagsInput">
-            <input type="text" onClick={() => fetchTags()}/>
-            <button>Submit</button>
-          </article>
-          <article className="signupTagsDrop">
-
-          </article>
-        </section>
+        :
+        null
+        }
         <section className="signupSubmit">
           <button onClick={() => SubmitSignup()}>Enviar</button>
         </section>

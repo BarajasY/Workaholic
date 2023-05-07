@@ -14,24 +14,24 @@ const Navbar = () => {
     const allCokies = cookies.getAll();
     const dispatch = useDispatch();
     dispatch(storeCompany(allCokies));
-    const User = useSelector((state:userType) => state.worker);
+    const User = useSelector((state:userType) => state.user);
     
   return (
     <div className="navbarContainer">
         <div className="logo">
-            <Link to={User.Logged ? "/browse" : "/home"}>Workaholic</Link>
+            <Link to={User.logged ? "/browse" : "/home"}>Workaholic</Link>
         </div>
         <div className="links">
-          {User.Logged
+          {User.logged
           ?
           <>
-            {User?.Role === "company" 
+            {User?.role.name === "company" 
               ? 
               <Link to="./add" id="add">Add job</Link>
               :
               null
             }
-            {User.Role === "admin" 
+            {User?.role.name === "admin" 
              ?
              <Link to="/settings"><AiOutlineSetting /></Link>
              :
