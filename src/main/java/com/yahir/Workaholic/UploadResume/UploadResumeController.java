@@ -29,11 +29,9 @@ public class UploadResumeController {
     @Autowired
     FileStorageService storageService;
 
-    private final UploadResumeRepository repository;
     private final ResumeRepository resumeRepository;
 
-    public UploadResumeController(UploadResumeRepository repository, ResumeRepository resumeRepository) {
-        this.repository = repository;
+    public UploadResumeController(ResumeRepository resumeRepository) {
         this.resumeRepository = resumeRepository;
     }
 
@@ -48,10 +46,6 @@ public class UploadResumeController {
             Resume resume = new Resume();
             resume.setPath(resumePath);
             resumeRepository.save(resume);
-            UploadResume uResume = new UploadResume();
-            uResume.setEmail(email);
-            uResume.setFilename(file.getOriginalFilename());
-            repository.save(uResume);
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         } catch (Exception e) {
             message = "Could not upload the file" + file.getOriginalFilename() + ". Error: " + e.getMessage();

@@ -19,6 +19,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
@@ -41,17 +43,17 @@ public class Postings{
     private String title;
     @Column(nullable = false)
     private String description;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "posting_types", 
                 joinColumns = {@JoinColumn(name = "posting_id")},
                 inverseJoinColumns = {@JoinColumn(name = "jobtype_id")})
-    Set<JobType> jobTypes;
+    Set<JobType> jobTypes;  
     @Column(nullable = false)
     private Integer salary;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "currency_id", nullable = false)
     private Currency currency;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "rate_id", nullable = false)
     private Rate rate;
     @Column(nullable = false)

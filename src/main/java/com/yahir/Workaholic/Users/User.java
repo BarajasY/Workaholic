@@ -10,6 +10,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
 import java.util.HashSet;
@@ -33,16 +35,13 @@ public class User {
         generator = "user_id_generator"
     )
     private Integer id;
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = false)
     private String password;
     private String country;
     private String cvPath;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "role_id")
     private Role role;
 
     public User() {

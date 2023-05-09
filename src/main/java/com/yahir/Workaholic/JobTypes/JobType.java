@@ -1,5 +1,6 @@
 package com.yahir.Workaholic.JobTypes;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class JobType {
     private Integer id;
     @Column(nullable = false)
     private String type;
-    @ManyToMany(mappedBy = "jobTypes")
+    @ManyToMany(mappedBy = "jobTypes", cascade = CascadeType.ALL)
     Set<Postings> Postings;
 
     public JobType() {

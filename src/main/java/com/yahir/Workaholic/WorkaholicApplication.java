@@ -19,7 +19,6 @@ import com.yahir.Workaholic.Roles.Role;
 import com.yahir.Workaholic.Roles.RoleRepository;
 import com.yahir.Workaholic.Tags.Tag;
 import com.yahir.Workaholic.Tags.TagRepository;
-import com.yahir.Workaholic.UploadResume.UploadResumeRepository;
 import com.yahir.Workaholic.UploadResume.UploadService.FileStorageService;
 import com.yahir.Workaholic.Users.UserRepository;
 
@@ -34,7 +33,6 @@ public class WorkaholicApplication implements CommandLineRunner {
 	@Resource
 	FileStorageService storageService;
 
-	private UploadResumeRepository uploadResumeRepository;
 	private PostingsRepository postingRepository;
 	private JobApplicationsRepository jobApplicationsRepository;
 	private UserRepository userRepository;
@@ -45,13 +43,11 @@ public class WorkaholicApplication implements CommandLineRunner {
 	private ResumeRepository resumeRepository;
 	private TagRepository tagRepository;
 
-	public WorkaholicApplication(FileStorageService storageService, UploadResumeRepository uploadResumeRepository,
+	public WorkaholicApplication(FileStorageService storageService,
 			PostingsRepository postingRepository, JobApplicationsRepository jobApplicationsRepository,
 			UserRepository userRepository, RoleRepository roleRepository, JobTypeRepository jobTypeRepository,
 			RateRepository rateRepository, CurrencyRepository currencyRepository, ResumeRepository resumeRepository,
 			TagRepository tagRepository) {
-		this.storageService = storageService;
-		this.uploadResumeRepository = uploadResumeRepository;
 		this.postingRepository = postingRepository;
 		this.jobApplicationsRepository = jobApplicationsRepository;
 		this.userRepository = userRepository;
@@ -95,8 +91,8 @@ public class WorkaholicApplication implements CommandLineRunner {
 			if (repository.existsByType("Full-Time")) {
 			} else {
 				repository.save(new JobType(1, "Full-Time"));
-				repository.save(new JobType(1, "Part-Time"));
-				repository.save(new JobType(1, "Freelance"));
+				repository.save(new JobType(2, "Part-Time"));
+				repository.save(new JobType(3, "Freelance"));
 			}
 		};
 	}

@@ -18,7 +18,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Index.Intro />} />
               <Route path="/home" element={<Index.Home />} />
-              <Route path="/signup" element={<Index.WorkerSignup />} />
+              <Route path="/signup" element={<Index.UserSignup />} />
               <Route path="/profile" element={<Index.Profile />} />
               <Route path="/login" element={<Index.Login />} />
               <Route path="/add" element={<Index.AddPosting />} />
