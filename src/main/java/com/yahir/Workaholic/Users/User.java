@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.yahir.Workaholic.Countries.Country;
 import com.yahir.Workaholic.Roles.Role;
 import com.yahir.Workaholic.Tags.Tag;
 
@@ -36,9 +37,11 @@ public class User {
     )
     private Integer id;
     private String name;
+    @Column(unique = true)
     private String email;
     private String password;
-    private String country;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Country country;
     private String cvPath;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
@@ -47,7 +50,7 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String name, String email, String password, String country, String cvPath, Role role) {
+    public User(Integer id, String name, String email, String password, Country country, String cvPath, Role role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -89,11 +92,11 @@ public class User {
         this.password = password;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return this.country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
@@ -133,7 +136,7 @@ public class User {
         return this;
     }
 
-    public User country(String country) {
+    public User country(Country country) {
         setCountry(country);
         return this;
     }
@@ -176,10 +179,4 @@ public class User {
             ", role='" + getRole() + "'" +
             "}";
     }
-/*     private String[] tags; */
-/*     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_tags", 
-    joinColumns = {@JoinColumn(name = "user_id")},
-    inverseJoinColumns = {@JoinColumn(name = "tag_id")})
-    Set<Tag> tags = new HashSet<>(); */
 }

@@ -6,7 +6,7 @@ import { userType } from '../../types';
 import { useNavigate } from 'react-router-dom';
 
 const AddPosting = () => {
-  const user = useSelector((state: userType) => state.worker)
+  const user = useSelector((state: userType) => state.user)
   const navigate = useNavigate()
 
   const [Salary, setSalary] = useState('')
@@ -24,19 +24,9 @@ const AddPosting = () => {
   const [PostingTags, setPostingTags] = useState<String[]>([])
   const [SuccessfullyPosted, setSuccessfullyPosted] = useState(false)
   const JobType = ["Full-Time", "Part-Time", "Freelance"]
-  const tags = [
-    "Software",
-    "Medicina",
-    "Limpieza",
-    "Ciberseguridad",
-    "Investigación",
-    "Construcción",
-    "Atención al cliente",
-    "Docente",
-  ];
 
   useEffect(() => {
-    if(user.Role !== "company") {
+    if(user.role.name !== "company") {
       navigate('/home')
     }
   }, [])
@@ -53,17 +43,6 @@ const AddPosting = () => {
         setBenefit(""); 
       }
     }
-  }
-
-  const AddPostingTag = (tag:string) => {
-    const TagAlreadyIn = PostingTags.includes(tag);
-    if (TagAlreadyIn) {
-      // remove tag from the list.
-      setPostingTags(PostingTags.filter((t) => t!== tag));
-    } else {
-      // adad tag to the list.
-      setPostingTags([...PostingTags, tag]);
-      }
   }
 
   const AddJobType = (type:string) => {
@@ -96,7 +75,6 @@ const AddPosting = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        businessName: user.CompanyName,
         title: PostingTitle,
         description: PostingDescription,
         jobType: JobTypeArray,
@@ -104,12 +82,11 @@ const AddPosting = () => {
         salaryCurrency: SalaryCurrency,
         salaryRate: SalaryRate,
         location: Location,
-        country: user.Country,
         duration: Duration,
         date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
         tags: PostingTags,
         benefits: BenefitsArray,
-        company_id: user.Id
+        company_id: user.id
       })
     }).then(response => {
       if(response.status === 200) {
@@ -218,14 +195,6 @@ const AddPosting = () => {
                 </li>
               ))}
             </ul>
-          </section>
-          <section>
-            <h1>Seleccione la categoría relacionada con el puesto:</h1>
-            <div className="PostingTagsContainer">
-            {tags.map((tag, i) => (
-              <p key={i} className={PostingTags.includes(tag) ? "PostingTag Selected" : 'PostingTag'} onClick={() => AddPostingTag(tag)}>{tag}</p>
-              ))}
-            </div>
           </section>
           <section className='PostingSubmitContainer'>
             <button onClick={() => AddPosting()}>Subir</button>

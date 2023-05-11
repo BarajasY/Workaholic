@@ -93,3 +93,8 @@ export type PostingType = {
     tags: string[],
     benefits: string[]
 }
+
+export type CountryType = {
+    id: number,
+    name: string
+}

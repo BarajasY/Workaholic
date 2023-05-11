@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yahir.Workaholic.Countries.Country;
+import com.yahir.Workaholic.Countries.CountryRepo;
 import com.yahir.Workaholic.Currencies.CurrencyRepository;
 import com.yahir.Workaholic.JobApplications.JobApplicationsRepository;
 import com.yahir.Workaholic.JobTypes.JobType;
@@ -41,13 +43,14 @@ public class WorkaholicApplication implements CommandLineRunner {
 	private RateRepository rateRepository;
 	private CurrencyRepository currencyRepository;
 	private ResumeRepository resumeRepository;
+	private CountryRepo countryRepo;
 	private TagRepository tagRepository;
 
 	public WorkaholicApplication(FileStorageService storageService,
 			PostingsRepository postingRepository, JobApplicationsRepository jobApplicationsRepository,
 			UserRepository userRepository, RoleRepository roleRepository, JobTypeRepository jobTypeRepository,
 			RateRepository rateRepository, CurrencyRepository currencyRepository, ResumeRepository resumeRepository,
-			TagRepository tagRepository) {
+			TagRepository tagRepository, CountryRepo countryRepo) {
 		this.postingRepository = postingRepository;
 		this.jobApplicationsRepository = jobApplicationsRepository;
 		this.userRepository = userRepository;
@@ -57,6 +60,7 @@ public class WorkaholicApplication implements CommandLineRunner {
 		this.currencyRepository = currencyRepository;
 		this.resumeRepository = resumeRepository;
 		this.tagRepository = tagRepository;
+		this.countryRepo = countryRepo;
 	}
 
 	public static void main(String[] args) {
@@ -81,6 +85,26 @@ public class WorkaholicApplication implements CommandLineRunner {
 				repository.save(new Role(1, "worker"));
 				repository.save(new Role(2, "admin"));
 				repository.save(new Role(3, "company"));
+			}
+		};
+	}
+
+	@Bean
+	public CommandLineRunner addCountries(CountryRepo repository) {
+		return (args) -> {
+			if(repository.existsById(1)) {
+
+			} else {
+				repository.save(new Country(1, "Mexico"));
+				repository.save(new Country(2, "USA"));
+				repository.save(new Country(3, "Canada"));
+				repository.save(new Country(4, "Argentina"));
+				repository.save(new Country(5, "España"));
+				repository.save(new Country(6, "Francia"));
+				repository.save(new Country(7, "UK"));
+				repository.save(new Country(8, "Alemania"));
+				repository.save(new Country(9, "Portugal"));
+				repository.save(new Country(10, "Chile"));
 			}
 		};
 	}

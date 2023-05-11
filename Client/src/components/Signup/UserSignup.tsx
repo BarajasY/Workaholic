@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
-import { tagType } from "../../types";
+import { CountryType, tagType } from "../../types";
 
 const Signup = () => {
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [ListOfCountries, setListOfCountries] = useState<CountryType[]>([])
   const [Country, setCountry] = useState("");
   const [CompanySignupForm, setCompanySignupForm] = useState(true)
   const [CV, setCV] = useState<File>();
@@ -78,15 +79,19 @@ const Signup = () => {
       // If response is 200 OK, complete signup.
       if (response.status === 200) {
         setErrorMessage("");
-/*         setTimeout(() => { */
           SendUserData()
-/*         }, 1000) */
       }
     })
     .catch(error => {
       console.log(error);
     });
   };
+
+  const getCountries = async() => {
+    const data = await fetch("http://localhost:8080/api/v1/country")
+    const json = await data.json()
+    setListOfCountries(json);
+  }
 
   // If CompleteSignup variable is true, the next UI will be shown.
   if (CompleteSignup) {
@@ -133,12 +138,24 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </section>
-        <section>
+        <section className="signupCountry">
           <h1>País</h1>
           <input
             type="text"
+            value={Country}
+            readOnly
+            onClick={() => getCountries()}
             onChange={(e) => setCountry(e.target.value.toLowerCase())}
-          />
+            />
+            {ListOfCountries.length !== 0 && 
+          <article>
+            {ListOfCountries.map((country) => (
+              <h1 
+              key={country.id}
+              onClick={() => setCountry(country.name)}>{country.name}</h1>
+              ))}
+          </article>
+            }
         </section>
         {Role === "worker" 
         ? 

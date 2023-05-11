@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yahir.Workaholic.Countries.Country;
+import com.yahir.Workaholic.Countries.CountryRepo;
 import com.yahir.Workaholic.Resume.ResumeRepository;
 import com.yahir.Workaholic.Roles.Role;
 import com.yahir.Workaholic.Roles.RoleRepository;
@@ -24,12 +26,14 @@ public class UserController {
     private final UserRepository repository;
     private final RoleRepository roleRepository;
     private final ResumeRepository resumeRepository;
+    private final CountryRepo countryRepo;
 
     @Autowired
-    public UserController(UserRepository repository, RoleRepository roleRepository, ResumeRepository resumeRepository) {
+    public UserController(UserRepository repository, RoleRepository roleRepository, ResumeRepository resumeRepository, CountryRepo countryRepo) {
         this.repository = repository;
         this.roleRepository = roleRepository;
         this.resumeRepository = resumeRepository;
+        this.countryRepo = countryRepo;
     }
 
     record newUserRequest(
@@ -46,10 +50,11 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
         User user = new User();
+        Country country = countryRepo.findByName(request.country());
         Role role = roleRepository.findByName(request.role());
         user.setName(request.name());
         user.setEmail(request.email());
-        user.setCountry(request.country());
+        user.setCountry(country);
         user.setPassword(request.password());
         user.setRole(role);        
         String cvPath = "uploads/" + request.email();
