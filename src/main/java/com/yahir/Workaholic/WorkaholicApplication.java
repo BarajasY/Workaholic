@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yahir.Workaholic.Countries.Country;
 import com.yahir.Workaholic.Countries.CountryRepo;
+import com.yahir.Workaholic.Currencies.Currency;
 import com.yahir.Workaholic.Currencies.CurrencyRepository;
 import com.yahir.Workaholic.JobApplications.JobApplicationsRepository;
 import com.yahir.Workaholic.JobTypes.JobType;
 import com.yahir.Workaholic.JobTypes.JobTypeRepository;
 import com.yahir.Workaholic.Postings.PostingsRepository;
+import com.yahir.Workaholic.Rates.Rate;
 import com.yahir.Workaholic.Rates.RateRepository;
 import com.yahir.Workaholic.Resume.ResumeRepository;
 import com.yahir.Workaholic.Roles.Role;
@@ -117,6 +119,39 @@ public class WorkaholicApplication implements CommandLineRunner {
 				repository.save(new JobType(1, "Full-Time"));
 				repository.save(new JobType(2, "Part-Time"));
 				repository.save(new JobType(3, "Freelance"));
+			}
+		};
+	}
+
+	@Bean
+	public CommandLineRunner addSalaryRates(RateRepository repository) {
+		return (args) -> {
+			if (repository.existsById(1)) {
+
+			} else {
+				repository.save(new Rate(1, "hr"));
+				repository.save(new Rate(2, "day"));
+				repository.save(new Rate(3, "week"));
+				repository.save(new Rate(4, "biweekly"));
+				repository.save(new Rate(5, "month"));
+				repository.save(new Rate(6, "year"));
+			}
+		};
+	}
+
+	@Bean
+	public CommandLineRunner addSalaryCurrency(CurrencyRepository repository) {
+		return (args) -> {
+			if(repository.existsById(1)) {
+
+			} else {
+				repository.save(new Currency(1, "MXN"));
+				repository.save(new Currency(2, "USD"));
+				repository.save(new Currency(3, "CAD"));
+				repository.save(new Currency(4, "EUR"));
+				repository.save(new Currency(5, "ARS"));
+				repository.save(new Currency(6, "CLP"));
+				repository.save(new Currency(7, "GBP"));
 			}
 		};
 	}

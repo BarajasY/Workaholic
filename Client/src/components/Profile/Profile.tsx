@@ -51,24 +51,17 @@ const Profile = () => {
 
             <div className="profileSidebar">
             </div>
-            {User.role.name === "worker" 
-                ?
-                <>
                 <div className="profileWorkerInformation">
                     <div className="profileWorkerName">
                         <h1 style={{color:renderColor(User.role.name)}}>{User.name} </h1>
                         <h1 style={{color:renderColor(User.role.name), borderColor:renderColor(User.role.name)}}>{User.role.name}</h1>
                     </div>
                     <p style={{color:renderColor(User.role.name)}}>{User.email}</p>
-                    <p>{User.country.toUpperCase()}</p>
+                    <p>{User.country.name}</p>
                 </div>
                 <div className="profileWorkerJobs">
                     
                 </div>
-                </>
-                :
-                null
-            }
         </div>
         <button onClick={() => Logout()}>Logout</button>
     </div>

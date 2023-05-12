@@ -60,6 +60,9 @@ const Signup = () => {
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
         setCompleteSignup(true);
+        setTimeout(() => {
+          navigate("/login")
+        }, 1500);
       }
     })
   }

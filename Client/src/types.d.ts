@@ -49,7 +49,7 @@ export interface userStateInterface {
     id: Number,
     name: String,
     email: String,
-    country: String,
+    country: CountryType,
     role: RoleType,
     logged: Boolean,
     password: String

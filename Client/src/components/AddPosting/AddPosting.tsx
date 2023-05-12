@@ -81,12 +81,11 @@ const AddPosting = () => {
         salary: Number(Salary),
         salaryCurrency: SalaryCurrency,
         salaryRate: SalaryRate,
-        location: Location,
         duration: Duration,
         date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
         tags: PostingTags,
-        benefits: BenefitsArray,
-        company_id: user.id
+        benefits: BenefitsArray.toString(),
+        userId: user.id
       })
     }).then(response => {
       if(response.status === 200) {
@@ -132,6 +131,8 @@ const AddPosting = () => {
               <select name="SalaryRate" value={SalaryRate} onChange={(e) => setSalaryRate(e.target.value)}>
                 <option value="hr">/hr</option>
                 <option value="day">/day</option>
+                <option value="week">/week</option>
+                <option value="biweekly">/biweekly</option>
                 <option value="month">/month</option>
                 <option value="year">/year</option>
               </select>
@@ -139,7 +140,10 @@ const AddPosting = () => {
                 <option value="MXN">$MXN</option>
                 <option value="USD">$USD</option>
                 <option value="CAD">$CAD</option>
-                <option value="ARG">$ARG</option>
+                <option value="GBP">$GBP</option>
+                <option value="EUR">$EUR</option>
+                <option value="ARS">$ARS</option>
+                <option value="CLP">$CLP</option>
               </select>
               </article>
           </section>
@@ -150,19 +154,6 @@ const AddPosting = () => {
                 return <p key={index} className={JobTypeArray.includes(item) ? "JobTypeSelected" : ""} onClick={() => AddJobType(item)}>{item}</p>
               })}
             </article>
-          </section>
-          <section>
-            <article className="PostingAddress">
-              <h1>Dirección completa</h1>
-              <p>Remoto</p>
-              <input type="checkbox" className='AddressCheckbox' onClick={() => IsRemoteFunction()}/>
-            </article>
-            <input type="text" 
-            placeholder='Municipio, Estado, Colonia, Calle, Numero'
-            className={IsRemote ? "Unchangeable" : ""}
-            value={Location}
-            readOnly = {IsRemote}
-            onChange={(e) => setLocation(e.target.value)}/>
           </section>
           <section>
             <article className='PostingDuration'>
