@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import './JobPost.css';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { PostingType, userType } from '../../types';
+import { PostingType, jobTypeType, userType } from '../../types';
 import { useDispatch, useSelector } from 'react-redux';
-import { storePosting } from '../../redux/PostingSlice';
+import { storePosting } from '../../redux/postingSlice';
 
 const JobPost = () => {
-  const user = useSelector((state:userType) => state.worker)
+  const user = useSelector((state:userType) => state.user)
   const dispatch = useDispatch()
     const {id} = useParams();
     const navigate = useNavigate()
@@ -33,17 +33,17 @@ const JobPost = () => {
     <div className="jobPostContainer">
       <div className="jobPostHeader">
         <h1 className='jobPostTitle'>{data.title}</h1>
-        <p className='jobPostCompany'>{data.businessName}</p>
+        <p className='jobPostCompany'>{data.user.name}</p>
         <div className="jobPostDateAndCountry">
           <p className="jobPostCountry">{data.country}</p>
           <p className="jobPostDate">{data.date}</p>
         </div>
         <div className="jobPostTypeContainer">
-          {data.jobType.map((type:string, i:number) => (
-            <p className='jobPostType' key={i}>{type}</p>
+          {data.jobTypes.map((type: jobTypeType) => (
+            <p className='jobPostType' key={type.id}>{type.type}</p>
           ))}
         </div>
-        <p className='jobPostSalary'>$ {data.salary} {data.salaryCurrency} per {data.salaryRate}</p>
+        <p className='jobPostSalary'>$ {data.salary} {data.currency.code} per {data.rate.rateName}</p>
       </div>
       <div className="jobPostAbout">
         <section>
@@ -52,24 +52,15 @@ const JobPost = () => {
             <p>{data.description}</p>
           </div>
         </section>
-        <p className='jobPostLocation'>Ubicación: <span>{data.location}</span></p>
-        <p className='jobPostDuration'>Duración: {data.duration === "Indefinite" ? <span>{data.duration}</span> : <span>{data.duration} Meses</span> }</p>
+        <p className='jobPostDuration'>Duración: {data.duration === 0 ? <span>Remoto</span> : <span>{data.duration} Meses</span> }</p>
         <ul className='jobPostBenefitsContainer'>
           <h1 className='jobPostBenefitsHeader'>Beneficios</h1>
-          {data.benefits.map((benefit:string, i:number) => (
+          {data.benefits.split(',').map((benefit:string, i:number) => (
             <li className='jobPostBenefit' key={i}>{benefit}</li>
           ))}
         </ul>
       </div>
-      <div className="jobPostTagsContainer">
-        <h1 className='jobPostTagsHeader'>Tags</h1>
-        <section>
-          {data.tags.map((tag:string, i:number) => (
-            <p className='jobPostTag' key={i}>{tag}</p>
-            ))}
-        </section>
-      </div>
-      {user.Role === "worker" 
+      {user.role.name === "worker" 
        ?
             <div className="jobPostApplyButton">
               <Link to="./apply" onClick={() => storePostingData()}>

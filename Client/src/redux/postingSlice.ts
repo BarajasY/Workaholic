@@ -2,29 +2,38 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const postingInitialState = {
     id: 0,
-    businessName: "",
     title : "",
     description: "",
-    jobType: [""],
+    jobType: [{
+        id:0,
+        type: ""
+    }],
     salary: 0,
-    salaryCurrency: "",
-    salaryRate: "",
-    location: "",
-    country: "",
+    currency: {
+        id: 0,
+        code: ""
+    },
+    rate: {
+        id: 0,
+        rateName: ""
+    },
     duration: "",
     date: "",
-    tags: [""],
     benefits: [""],
-    company : {
+    user : {
         id: 0,
         name: "",
-        location: "",
         password: "",
-        owner: "",
         email: "",
-        country: "",
-        tags: "",
-        role: ""
+        cvPath: "",
+        country: {
+            id: 0,
+            name: ""
+        },
+        role: {
+            id: 0,
+            name: ""
+        }
     }
 }
 
@@ -36,7 +45,7 @@ export const postingSlice = createSlice({
             const {title, id, company} = action.payload;
             state.title = title,
             state.id = id,
-            state.company.id = company.id
+            state.user.id = company.id
         },
         resetPosting: () => postingInitialState
     }

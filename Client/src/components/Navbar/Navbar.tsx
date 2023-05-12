@@ -5,15 +5,15 @@ import {Link} from 'react-router-dom'
 import './Navbar.css';
 import { CompanyType, WorkerType, companyStateInterface, userStateInterface, userType, workerStateInterface } from '../../types';
 import Cookies from 'universal-cookie';
-import { storeWorker, storeCompany } from '../../redux/workerSlice';
 import store from '../../redux/store';
 import { AiOutlineSetting } from 'react-icons/ai';
+import { storeUser } from '../../redux/userSlice';
 
 const Navbar = () => {
     const cookies = new Cookies();
     const allCokies = cookies.getAll();
     const dispatch = useDispatch();
-    dispatch(storeCompany(allCokies));
+    dispatch(storeUser(allCokies));
     const User = useSelector((state:userType) => state.user);
     
   return (

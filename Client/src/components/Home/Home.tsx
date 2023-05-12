@@ -6,10 +6,10 @@ import { userType } from '../../types';
 
 const Home = () => {
   const navigate = useNavigate();
-  const user = useSelector((state:userType) => state.worker)
+  const user = useSelector((state:userType) => state.user)
 
   useEffect(() => {
-    if(user.Logged) {
+    if(user.logged) {
       navigate('/browse')
     }
   }, [])

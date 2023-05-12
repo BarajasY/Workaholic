@@ -11,11 +11,11 @@ const JobApply = () => {
   const [CoverLetter, setCoverLetter] = useState("")
   const [ErrorMessage, setErrorMessage] = useState("")
 
-  const user = useSelector((state: userType) => state.worker);
+  const user = useSelector((state: userType) => state.user);
   const posting = useSelector((state: any) => state.posting);
-  const email = user.Email;
+  const email = user.email;
 
-  if(user.Role !== "worker") {
+  if(user.role.name !== "worker") {
     navigate("/home")
   }
 
@@ -32,7 +32,7 @@ const JobApply = () => {
   });
 
   const verifyApplication = async() => {
-    const get = await fetch(`http://localhost:8080/api/v1/jobapplication/verify/${user.Id}/${posting.id}`)
+    const get = await fetch(`http://localhost:8080/api/v1/jobapplication/verify/${user.id}/${posting.id}`)
     if(get.status === 409) {
       setErrorMessage("Ya aplicaste a este puesto.")
       window.scrollTo({top: 0, behavior: "smooth"})
@@ -48,7 +48,7 @@ const JobApply = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        worker_id: user.Id,
+        worker_id: user.id,
         company_id: posting.company.id,
         posting_id: posting.id,
         coverLetter: CoverLetter
@@ -79,13 +79,13 @@ const JobApply = () => {
         <div className="jobApplyNames">
           <section>
             <h1>
-              <span>Name: </span>{user.FName} {user.LName}
+              <span>Name: </span>{user.name}
             </h1>
           </section>
         </div>
         <div className="jobApplyEmail">
           <h1>
-            <span>Email: </span>{user.Email}
+            <span>Email: </span>{user.email}
           </h1>
         </div>
         <div className="jobApplyResume">

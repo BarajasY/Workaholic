@@ -98,3 +98,8 @@ export type CountryType = {
     id: number,
     name: string
 }
+
+export type jobTypeType = {
+    id: number,
+    type: string
+}

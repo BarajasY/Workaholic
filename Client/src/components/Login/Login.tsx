@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
 import './Login.css'
-import { storeWorker, storeCompany } from '../../redux/workerSlice';
 import { companyInterface, userStateInterface, workerInterface } from '../../types';
 import { storeUser } from '../../redux/userSlice';
 
@@ -50,21 +49,6 @@ const Login = () => {
     })
   }
 
-/*   const storeWorkerLogin = (data: workerInterface) => {
-    const cookies = new Cookies();
-    cookies.set('Logged', true, {path: "/"})
-    cookies.set('Email', data.email, {path: "/"});
-    cookies.set('FName', data.fname, {path: "/"});
-    cookies.set('LName', data.lname, {path: "/"});
-    cookies.set('Country', data.country, {path: "/"});
-    cookies.set("Role", data.role, {path: "/"});
-    cookies.set('Tags', data.tags, {path: "/"});
-    cookies.set('Id', data.id, {path: "/"});
-    const cookieData = cookies.getAll();
-    dispatch(storeWorker(cookieData))
-    navigate("/browse")
-  } */
-
   const storeUserLogin = (data:userStateInterface) => {
     const cookies = new Cookies();
     cookies.set('logged', true)
@@ -78,23 +62,6 @@ const Login = () => {
     dispatch(storeUser(cookieData))
     navigate("/browse")
   }
-  
-/*   const storeCompanyLogin = (data: companyInterface) => {
-    const cookies = new Cookies();
-    cookies.set('Logged', true, {path: "/"})
-    cookies.set('CompanyName', data.name, {path: "/"})
-    cookies.set('Password', data.password, {path: "/"})
-    cookies.set('Email', data.email, {path: "/"})
-    cookies.set('CompanyOwner', data.owner, {path: "/"})
-    cookies.set('Country', data.country, {path: "/"})
-    cookies.set('CompanyLocation', data.location, {path: "/"})
-    cookies.set("Role", data.role, {path: "/"})
-    cookies.set("Tags", data.tags, {path: "/"})
-    cookies.set("Id", data.id, {path: "/"})
-    const cookieData = cookies.getAll();
-    dispatch(storeCompany(cookieData))
-    navigate("/browse")
-  } */
 
   return (
     <div className="loginContainer">
