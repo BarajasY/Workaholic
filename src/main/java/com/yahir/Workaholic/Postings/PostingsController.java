@@ -82,15 +82,27 @@ public class PostingsController {
 
     public Set<JobType> findJobTypes(String[] array) {
         Set<JobType> ArrayOfTypes = new HashSet<JobType>(); 
-        if(array.length == 1) {
-            JobType jobType1 = jobTypeRepository.findByType(array[0]);
-            ArrayOfTypes.add(jobType1);
-        } else if (array.length == 2) {
-            JobType jobType2 = jobTypeRepository.findByType(array[1]);
-            ArrayOfTypes.add(jobType2);
-        } else if (array.length == 3) {
-            JobType jobType3 = jobTypeRepository.findByType(array[2]);
-            ArrayOfTypes.add(jobType3);
+        switch (array.length) {
+            case 1:
+                JobType jobType1 = jobTypeRepository.findByType(array[0]);
+                ArrayOfTypes.add(jobType1);
+                break;
+            case 2:
+                JobType jobType2 = jobTypeRepository.findByType(array[0]);
+                ArrayOfTypes.add(jobType2);
+                JobType jobType3 = jobTypeRepository.findByType(array[1]);
+                ArrayOfTypes.add(jobType3);
+                break;
+            case 3:
+                JobType jobType4 = jobTypeRepository.findByType(array[0]);
+                ArrayOfTypes.add(jobType4);
+                JobType jobType5 = jobTypeRepository.findByType(array[1]);
+                ArrayOfTypes.add(jobType5);
+                JobType jobType6 = jobTypeRepository.findByType(array[2]);
+                ArrayOfTypes.add(jobType6);
+                break;
+            default:
+                break;
         }
         return ArrayOfTypes;
     }
