@@ -8,15 +8,16 @@ const Home = () => {
   const navigate = useNavigate();
   const user = useSelector((state:userType) => state.user)
 
-  useEffect(() => {
+/*   useEffect(() => {
     if(user.logged) {
       navigate('/browse')
     }
-  }, [])
+  }, []) */
   
 
   return (
     <div className="homeContainer">
+      <p>Presenting</p>
         <h1>
             <span>W</span>
             <span>o</span>
@@ -30,7 +31,8 @@ const Home = () => {
             <span>c</span>
         </h1>
         <div className="homeButtons">
-            <Link to="/signup">Buscar empleo</Link>
+            <h1>Your place to look out for 
+              <Link to="/signup">Jobs</Link></h1>
         </div>
     </div>
   )

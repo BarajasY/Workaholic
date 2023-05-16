@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <div className="navbarContainer">
         <div className="logo">
-            <Link to={User.logged ? "/browse" : "/home"}>Workaholic</Link>
+            <Link to={User.logged ? "/home" : "/home"}>Workaholic</Link>
         </div>
         <div className="links">
           {User.logged

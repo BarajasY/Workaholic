@@ -4,41 +4,57 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     z-index: -1;
+    background-image: repeating-linear-gradient(135deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(22.5deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(194,74%,56%),hsl(266,74%,56%),hsl(338,74%,56%),hsl(50,74%,56%),hsl(122,74%,56%));
 }
 
-.homeContainer h1 {
+.homeContainer h1, .homeContainer p {
     display: flex;
+    background-image: repeating-linear-gradient(135deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(22.5deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(194,74%,56%),hsl(266,74%,56%),hsl(338,74%,56%),hsl(50,74%,56%),hsl(122,74%,56%));
+}
+
+.homeContainer p:nth-child(1) {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--navyblue);
 }
 
 .homeContainer h1 span{
     display: block;
     position: relative;
-    font-size: 150px;
-    color: var(--color8);
+    font-size: 180px;
+    color: var(--navyblue);
     cursor:default;
-    text-shadow: 0px 5px 10px var(--color8);
-    background: none;
+    text-shadow: 0px 5px 10px var(--navyblue);
+    background-image: repeating-linear-gradient(135deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(22.5deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(194,74%,56%),hsl(266,74%,56%),hsl(338,74%,56%),hsl(50,74%,56%),hsl(122,74%,56%));
 }
 
-.homeContainer h1 span:hover {
-    color: var(--darkblue);
-    text-shadow: 0px 10px 20px var(--darkblue);
-}
 
-.homeButtons a {
+/* .homeContainer h1 span:hover {
+    color: var(--cobaltblue);
+    text-shadow: 0px 5px 30px var(--cobaltblue);
+    transform: translateY(-10px);
+} */
+
+/* .homeButtons a {
     position: relative;
     display: block;
     color: var(--color5);
-    font-size: 20px;
+    font-size: 25px;
+    font-weight: 800;
     border: 2px solid var(--color5);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 5px 10px var(--color5);
+    background: white;
 }
 
 .homeButtons a:hover {
     transform: translateY(-5px);
     box-shadow: 0px 5px 10px var(--color5) inset;
+} */
+
+.homeButtons {
+    
 }
