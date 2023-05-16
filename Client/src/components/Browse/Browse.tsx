@@ -30,7 +30,7 @@ const Browse:React.FC = () => {
                 <p className='jobDate'>{job.date}</p>
               </div>
                 <p className="companyName">{job.user.name}</p>
-                <h1 className="jobSalary">${job.salary} <span>{job.currency.code} a {job.rate.ratename}</span></h1>
+                <h1 className="jobSalary">${job.salary} <span>{job.currency.code}/{job.rate.rateName}</span></h1>
                 <div className="jobTypeContainer">
                   {job.jobTypes.map((type:jobTypeType) => (
                     <h1 className='type' key={type.id}>{type.type}</h1>

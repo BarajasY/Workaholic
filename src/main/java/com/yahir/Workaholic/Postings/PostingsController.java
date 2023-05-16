@@ -62,7 +62,7 @@ public class PostingsController {
     @PostMapping("/add")
     public Object addJobPosting(@RequestBody newPostingRequest request) {
         Postings Posting = new Postings();
-        User user = userRepository.findById(request.userId());
+        User user = userRepository.findUserById(request.userId());
         Currency currency = currencyRepository.findCurrencyByCode(request.salaryCurrency());
         Rate rate = rateRepository.findRateByRateName(request.salaryRate());
 /*         Set<JobType> jobTypes = jobTypeRepository.findAllByType(request.jobType()); */

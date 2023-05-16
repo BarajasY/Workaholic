@@ -48,9 +48,8 @@ const JobApply = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        worker_id: user.id,
-        company_id: posting.company.id,
-        posting_id: posting.id,
+        UserId: user.id,
+        PostingId: posting.id,
         coverLetter: CoverLetter
       })
     })
@@ -74,7 +73,7 @@ const JobApply = () => {
   return (
     <div className="jobApplyContainer">
       <div className="jobApplyContent">
-        <h1>Usted aplicará al puesto <span>{posting.title}</span> con la siguiente información</h1>
+        <h1>Usted aplicará al puesto <span> {posting.title}</span> con la siguiente información</h1>
         <p>{ErrorMessage}</p>
         <div className="jobApplyNames">
           <section>

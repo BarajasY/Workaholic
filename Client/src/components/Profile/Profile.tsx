@@ -26,6 +26,7 @@ const Profile = () => {
         cookies.remove("country");
         cookies.remove("role");
         cookies.remove("logged");
+        cookies.remove('password')
         dispatch(resetUser())
         navigate("/home")
     }
@@ -48,7 +49,6 @@ const Profile = () => {
   return (
     <div className="profileContainer">
         <div className="profileContent">
-
             <div className="profileSidebar">
             </div>
                 <div className="profileWorkerInformation">
@@ -59,11 +59,10 @@ const Profile = () => {
                     <p style={{color:renderColor(User.role.name)}}>{User.email}</p>
                     <p>{User.country.name}</p>
                 </div>
-                <div className="profileWorkerJobs">
-                    
-                </div>
         </div>
-        <button onClick={() => Logout()}>Logout</button>
+        <div className="profileLogout">
+            <button onClick={() => Logout()}>Logout</button>
+        </div>
     </div>
   )
 }

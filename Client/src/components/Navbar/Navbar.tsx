@@ -3,9 +3,8 @@ import {CgProfile} from 'react-icons/cg';
 import {useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
 import './Navbar.css';
-import { CompanyType, WorkerType, companyStateInterface, userStateInterface, userType, workerStateInterface } from '../../types';
+import { userType} from '../../types';
 import Cookies from 'universal-cookie';
-import store from '../../redux/store';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { storeUser } from '../../redux/userSlice';
 

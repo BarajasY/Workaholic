@@ -4,7 +4,10 @@ export const userInitialState = {
     id: 0,
     name: "",
     email: "",
-    country: "",
+    country: {
+        id: 0,
+        name: ""
+    },
     role : {
         id: 0,
         name: ""

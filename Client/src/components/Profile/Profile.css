@@ -48,3 +48,18 @@
     font-weight: 800;
     font-size: 20px;
 }
+
+.profileLogout button{
+    padding: 10px;
+    font-size: 25px;
+    margin-top: 20px;
+    font-weight: 800;
+    border-radius: 5px;
+    color: var(--error);
+    cursor: pointer;
+}
+
+.profileLogout button:hover {
+    color: white;
+    background: red;
+}

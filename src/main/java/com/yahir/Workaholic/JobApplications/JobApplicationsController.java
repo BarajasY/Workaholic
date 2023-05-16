@@ -20,7 +20,7 @@ import com.yahir.Workaholic.Users.UserRepository;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/v1/jobapplication")
+@RequestMapping("api/v1/jobapplication/")
 public class JobApplicationsController {
     
     @Autowired
@@ -31,31 +31,32 @@ public class JobApplicationsController {
     private PostingsRepository postingsRepository;
 
     record newJobAppRequest(
-        Integer user_id,
-        Integer posting_id,
+        Number UserId,
+        Number PostingId,
         String coverLetter
     ){}
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public Object addJobApplication(@RequestBody newJobAppRequest request) {
-        User test = userRepository.findById(request.user_id()).get();
-        Postings test3 = postingsRepository.findById(request.posting_id()).get();
+        User test = userRepository.findUserById(request.UserId());
+        Postings test3 = postingsRepository.findPostingsById(request.PostingId());
         JobApplications jobApplications = new JobApplications();
         jobApplications.user(test);
         jobApplications.posting(test3);
         jobApplications.coverLetter(request.coverLetter());
         repository.save(jobApplications);
+        System.out.println("Hola");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public List<JobApplications> allJobApplications() {
         return repository.findAll();
     }
 
-    @GetMapping("verify/{user_id}/{posting_id}")
-    public Object verifyJobApplication(@PathVariable Number user_id, @PathVariable Number posting_id) {
-        if(repository.existsByUser_idAndPosting_id(user_id, posting_id)) {
+    @GetMapping("/verify/{UserId}/{PostingId}")
+    public Object verifyJobApplication(@PathVariable Number UserId, @PathVariable Number PostingId) {
+        if(repository.existsByUserIdAndPostingId(UserId, PostingId)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(HttpStatus.OK);

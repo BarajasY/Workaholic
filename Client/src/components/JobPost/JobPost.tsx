@@ -27,6 +27,7 @@ const JobPost = () => {
 
     const storePostingData = () => {
       dispatch(storePosting(data))
+      navigate("./apply")
     }
 
   return (
@@ -63,9 +64,7 @@ const JobPost = () => {
       {user.role.name === "worker" 
        ?
             <div className="jobPostApplyButton">
-              <Link to="./apply" onClick={() => storePostingData()}>
                 <button onClick={() => storePostingData()}>Apply</button>
-              </Link>
             </div>
        :
             null

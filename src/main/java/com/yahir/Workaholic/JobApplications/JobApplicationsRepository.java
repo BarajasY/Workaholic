@@ -6,5 +6,5 @@ public interface JobApplicationsRepository extends JpaRepository<JobApplications
     
     Boolean existsByUser_id(Number id);
 
-    Boolean existsByUser_idAndPosting_id(Number user_id, Number posting_id);
+    Boolean existsByUserIdAndPostingId(Number UserId, Number PostingId);
 }

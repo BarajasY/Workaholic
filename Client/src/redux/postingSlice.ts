@@ -42,10 +42,10 @@ export const postingSlice = createSlice({
     initialState: postingInitialState,
     reducers : {
         storePosting: (state, action) => {
-            const {title, id, company} = action.payload;
+            const {title, id, user} = action.payload;
             state.title = title,
             state.id = id,
-            state.user.id = company.id
+            state.user.id = user.id
         },
         resetPosting: () => postingInitialState
     }

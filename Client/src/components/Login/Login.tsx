@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
 import './Login.css'
-import { companyInterface, userStateInterface, workerInterface } from '../../types';
+import { userStateInterface} from '../../types';
 import { storeUser } from '../../redux/userSlice';
 
 const Login = () => {
@@ -12,7 +12,8 @@ const Login = () => {
   const [ErrorMessage, setErrorMessage] = useState("")
   const dispatch = useDispatch();
   const navigate = useNavigate()
-
+  const cookies = new Cookies();
+  
   const Login = () => {
     if(Email === "" && Password === "") {
       setErrorMessage("Rellene todos los espacios por favor")
@@ -50,17 +51,16 @@ const Login = () => {
   }
 
   const storeUserLogin = (data:userStateInterface) => {
-    const cookies = new Cookies();
     cookies.set('logged', true)
     cookies.set('id', data.id)
     cookies.set('name', data.name)
     cookies.set('email', data.email)
-    cookies.set('password', data.password)
     cookies.set('country', data.country)
     cookies.set('role', data.role)
     const cookieData = cookies.getAll();
-    dispatch(storeUser(cookieData))
+/*     dispatch(storeUser(cookieData)) */
     navigate("/browse")
+    navigate(0)
   }
 
   return (
