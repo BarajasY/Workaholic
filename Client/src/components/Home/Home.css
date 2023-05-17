@@ -9,7 +9,7 @@
     background-image: repeating-linear-gradient(135deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(22.5deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(194,74%,56%),hsl(266,74%,56%),hsl(338,74%,56%),hsl(50,74%,56%),hsl(122,74%,56%));
 }
 
-.homeContainer h1, .homeContainer p {
+.homeContainer p {
     display: flex;
     background-image: repeating-linear-gradient(135deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(22.5deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(194,74%,56%),hsl(266,74%,56%),hsl(338,74%,56%),hsl(50,74%,56%),hsl(122,74%,56%));
 }
@@ -20,15 +20,25 @@
     color: var(--blueishblack);
 }
 
+.homeContainer h1:nth-child(2){
+    display: flex;
+    padding: 20px;
+    border: 2px solid var(--blueishblack);
+    border-radius: 5px;
+    margin: 20px 0px;
+    background: var(--blueishblack) !important;
+    box-shadow: 5px 5px 10px var(--blueishblack);
+}
+
 .homeContainer h1 span{
     display: block;
     position: relative;
-    font-size: 180px;
+    font-size: 150px;
     letter-spacing: 5px;
-    color: var(--navyblue);
     cursor:default;
-    text-shadow: 0px 5px 10px var(--navyblue);
+    background: var(--blueishblack) !important;
     background-image: repeating-linear-gradient(135deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(22.5deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(194,74%,56%),hsl(266,74%,56%),hsl(338,74%,56%),hsl(50,74%,56%),hsl(122,74%,56%));
+    color: white;
 }
 
 
@@ -37,28 +47,30 @@
     text-shadow: 0px 5px 20px var(--cobaltblue);
 }
 
-/* .homeButtons a {
-    position: relative;
-    display: block;
-    color: var(--color5);
-    font-size: 25px;
-    font-weight: 800;
-    border: 2px solid var(--color5);
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 5px 10px var(--color5);
-    background: white;
-}
-
-.homeButtons a:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 5px 10px var(--color5) inset;
-} */
-
 .homeButtons {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: repeating-linear-gradient(135deg, 
+    rgb(255,255,255) 0px, 
+    rgb(255,255,255) 10px,transparent 10px, transparent 11px),
+    repeating-linear-gradient(22.5deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,
+    transparent 10px, transparent 11px),
+    linear-gradient(90deg, hsl(194,74%,56%),hsl(266,74%,56%),hsl(338,74%,56%),
+    hsl(50,74%,56%)
+    ,hsl(122,74%,56%));
+}
+
+.homeButtons h1 {
+    background-image: repeating-linear-gradient(135deg, 
+    rgb(255,255,255) 0px, 
+    rgb(255,255,255) 10px,transparent 10px, transparent 11px),
+    repeating-linear-gradient(22.5deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,
+    transparent 10px, transparent 11px),
+    linear-gradient(90deg, hsl(194,74%,56%),hsl(266,74%,56%),hsl(338,74%,56%),
+    hsl(50,74%,56%)
+    ,hsl(122,74%,56%));
+
 }
 
 .homeButtons a{

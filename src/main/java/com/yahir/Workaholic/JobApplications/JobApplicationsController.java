@@ -19,7 +19,7 @@ import com.yahir.Workaholic.Users.User;
 import com.yahir.Workaholic.Users.UserRepository;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("api/v1/jobapplication/")
 public class JobApplicationsController {
     

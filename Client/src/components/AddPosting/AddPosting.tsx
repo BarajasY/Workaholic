@@ -92,7 +92,7 @@ const AddPosting = () => {
         setSuccessfullyPosted(true)
         window.scrollTo({top: 0, behavior: "smooth"})
         setTimeout(() => {
-          navigate("/home")
+          navigate("/browse")
         }, 1500)
       }
     })

@@ -32,7 +32,7 @@ const JobPost = () => {
     }
 
     const verifyApplication=async() => {
-      const check = await fetch(`http://localhost:8080/api/v1/jopbapplication/verify/${user.id}/${data.id}`)
+      const check = await fetch(`http://localhost:8080/api/v1/jobapplication/verify/${user.id}/${data.id}`)
       if(check.status === 409) {
         setErrorMessage("Already applied to this job post.")
         window.scrollTo({top: 0, behavior: "smooth"})

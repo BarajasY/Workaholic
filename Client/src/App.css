@@ -53,6 +53,7 @@
   font-family: 'Poppins';
   transition: .2s;
   background: white;
+/*   border: 2px solid red !important; */
 }
 
 ::-webkit-scrollbar {

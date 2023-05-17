@@ -80,7 +80,7 @@ const Profile = () => {
             ? <h1 style={{marginTop: "10px"}}>No job postings were found</h1> 
             :
             <>
-            <h1 style={{marginTop: "10px"}}>Puestos</h1>
+            <h1 style={{marginTop: "10px"}}>Posts Made</h1>
                 <div className="profileCompanyData">
                     {data.map((post:PostingType) => (
                         <div className="profileCompanyPost">
