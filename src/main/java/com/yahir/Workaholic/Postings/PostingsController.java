@@ -120,4 +120,14 @@ public class PostingsController {
     public List<Postings> showAll() {
         return repository.findAll();
     }
+
+    @GetMapping("/user/{id}")
+    public Object showPostingsByUserId(@PathVariable Number id) {
+        User user = userRepository.findUserById(id);
+        List<Postings> posts = repository.findAllPostingsByUser(user);
+        if(posts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return repository.findAllPostingsByUser(user);
+    }
 }

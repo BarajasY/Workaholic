@@ -24,6 +24,7 @@ import com.yahir.Workaholic.Roles.RoleRepository;
 import com.yahir.Workaholic.Tags.Tag;
 import com.yahir.Workaholic.Tags.TagRepository;
 import com.yahir.Workaholic.UploadResume.UploadService.FileStorageService;
+import com.yahir.Workaholic.Users.User;
 import com.yahir.Workaholic.Users.UserRepository;
 
 import jakarta.annotation.Resource;
@@ -107,6 +108,25 @@ public class WorkaholicApplication implements CommandLineRunner {
 				repository.save(new Country(8, "Alemania"));
 				repository.save(new Country(9, "Portugal"));
 				repository.save(new Country(10, "Chile"));
+			}
+		};
+	}
+
+	@Bean
+	public CommandLineRunner addAdmin(UserRepository repository) {
+		return (args) -> {
+			if(repository.existsById(1)) {
+
+			} else {
+				User admin = new User();
+				Country country = countryRepo.findByName("Mexico");
+				Role role = roleRepository.findByName("admin");
+				admin.setName("admin");
+				admin.setEmail("admin@workaholic.com");
+				admin.setPassword("admin");
+				admin.setCvPath(null);
+				admin.setRole(role);
+				admin.setCountry(country);
 			}
 		};
 	}

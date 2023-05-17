@@ -11,6 +11,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .profileWorkerInformation {
@@ -35,6 +37,12 @@
     border-radius: 5px;
 }
 
+.profileWorkerName h1:nth-child(2):hover {
+    background: var(--blueishblack);
+    color: white !important;
+    border: 2px solid var(--blueishblack) !important;
+}
+
 .profileWorkerInformation p:nth-child(2) {
     font-size: 30px;
     font-weight: 500;
@@ -55,11 +63,35 @@
     margin-top: 20px;
     font-weight: 800;
     border-radius: 5px;
-    color: var(--error);
+    color: var(--cherryred);
     cursor: pointer;
 }
 
 .profileLogout button:hover {
     color: white;
-    background: red;
+    background: var(--cherryred);
+}
+
+.profileCompanyData {
+    width: 50%;
+}
+
+.profileCompanyPost {
+    border: 2px solid var(--blueishblack);
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 5px 0px;
+    border-radius: 5px;
+    color: var(--blueishblack);
+    align-items: center;
+    font-size: 12px;
+}
+
+.profileCompanyPost h1:nth-child(2) {
+    color: white;
+    background: var(--blueishblack);
+    padding: 5px 10px;
+    border-radius: 5px;
 }

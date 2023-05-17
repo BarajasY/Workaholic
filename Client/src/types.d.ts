@@ -79,19 +79,17 @@ export type tagType = {
 }
 
 export type PostingType = {
-    id: Number,
-    businessName: String,
+    id: number,
     title: String,
     description: String,
-    jobType: String[],
-    salary: Number,
-    salaryCurrency: String,
-    salaryRate: String,
-    location: String,
-    duration: String,
+    jobTypes: jobTypeType[],
+    salary: number,
+    currency: currencyType,
+    rate: rateType,
+    duration: number,
     date: String,
-    tags: string[],
-    benefits: string[]
+    benefits: string,
+    user: userStateInterface
 }
 
 export type CountryType = {
@@ -102,4 +100,14 @@ export type CountryType = {
 export type jobTypeType = {
     id: number,
     type: string
+}
+
+export type currencyType = {
+    id: number,
+    code: string
+}
+
+export type rateType = {
+    id: number,
+    rateName: string
 }

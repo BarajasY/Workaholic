@@ -11,6 +11,7 @@ const JobPost = () => {
   const dispatch = useDispatch()
     const {id} = useParams();
     const navigate = useNavigate()
+    const [ErrorMessage, setErrorMessage] = useState("")
     
     const { isLoading, error, data} = useQuery({
       queryKey: [`jobPost`, id],
@@ -30,9 +31,20 @@ const JobPost = () => {
       navigate("./apply")
     }
 
+    const verifyApplication=async() => {
+      const check = await fetch(`http://localhost:8080/api/v1/jopbapplication/verify/${user.id}/${data.id}`)
+      if(check.status === 409) {
+        setErrorMessage("Already applied to this job post.")
+        window.scrollTo({top: 0, behavior: "smooth"})
+      } else {
+        storePostingData()
+      }
+    }
+
   return (
     <div className="jobPostContainer">
       <div className="jobPostHeader">
+        <h1 style={{color: "var(--cherryred)"}}>{ErrorMessage}</h1>
         <h1 className='jobPostTitle'>{data.title}</h1>
         <p className='jobPostCompany'>{data.user.name}</p>
         <div className="jobPostDateAndCountry">
@@ -64,7 +76,7 @@ const JobPost = () => {
       {user.role.name === "worker" 
        ?
             <div className="jobPostApplyButton">
-                <button onClick={() => storePostingData()}>Apply</button>
+                <button onClick={() => verifyApplication()}>Apply</button>
             </div>
        :
             null
