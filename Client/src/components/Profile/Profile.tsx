@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { resetUser } from "../../redux/userSlice";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { PostingType, userType } from "../../types";
 import { useQuery } from "@tanstack/react-query";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 const Profile = () => {
+  const [MessageActive, setMessageActive] = useState(false)
+  const [Message, setMessage] = useState("")
   const navigate = useNavigate();
   const User = useSelector((state: userType) => state.user);
   const dispatch = useDispatch();
@@ -56,8 +59,45 @@ const Profile = () => {
     }
   }
 
+  const deletePost = async(post:PostingType) => {
+    const request = await fetch(`http://localhost:8080/api/v1/postings/delete/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        post
+      })
+    });
+    if(request.status === 400) {
+      DisappearingMessage("Bad petition")
+    } else {
+      navigate(0)
+      setTimeout(() => {
+        DisappearingMessage("Post eliminated")
+      }, 2000)
+    }
+  }
+
+  const DisappearingMessage = (message:string) => {
+    setMessageActive(true)
+    setMessage(message)
+    setTimeout(() => {
+      setMessageActive(false)
+      setMessage("")
+    }, 2000)
+  }
+
   return (
     <div className="profileContainer">
+      <AnimatePresence>
+        <motion.h1 
+        initial={{opacity: 0, y: 0}}
+        animate={{opacity: 1, y: -100}}
+        exit={{opacity: 0}}
+        transition={{duration: 2}}
+        className="disappearingMessage">{Message}</motion.h1>
+      </AnimatePresence>
       <div className="profileContent">
         <div className="profileWorkerInformation">
           <div className="profileWorkerName">
@@ -87,6 +127,10 @@ const Profile = () => {
                             <h1>{post.title}</h1>
                             <h1>{post.salary} {post.currency.code} /{post.rate.rateName}</h1>
                             <h1>{post.date}</h1>
+                            <div className="postIcons">
+                              <AiFillDelete className="icon" onClick={() => deletePost(post)}/>
+                              <AiFillEdit className="icon"/>
+                            </div>
                         </div>
                     ))}
                 </div>

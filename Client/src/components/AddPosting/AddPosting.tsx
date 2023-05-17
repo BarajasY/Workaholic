@@ -57,14 +57,10 @@ const AddPosting = () => {
       }
     }
   }
-
-  const IsRemoteFunction = () => {
-    setIsRemote(!IsRemote)
-      setLocation("Remote")
-  }
+  
   const IsIndefiniteFunction = () => {
     setIsIndefinite(!IsIndefinite)
-    setDuration("Indefinite")
+    setDuration("0")
   }
 
   const AddPosting = () => {

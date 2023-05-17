@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -129,5 +130,20 @@ public class PostingsController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return repository.findAllPostingsByUser(user);
+    }
+
+    record newPostDeleteRequest(
+        Postings post
+    ){}
+
+    @PostMapping("/delete/")
+    public Object deletePost(@RequestBody newPostDeleteRequest request) {
+        Postings deletePost = repository.findPostingsById(request.post().getId());
+        if(deletePost.getUser().equals(request.post().getUser())) {
+            repository.deleteById(deletePost.getId());;
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

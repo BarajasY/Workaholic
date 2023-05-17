@@ -6,6 +6,13 @@
     align-items: center;
 }
 
+.disappearingMessage {
+    position: absolute;
+    margin-top: 30vh;
+    padding: 30px;
+    color: var(--cherryred);
+}
+
 .profileContent {
     margin-top: 90px;
     width: 100%;
@@ -100,4 +107,17 @@
     border: 2px solid var(--cherryred);
     cursor: pointer;
     transform: translateY(-5px);
+}
+
+.icon {
+    font-size: 28px;
+    margin: 0px 5px;
+}
+
+.postIcons .icon:nth-child(1):hover {
+    color: var(--cherryred);
+}
+
+.postIcons .icon:nth-child(2):hover {
+    color: var(--teal);
 }

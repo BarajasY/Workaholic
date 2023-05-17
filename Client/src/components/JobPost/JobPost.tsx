@@ -65,7 +65,7 @@ const JobPost = () => {
             <p>{data.description}</p>
           </div>
         </section>
-        <p className='jobPostDuration'>Duración: {data.duration === 0 ? <span>Remoto</span> : <span>{data.duration} Meses</span> }</p>
+        <p className='jobPostDuration'>Duración: {data.duration === 0 ? <span>Indefinite</span> : <span>{data.duration} Meses</span> }</p>
         <ul className='jobPostBenefitsContainer'>
           <h1 className='jobPostBenefitsHeader'>Beneficios</h1>
           {data.benefits.split(',').map((benefit:string, i:number) => (
