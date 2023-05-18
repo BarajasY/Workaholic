@@ -11,6 +11,7 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 const Profile = () => {
   const [MessageActive, setMessageActive] = useState(false)
+  const [EditActive, setEditActive] = useState(false)
   const [Message, setMessage] = useState("")
   const navigate = useNavigate();
   const User = useSelector((state: userType) => state.user);
@@ -45,18 +46,9 @@ const Profile = () => {
   };
 
   function renderColor(role: String) {
-    switch (role) {
-      case "admin":
-        return "var(--golden)";
-        break;
-      case "worker":
-        return "var(--teal)";
-        break;
-      case "company":
-        return "var(--cobaltblue)";
-      default:
-        break;
-    }
+    if(role === "admin") return "var(--golden)";
+    if(role === "worker") return "var(--teal)";
+    if(role === "company") return "var(--cobaltblue)";
   }
 
   const deletePost = async(post:PostingType) => {
@@ -66,7 +58,8 @@ const Profile = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        post
+        post_id: post.id,
+        company: post.user
       })
     });
     if(request.status === 400) {
@@ -91,12 +84,33 @@ const Profile = () => {
   return (
     <div className="profileContainer">
       <AnimatePresence>
-        <motion.h1 
-        initial={{opacity: 0, y: 0}}
-        animate={{opacity: 1, y: -100}}
-        exit={{opacity: 0}}
-        transition={{duration: 2}}
-        className="disappearingMessage">{Message}</motion.h1>
+        {MessageActive && 
+          <motion.h1 
+          initial={{opacity: 0, y: 0}}
+          animate={{opacity: 1, y: -100}}
+          exit={{opacity: 0}}
+          transition={{duration: 2}}
+          className="disappearingMessage">{Message}</motion.h1>
+        }
+        {EditActive &&
+        <>
+          <motion.div 
+          className="editShade"
+          initial={{opacity: 0}}
+          whileInView={{opacity: 1}}
+          exit={{opacity: 0}}></motion.div>
+          <motion.div 
+          className="editContent"
+          initial={{opacity: 0}}
+          whileInView={{opacity: 1}}
+          exit={{opacity: 0}}>
+            <div className="editButtons">
+              <button>Finish</button>
+              <button onClick={() => setEditActive(false)}>Cancel</button>
+            </div>
+          </motion.div>
+        </>
+        }
       </AnimatePresence>
       <div className="profileContent">
         <div className="profileWorkerInformation">
@@ -129,7 +143,7 @@ const Profile = () => {
                             <h1>{post.date}</h1>
                             <div className="postIcons">
                               <AiFillDelete className="icon" onClick={() => deletePost(post)}/>
-                              <AiFillEdit className="icon"/>
+                              <AiFillEdit className="icon" onClick={() => setEditActive(true)}/>
                             </div>
                         </div>
                     ))}

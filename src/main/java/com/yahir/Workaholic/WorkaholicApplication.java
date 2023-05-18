@@ -112,25 +112,7 @@ public class WorkaholicApplication implements CommandLineRunner {
 		};
 	}
 
-	@Bean
-	public CommandLineRunner addAdmin(UserRepository repository) {
-		return (args) -> {
-			if(repository.existsById(1)) {
-
-			} else {
-				User admin = new User();
-				Country country = countryRepo.findByName("Mexico");
-				Role role = roleRepository.findByName("admin");
-				admin.setName("admin");
-				admin.setEmail("admin@workaholic.com");
-				admin.setPassword("admin");
-				admin.setCvPath(null);
-				admin.setRole(role);
-				admin.setCountry(country);
-			}
-		};
-	}
-
+	
 	@Bean
 	public CommandLineRunner createJobTypes(JobTypeRepository repository) {
 		return (args) -> {
@@ -142,12 +124,12 @@ public class WorkaholicApplication implements CommandLineRunner {
 			}
 		};
 	}
-
+	
 	@Bean
 	public CommandLineRunner addSalaryRates(RateRepository repository) {
 		return (args) -> {
 			if (repository.existsById(1)) {
-
+				
 			} else {
 				repository.save(new Rate(1, "hr"));
 				repository.save(new Rate(2, "day"));
@@ -158,12 +140,12 @@ public class WorkaholicApplication implements CommandLineRunner {
 			}
 		};
 	}
-
+	
 	@Bean
 	public CommandLineRunner addSalaryCurrency(CurrencyRepository repository) {
 		return (args) -> {
 			if(repository.existsById(1)) {
-
+				
 			} else {
 				repository.save(new Currency(1, "MXN"));
 				repository.save(new Currency(2, "USD"));
@@ -175,7 +157,7 @@ public class WorkaholicApplication implements CommandLineRunner {
 			}
 		};
 	}
-
+	
 	@Bean
 	public CommandLineRunner createTags(TagRepository repository) {
 		return (args) -> {
@@ -199,4 +181,26 @@ public class WorkaholicApplication implements CommandLineRunner {
 			}
 		};
 	}
+
+/* 	@Bean
+	public CommandLineRunner addAdmin(UserRepository repository) {
+		return (args) -> {
+			if(repository.existsById(1)) {
+	
+			} else {
+				User admin = new User();
+				Country country = countryRepo.findByName("Mexico");
+				Role role = roleRepository.findByName("admin");
+				admin.setName("admin");
+				admin.setEmail("admin@workaholic.com");
+				admin.setPassword("admin");
+				admin.setCvPath(null);
+				admin.setRole(role);
+				admin.setRole(new Role(2, "admin"));
+				admin.setCountry(new Country(1, "Mexico"));
+				admin.setCountry(country);
+				userRepository.save(admin);
+			}
+		};
+	} */
 }

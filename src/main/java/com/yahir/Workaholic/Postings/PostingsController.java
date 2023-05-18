@@ -133,14 +133,15 @@ public class PostingsController {
     }
 
     record newPostDeleteRequest(
-        Postings post
+        Integer post_id,
+        User company
     ){}
 
     @PostMapping("/delete/")
     public Object deletePost(@RequestBody newPostDeleteRequest request) {
-        Postings deletePost = repository.findPostingsById(request.post().getId());
-        if(deletePost.getUser().equals(request.post().getUser())) {
-            repository.deleteById(deletePost.getId());;
+        Postings deletePost = repository.findPostingsById(request.post_id());
+        if(deletePost.getUser().equals(request.company())) {
+            repository.delete(deletePost);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

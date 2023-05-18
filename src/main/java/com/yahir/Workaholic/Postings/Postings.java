@@ -43,24 +43,24 @@ public class Postings{
     private String title;
     @Column(nullable = false)
     private String description;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "posting_types", 
                 joinColumns = {@JoinColumn(name = "posting_id")},
                 inverseJoinColumns = {@JoinColumn(name = "jobtype_id")})
     Set<JobType> jobTypes;  
     @Column(nullable = false)
     private Number salary;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "currency_id", nullable = false)
     private Currency currency;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "rate_id", nullable = false)
     private Rate rate;
     @Column(nullable = false)
     private Number duration;
     private String date;
     private String benefits;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name =  "company_id", nullable = false)
     private User user;
 
