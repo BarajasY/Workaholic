@@ -25,6 +25,7 @@ function App() {
               <Route path="/browse" element={<Index.Browse />} />
               <Route path="/browse/:id" element={<Index.JobPost />} />
               <Route path="/browse/:id/apply" element={<Index.JobApply />} />
+              <Route path="/settings" element={<Index.AdminSettings />} />
             </Routes>
             <Index.Footer />
           </BrowserRouter>

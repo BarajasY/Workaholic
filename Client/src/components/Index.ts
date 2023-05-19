@@ -9,3 +9,4 @@ export {default as Browse } from './Browse/Browse';
 export {default as AddPosting} from './AddPosting/AddPosting';
 export {default as JobPost} from './JobPost/JobPost';
 export {default as JobApply } from './JobApply/JobApply';
+export {default as AdminSettings} from './AdminSettings/AdminSettings';
