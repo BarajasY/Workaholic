@@ -10,3 +10,6 @@ export {default as AddPosting} from './AddPosting/AddPosting';
 export {default as JobPost} from './JobPost/JobPost';
 export {default as JobApply } from './JobApply/JobApply';
 export {default as AdminSettings} from './AdminSettings/AdminSettings';
+export { default as jobApp} from './AdminSettings/jobApp/jobApp';
+export {default as Users } from './AdminSettings/Users/Users';
+export {default as Posts } from './AdminSettings/Posts/Posts';

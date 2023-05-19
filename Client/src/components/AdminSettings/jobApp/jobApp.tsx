@@ -1,4 +1,5 @@
 import React from 'react'
+import './jobApp.css';
 
 const jobApp = () => {
   return (

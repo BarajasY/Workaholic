@@ -24,6 +24,7 @@
     font-size: 20px;
     cursor: pointer;
     color: var(--success2);
+    font-weight: 800;
 }
 
 #addAdmin:hover {
@@ -34,11 +35,14 @@
 .addIcon {
     background: white;
     transition: .2s;
+    font-weight: 800;
+    font-size: 30px;
+    margin-right: 5px;
 }
 
 #addAdmin:hover .addIcon {
     background: var(--success2);
-    margin-right: 10px;
+    margin-right: 15px;
     transform: rotate(180deg);
 }
 
