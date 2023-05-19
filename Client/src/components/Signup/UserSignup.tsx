@@ -62,7 +62,7 @@ const Signup = () => {
         setCompleteSignup(true);
         setTimeout(() => {
           navigate("/login")
-        }, 1500);
+        }, 1000);
       }
     })
   }

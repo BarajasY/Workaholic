@@ -10,9 +10,21 @@ import { useQuery } from "@tanstack/react-query";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 const Profile = () => {
-  const [MessageActive, setMessageActive] = useState(false)
+  const [Post, setPost] = useState<PostingType>()
+  const [EditTitle, setEditTitle] = useState("")
+  const [EditDescription, setEditDescription] = useState("")
+  const [EditSalary, setEditSalary] = useState(0)
+  const [EditRate, setEditRate] = useState("")
+  const [EditCurrency, setEditCurrency] = useState("")
+  const [EditDuration, setEditDuration] = useState(0)
+  const [EditJobType, setEditJobType] = useState([""])
   const [EditActive, setEditActive] = useState(false)
+
+  const jobType = ["Full-Time", "Part-Time", "Freelance"]
+  
+  const [MessageActive, setMessageActive] = useState(false)
   const [Message, setMessage] = useState("")
+
   const navigate = useNavigate();
   const User = useSelector((state: userType) => state.user);
   const dispatch = useDispatch();
@@ -72,6 +84,30 @@ const Profile = () => {
     }
   }
 
+  const editPost = async() => {
+    const post = await fetch("http://localhost:8080/api/v1/postings/edit/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: Post?.id,
+        title: EditTitle,
+        description: EditDescription,
+        salary: EditSalary,
+        rate: EditRate,
+        currency: EditCurrency,
+        duration: EditDuration,
+        jobType: EditJobType
+      })
+    })
+    if(post.status === 200) {
+      setEditActive(false)
+      navigate(0)
+      DisappearingMessage("Post edited successfully")
+    }
+  }
+
   const DisappearingMessage = (message:string) => {
     setMessageActive(true)
     setMessage(message)
@@ -79,6 +115,27 @@ const Profile = () => {
       setMessageActive(false)
       setMessage("")
     }, 2000)
+  }
+
+  const EditFunction = (post:PostingType) => {
+    setPost(post);
+    setEditActive(true)
+    setEditJobType(post.jobTypes.map(t => t.type))
+    setEditTitle(post.title)
+    setEditDescription(post.description)
+    setEditSalary(post.salary)
+    setEditRate(post.rate.rateName)
+    setEditCurrency(post.currency.code)
+    setEditDuration(post.duration)
+  }
+
+  const JobTypeFunction = (type:string) => {
+    const JobTypeAlreadyIn = EditJobType.includes(type)
+    if(JobTypeAlreadyIn) {
+      setEditJobType(EditJobType.filter(t => t !== type))
+    } else {
+      setEditJobType([...EditJobType, type])
+    }
   }
 
   return (
@@ -104,9 +161,73 @@ const Profile = () => {
           initial={{opacity: 0}}
           whileInView={{opacity: 1}}
           exit={{opacity: 0}}>
+            <section>
+              <p>Title</p>
+              <input 
+              type="text" 
+              placeholder={Post?.title}
+              onChange={(e) => setEditTitle(e.target.value)}/>
+            </section>
+            <section className="editDescription">
+              <p>Description</p>
+              <textarea rows={4} placeholder={Post?.description} onChange={(e) => setEditDescription(e.target.value)}/>
+            </section>
+            <section id="editSalary">
+              <p>Salary</p>
+              <article>
+                <input 
+                  type="number" 
+                  placeholder={Post?.salary.toString()}
+                  onChange={(e) => setEditSalary(Number(e.target.value))}/>
+                <select 
+                name="EditSalaryRate" 
+                onChange={(e) => setEditRate(e.target.value)} 
+                value={EditRate}
+                placeholder={Post?.rate.rateName}>
+                  <option value="hr">/hr</option>
+                  <option value="day">/day</option>
+                  <option value="week">/week</option>
+                  <option value="biweekly">/biweekly</option>
+                  <option value="month">/month</option>
+                  <option value="year">/year</option>
+                </select>
+                <select name="EditSalaryCurrency" 
+                onChange={(e) => setEditCurrency(e.target.value)} 
+                value={EditCurrency}
+                placeholder={Post?.currency.code}>
+                  <option value="MXN">$MXN</option>
+                  <option value="USD">$USD</option>
+                  <option value="CAD">$CAD</option>
+                  <option value="GBP">$GBP</option>
+                  <option value="EUR">$EUR</option>
+                  <option value="ARS">$ARS</option>
+                  <option value="CLP">$CLP</option>
+                </select>
+              </article>
+            </section>
+            <section id="editJobType">
+              <p>Job Type</p>
+              <article>
+                {jobType.map((type, i) => (
+                  <h1 
+                  key={i} 
+                  className={EditJobType.includes(type) ? "selectedJob" : ""}
+                  onClick={() => JobTypeFunction(type)}>{type}</h1>
+                  ))}
+              </article>
+            </section>
+            <section id="editDuration">
+              <p>Duration <span>(0 months = Indefinite)</span></p>
+              <input 
+              type="number" 
+              placeholder={Post?.duration.toString()}
+              onChange={(e) => setEditDuration(Number(e.target.value))}/> Months
+            </section>
             <div className="editButtons">
-              <button>Finish</button>
-              <button onClick={() => setEditActive(false)}>Cancel</button>
+              <button id="finishButton" onClick={() => editPost()}>Finish</button>
+              <button 
+              id="cancelButton"
+              onClick={() => setEditActive(false)}>Cancel</button>
             </div>
           </motion.div>
         </>
@@ -138,12 +259,12 @@ const Profile = () => {
                 <div className="profileCompanyData">
                     {data.map((post:PostingType) => (
                         <div className="profileCompanyPost">
-                            <h1>{post.title}</h1>
+                            <h1 onClick={() => navigate(`/browse/${post.id}`)}>{post.title}</h1>
                             <h1>{post.salary} {post.currency.code} /{post.rate.rateName}</h1>
                             <h1>{post.date}</h1>
                             <div className="postIcons">
                               <AiFillDelete className="icon" onClick={() => deletePost(post)}/>
-                              <AiFillEdit className="icon" onClick={() => setEditActive(true)}/>
+                              <AiFillEdit className="icon" onClick={() => EditFunction(post)}/>
                             </div>
                         </div>
                     ))}

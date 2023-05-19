@@ -40,10 +40,10 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Country country;
     private String cvPath;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 

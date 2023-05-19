@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -146,5 +147,30 @@ public class PostingsController {
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    record newPostEditRequest(
+        Number id,
+        String title,
+        String description,
+        Number salary,
+        String rate,
+        String currency,
+        Number duration,
+        String[] jobType
+        ) {}
+
+    @PostMapping("/edit/")
+    public Object editPost(@RequestBody newPostEditRequest request) {
+        Postings updatePost = repository.findPostingsById(request.id());
+        updatePost.setTitle(request.title());
+        updatePost.setDescription(request.description());
+        updatePost.setSalary(request.salary());
+        updatePost.setRate(rateRepository.findRateByRateName(request.rate()));
+        updatePost.setCurrency(currencyRepository.findCurrencyByCode(request.currency()));
+        updatePost.setDuration(request.duration());
+        updatePost.setJobTypes(findJobTypes(request.jobType()));
+        repository.save(updatePost);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

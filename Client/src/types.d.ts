@@ -80,8 +80,8 @@ export type tagType = {
 
 export type PostingType = {
     id: number,
-    title: String,
-    description: String,
+    title: string,
+    description: string,
     jobTypes: jobTypeType[],
     salary: number,
     currency: currencyType,

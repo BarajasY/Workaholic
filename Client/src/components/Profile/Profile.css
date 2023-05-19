@@ -96,6 +96,32 @@
     font-size: 12px;
 }
 
+.profileCompanyPost h1:nth-child(1) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 500px;
+}
+
+.profileCompanyPost h1:nth-child(1):hover {
+    color: var(--teal);
+}
+
+.profileCompanyPost h1:nth-child(1):after {
+    position: relative;
+    width: 0px;
+    content: "";
+    display: block;
+    height: 2px;
+    background: var(--blueishblack);
+    z-index: 1;
+    transition: .2s;
+}
+
+.profileCompanyPost h1:nth-child(1):hover:after {
+    width: 100%;
+}
+
 .profileCompanyPost h1:nth-child(2) {
     color: white;
     background: var(--blueishblack);
@@ -112,6 +138,8 @@
 .icon {
     font-size: 28px;
     margin: 0px 5px;
+    z-index: 1;
+    position: relative;
 }
 
 .postIcons .icon:nth-child(1):hover {
@@ -136,4 +164,109 @@
     width: 70%;
     height: 70%;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.editContent section {
+    width: 60%;
+    margin: 5px 0px;
+}
+
+.editContent section p {
+    color: var(--blueishblack);
+    font-weight: 800;
+    font-size: 25px;
+}
+
+.editContent section input {
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 20px;
+    width: 100%;
+}
+
+.editContent section article {
+    width: 100%;
+}
+
+.editDescription textarea {
+    width: 100%;
+    padding: 5px;
+    font-size: 18px;
+}
+
+#editSalary article input{
+    width: 40% !important;
+    text-align: center;
+}
+
+#editSalary article select {
+    width: 15% !important;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#editJobType article{
+    display: flex;
+}
+
+#editJobType article h1 {
+    margin: 10px;
+    border: 2px solid var(--blueishblack);
+    padding: 10px;
+    cursor: pointer;
+    color: var(--blueishblack);
+    border-radius: 5px;
+}
+
+.selectedJob, #editJobType article h1:hover {
+    background: var(--blueishblack) !important;
+    color: white !important;
+}
+
+#editDuration input{
+    width: 30%;
+    text-align: center;
+}
+
+#editDuration {
+    font-weight: 800;
+    font-size: 20px;
+}
+
+#editDuration p span {
+    color: var(--color6);
+    font-size: 15px;
+}
+
+.editButtons button{
+    padding: 10px;
+    font-size: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: 800;
+}
+
+#finishButton {
+    color: var(--blueishblack);
+}
+
+#finishButton:hover {
+    background: var(--blueishblack);
+    color: white;
+    cursor: pointer;
+}
+
+#cancelButton {
+    color: var(--cherryred);
+}
+
+#cancelButton:hover {
+    background: var(--cherryred);
+    color: white;
+    cursor: pointer;
 }

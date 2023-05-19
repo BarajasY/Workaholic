@@ -89,7 +89,7 @@ const AddPosting = () => {
         window.scrollTo({top: 0, behavior: "smooth"})
         setTimeout(() => {
           navigate("/browse")
-        }, 1500)
+        }, 1000)
       }
     })
   }
