@@ -75,3 +75,31 @@
     color: white;
     cursor: pointer;
 }
+
+.usersTableColumns {
+    display: flex;
+    width: 80%;
+    justify-content: space-around;
+    padding: 10px;
+    margin: 10px 0px;
+    border: 2px solid var(--blueishblack);
+    border-radius: 5px;
+}
+
+.usersTable {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.userRecord {
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid var(--blueishblack);
+    width: 80%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 10px;
+}
