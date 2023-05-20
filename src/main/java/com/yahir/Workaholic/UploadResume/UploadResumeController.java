@@ -58,7 +58,7 @@ public class UploadResumeController {
     public Object getFile(@PathVariable String email) {
         Object file = storageService.load(email);
         HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=yahirmb7568@gmail.com.pdf");
+        headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=");
         headers.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE);
         headers.set(HttpHeaders.CONTENT_ENCODING, "UTF-8");
         return new ResponseEntity<>(file, headers, HttpStatus.OK);

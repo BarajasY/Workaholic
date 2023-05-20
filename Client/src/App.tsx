@@ -17,9 +17,11 @@ function App() {
             <Index.Navbar />
             <Routes>
               <Route path="/" element={<Index.Intro />} />
+              <Route path="*" element={<Index.Home />} />
               <Route path="/home" element={<Index.Home />} />
               <Route path="/signup" element={<Index.UserSignup />} />
               <Route path="/profile" element={<Index.Profile />} />
+              <Route path="/profile/applications/:id" element={<Index.JobApplications />} />
               <Route path="/login" element={<Index.Login />} />
               <Route path="/add" element={<Index.AddPosting />} />
               <Route path="/browse" element={<Index.Browse />} />

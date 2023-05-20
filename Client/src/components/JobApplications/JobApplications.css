@@ -1,0 +1,77 @@
+.applicationsContainer {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.applicationsContent {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.applicationsContent h1:nth-child(1) span{
+    color: var(--teal);
+}
+
+.applicationsColumns, .application {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid var(--blueishblack);
+    color: var(--blueishblack);
+    border-radius: 5px;
+    align-items: center;
+}
+
+.application h1 {
+    font-size: 20px;
+}
+
+.applicationIcon {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.applicationIcon:hover {
+    color: var(--teal);
+}
+
+.applicationCVShade {
+    width: 100%;
+    height: 100%;
+    filter: blur(30px);
+    position: absolute;
+}
+
+.applicationCV {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 80%;
+    border: 2px solid var(--blueishblack);
+}
+
+.closeCVButton {
+    padding: 10px;
+    color: var(--cherryred);
+    font-weight: 800;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.closeCVButton:hover {
+    background: var(--cherryred);
+    color: white;
+    cursor: pointer;
+}

@@ -15,7 +15,8 @@ const Users = () => {
     }
   })
   if(isLoading) return <h1>Loading</h1>
-  if(error) return console.log(error)
+  if(error) console.log(error)
+
   return (
     <div className="usersContainer">
       <h1>List of Users</h1>

@@ -1,6 +1,7 @@
 package com.yahir.Workaholic.JobApplications;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -60,6 +61,12 @@ public class JobApplicationsController {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/application/{Id}")
+    public Object showApplicationsByPostId(@PathVariable Number Id) {
+        Set<JobApplications> applications = repository.findAllByPostingId(Id);
+        return applications;
     }
 
 }

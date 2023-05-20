@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { resetUser } from "../../redux/userSlice";
 import { AnimatePresence, motion } from "framer-motion";
-import { PostingType, userType } from "../../types";
+import { PostingInterface, PostingType, userType } from "../../types";
 import { useQuery } from "@tanstack/react-query";
-import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { AiFillEdit, AiFillDelete, AiOutlineBars } from "react-icons/ai";
+import { storePosting } from "../../redux/postingSlice";
 
 const Profile = () => {
-  const [Post, setPost] = useState<PostingType>()
+  const [Post, setPost] = useState<PostingInterface>()
   const [EditTitle, setEditTitle] = useState("")
   const [EditDescription, setEditDescription] = useState("")
   const [EditSalary, setEditSalary] = useState(0)
@@ -63,7 +64,7 @@ const Profile = () => {
     if(role === "company") return "var(--cobaltblue)";
   }
 
-  const deletePost = async(post:PostingType) => {
+  const deletePost = async(post:PostingInterface) => {
     const request = await fetch(`http://localhost:8080/api/v1/postings/delete/`, {
       method: "POST",
       headers: {
@@ -117,7 +118,7 @@ const Profile = () => {
     }, 2000)
   }
 
-  const EditFunction = (post:PostingType) => {
+  const EditFunction = (post:PostingInterface) => {
     setPost(post);
     setEditActive(true)
     setEditJobType(post.jobTypes.map(t => t.type))
@@ -136,6 +137,11 @@ const Profile = () => {
     } else {
       setEditJobType([...EditJobType, type])
     }
+  }
+
+  const goToApplications = (post:PostingInterface) => {
+    navigate(`./applications/${post.id}`)
+    dispatch(storePosting(post))
   }
 
   return (
@@ -257,14 +263,15 @@ const Profile = () => {
             <>
             <h1 style={{marginTop: "10px"}}>Posts Made</h1>
                 <div className="profileCompanyData">
-                    {data.map((post:PostingType) => (
-                        <div className="profileCompanyPost">
+                    {data.map((post:PostingInterface) => (
+                        <div className="profileCompanyPost" key={post.id}>
                             <h1 onClick={() => navigate(`/browse/${post.id}`)}>{post.title}</h1>
                             <h1>{post.salary} {post.currency.code} /{post.rate.rateName}</h1>
                             <h1>{post.date}</h1>
                             <div className="postIcons">
                               <AiFillDelete className="icon" onClick={() => deletePost(post)}/>
                               <AiFillEdit className="icon" onClick={() => EditFunction(post)}/>
+                              <AiOutlineBars className="icon" onClick={() => goToApplications(post)}/>
                             </div>
                         </div>
                     ))}

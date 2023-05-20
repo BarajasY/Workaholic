@@ -13,3 +13,4 @@ export {default as AdminSettings} from './AdminSettings/AdminSettings';
 export { default as jobApp} from './AdminSettings/jobApp/jobApp';
 export {default as Users } from './AdminSettings/Users/Users';
 export {default as Posts } from './AdminSettings/Posts/Posts';
+export {default as JobApplications} from './JobApplications/JobApplications'
