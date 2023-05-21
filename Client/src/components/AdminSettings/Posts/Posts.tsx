@@ -12,6 +12,8 @@ const Posts = () => {
       return await get.json();
     },
   });
+  if(isLoading) return <h1>Loading</h1>
+  if(error) console.log(error)
 
   return (
     <div className="postsContainer">
@@ -26,8 +28,12 @@ const Posts = () => {
         <h1>Company</h1>
         <h1>Country</h1>
       </div>
-      {data.map((post: PostingInterface) => (
-        <div className="postWrapper">
+      {
+        data.length > 0 
+        ? 
+        <>
+        {data.map((post: PostingInterface) => (
+          <div className="postWrapper">
           <div className="postRecord">
             <h1>{post.title}</h1>
             <h1>{post.salary}</h1>
@@ -41,6 +47,9 @@ const Posts = () => {
           <AiFillDelete className="deleteIcon"/>
         </div>
       ))}
+      </>
+      : <h1>No posts found</h1>
+    }
     </div>
   );
 };

@@ -64,5 +64,5 @@ export type rateType = {
 export interface jobApplicationInterface {
     coverLetter: string,
     user: userStateInterface, 
-    post: PostingInterface
+    posting: PostingInterface
 }
