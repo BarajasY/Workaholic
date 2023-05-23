@@ -24,14 +24,21 @@ const jobApp = () => {
         <h1>User Name</h1>
         <h1>Company Name</h1>
       </div>
-      {data.map((application:jobApplicationInterface) => (
-        <div className="jobApplicationRecord">
-          <h1>{application.user.id.toString()}</h1>
-          <h1>{application.posting.id}</h1>
-          <h1>{application.user.name}</h1>
-          <h1>{application.posting.user.name}</h1>
-        </div>
-      ))}
+      {data.length > 0 
+        ?
+        <>
+        {data.map((application:jobApplicationInterface) => (
+          <div className="jobApplicationRecord">
+            <h1>{application.user.id.toString()}</h1>
+            <h1>{application.posting.id}</h1>
+            <h1>{application.user.name}</h1>
+            <h1>{application.posting.user.name}</h1>
+          </div>
+        ))}
+        </>
+       :
+          <h1>No applications found</h1>
+       }
     </div>
   )
 }

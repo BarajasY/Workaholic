@@ -40,6 +40,9 @@ const Home = () => {
           <h1>Then you're ready to begin your <span>job hunt</span>.</h1>
         </section>
       </div>
+      <div className="homeContent3">
+        <h1>Start now by creating your <Link to="/signup" id='HomeAccountButton'>Account</Link></h1>
+      </div>
     </div>
   )
 }
