@@ -10,6 +10,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 const AdminSettings = () => {
     const [AdminCreate, setAdminCreate] = useState(false)
     const [ListOfCountries, setListOfCountries] = useState<CountryType[]>([])
+    const [ErrorMessage, setErrorMessage] = useState("")
+    const [Name, setName] = useState("")
+    const [Email, setEmail] = useState("")
+    const [Password, setPassword] = useState("")
     const [Country, setCountry] = useState("")
     const navigate = useNavigate();
     const cookies = new Cookies();
@@ -28,8 +32,30 @@ const AdminSettings = () => {
       setListOfCountries(json)
     }
 
+    const sendAdmin = async() => {
+      const post = await fetch("http://localhost:8080/api/v1/user/admin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Name,
+          Email,
+          Password,
+          Country
+        })
+      })
+      if(post.status === 409) {
+        setErrorMessage("Email already exists")
+        window.scrollTo({top: 0, behavior: "smooth"})
+      } else {
+        setAdminCreate(false)
+      }
+    }
+
   return (
     <div className="adminContainer">
+      <h1>{ErrorMessage === "" ? null : ErrorMessage}</h1>
       <AnimatePresence>
         {AdminCreate 
         ? 
@@ -40,15 +66,15 @@ const AdminSettings = () => {
         className="createAdminContainer">
           <section>
             <h1>Name</h1>
-            <input type="text" />
+            <input type="text" onChange={(e) => setName(e.target.value)}/>
           </section>
           <section>
             <h1>Email</h1>
-            <input type="text" />
+            <input type="text" onChange={(e) => setEmail(e.target.value)}/>
           </section>
           <section>
             <h1>Password</h1>
-            <input type="text" />
+            <input type="password" onChange={(e) => setPassword(e.target.value)}/>
           </section>
           <section id='countrySection'>
             <h1>Country</h1>
@@ -71,7 +97,7 @@ const AdminSettings = () => {
             }
           </section>
             <div className="createAdminButtons">
-              <button>Send</button>
+              <button onClick={() => sendAdmin()}>Send</button>
               <button onClick={() => setAdminCreate(false)}>Close</button>
             </div>
           </motion.div>

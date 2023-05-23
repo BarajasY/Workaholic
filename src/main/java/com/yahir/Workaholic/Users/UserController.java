@@ -67,6 +67,32 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    record newAdminRegisterRequest(
+        String Name,
+        String Email,
+        String Password,
+        String Country
+    ){}
+
+    @PostMapping("/admin")
+    private Object registerAdmin(@RequestBody newAdminRegisterRequest request) {
+        if(repository.existsByEmail(request.Email())) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } else {
+            Country country = countryRepo.findByName(request.Country());
+            Role role = roleRepository.findByName("admin");
+            User admin = new User();
+            admin.setEmail(request.Email());
+            admin.setCvPath("null");
+            admin.setCountry(country);
+            admin.setName(request.Name());
+            admin.setRole(role);
+            admin.setPassword(request.Password());
+            repository.save(admin);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
     @GetMapping("/all")
     public List<User> showUsers() {
         return repository.findAll();

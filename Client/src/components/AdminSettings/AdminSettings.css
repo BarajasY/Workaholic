@@ -86,3 +86,69 @@
     background: var(--skyblue);
     color: white;
 }
+
+.createAdminContainer {
+    height: 60%;
+}
+
+.createAdminContainer section {
+    width: 80%;
+}
+
+.createAdminContainer section h1 {
+    font-size: 20px;
+    color: var(--blueishblack);
+}
+
+.createAdminContainer section input {
+    padding: 5px;
+    width: 50%;
+    border-radius: 5px;
+    border: 2px solid var(--blueishblack);
+    outline: none;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.createAdminContainer section input:focus {
+    box-shadow: none;
+}
+
+#countrySection article{
+    width: 50%;
+    border: 2px solid var(--blueishblack);
+    height: 100px;
+    overflow-y: scroll;
+}
+
+#countrySection article h1:hover {
+    background: var(--blueishblack);
+    color: white;
+    cursor: pointer;
+}
+
+.createAdminButtons button{
+    padding: 5px 10px;
+    font-size: 25px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.createAdminButtons button:nth-child(1) {
+    color: var(--success2);
+}
+
+.createAdminButtons button:nth-child(1):hover {
+    color: white;
+    background: var(--success2);
+}
+
+.createAdminButtons button:nth-child(2) {
+    color: var(--cherryred);
+}
+
+.createAdminButtons button:nth-child(2):hover {
+    background: var(--cherryred);
+    color: white;
+}
