@@ -208,3 +208,21 @@
         font-size: 20px;
     }
 }
+
+@media only screen and (max-width:600px) {
+    .homeContent1 h1 span {
+        font-size: 35px;
+    }
+
+    .homeContent2 {
+        width: 95%;
+    }
+
+    .homeContent2 section {
+        width: 90%;
+    }
+
+    .homeContent3 h1 {
+        font-size: 18px;
+    }
+}

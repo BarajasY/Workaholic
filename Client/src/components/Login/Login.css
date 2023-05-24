@@ -43,6 +43,7 @@
     margin: 10px 0px;
     width: 100%;
     padding: 20px;
+    font-weight: 800;
 }
 
 .loginSubmit {
@@ -57,4 +58,26 @@
     color: white;
     cursor: pointer;
     box-shadow: 2px 2px 10px black;
+}
+
+@media only screen and (max-width: 991px) {
+    .loginContent {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .loginContent p {
+        margin-left: 20px;
+    }
+
+    .loginContent input {
+        padding: 10px;
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .loginContent h1 {
+        font-size: 30px;
+    }
 }

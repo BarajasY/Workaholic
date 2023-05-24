@@ -36,10 +36,10 @@ const Login = () => {
     .then(response => {
       if(response.status === 500) {
         console.clear()
-        setErrorMessage("El correo no existe.")
+        setErrorMessage("El correo o contraseña son incorrectos")
       } else if(response.status === 409) {
         console.clear()
-        setErrorMessage("La contraseña es incorrecta.")
+        setErrorMessage("El correo o contraseña son incorrectos")
       } else if(response.status === 200) {
         response.json().then(data => {
           storeUserLogin(data)

@@ -17,7 +17,7 @@
 
 .signupContent {
     padding: 20px;
-    width: 40%;
+    width: 50%;
 }
 
 .signupContainer h1 {
@@ -33,6 +33,7 @@
     background: none;
     border: 2px solid var(--color5);
     color: var(--color5);
+    font-weight: 800;
 }
 
 input:focus {
@@ -93,27 +94,7 @@ input:focus {
 
 .signupContent section {
     margin: 20px;
-    width: 120%;
-}
-
-.signupTagsInput input {
-    width: 70%;
-    color: var(--eblue);
-    font-weight: 800;
-}
-
-.signupTagsInput button {
-    width: 20%;
-    font-size: 30px;
-    border-radius: 5px;
-    padding: 10px;
-    margin-left: 20px;
-}
-
-.signupTagsInput button:hover {
-    background: var(--teal);
-    color: white;
-    cursor: pointer;
+    width: 100%;
 }
 
 .signupCountry article{
@@ -180,13 +161,25 @@ input:focus {
     color: var(--blend5);
 }
 
-.createAdminContainer {
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid var(--blueishblack);
+@media only screen and (max-width: 991px) {
+    #signupHeader {
+        font-size: 30px;
+    }
+    
+    .signupContent {
+        width: 95%;
+        padding: 0px;
+    }
+
+    .signupContent section {
+        margin: 10px 0px;
+    }
+
+    .signupContent section h1 {
+        font-size: 20px;
+    }
+
+    .signupContent section input {
+        font-size: 20px;
+    }
 }
