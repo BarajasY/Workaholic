@@ -115,7 +115,7 @@
 
 .homeContent2 section{
     display: flex;
-    width: 50%;
+    width: 70%;
     background: var(--blueishblack);
     justify-content: space-around;
     align-items: center;
@@ -172,4 +172,39 @@
     color: white;
     cursor: pointer;
     background: var(--blueishblack) !important;
+}
+
+@media only screen and (max-width:991px) {
+    .homeContent1 p {
+        font-size: 30px !important;
+    }
+    
+    .homeContent1 h1 span {
+        font-size: 70px;
+    }
+
+    .homeButtons h1, .homeButtons a {
+        font-size: 20px;
+    }
+
+    .homeContent2 {
+        width: 90%;
+        height: 50vh;
+    }
+
+    .homeContent2 section {
+        width: 60%;
+    }
+
+    .homeContent2 section h1 {
+        font-size: 20px;
+    }
+
+    .homeIcon {
+        font-size: 40px;
+    }
+
+    .homeContent3 h1 {
+        font-size: 20px;
+    }
 }
