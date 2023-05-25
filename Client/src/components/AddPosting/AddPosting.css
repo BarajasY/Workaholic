@@ -8,9 +8,8 @@
 }
 
 .addPostingForm {
-    width: 30%; 
+    width: 40%; 
     padding: 20px;
-/*     background: var(--whiteshade2); */
     border-radius: 10px;
     margin: 20px;
 }
@@ -217,4 +216,16 @@ section ul li {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media only screen and (max-width: 991px) {
+    .addPostingForm {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .jobType p {
+        font-size: 15px;
+    }
 }

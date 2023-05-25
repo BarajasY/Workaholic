@@ -22,7 +22,6 @@ import com.yahir.Workaholic.Rates.RateRepository;
 import com.yahir.Workaholic.Resume.ResumeRepository;
 import com.yahir.Workaholic.Roles.Role;
 import com.yahir.Workaholic.Roles.RoleRepository;
-import com.yahir.Workaholic.Tags.Tag;
 import com.yahir.Workaholic.Tags.TagRepository;
 import com.yahir.Workaholic.UploadResume.UploadService.FileStorageService;
 import com.yahir.Workaholic.Users.User;
@@ -178,27 +177,4 @@ public class WorkaholicApplication implements CommandLineRunner {
 			}
 		};
 	}
-		/* 	@Bean
-			public CommandLineRunner createTags(TagRepository repository) {
-				return (args) -> {
-					if (repository.existsByTagName("Software")) {
-					} else {
-						repository.save(new Tag(null, "Software"));
-						repository.save(new Tag(null, "Cybersecurity"));
-						repository.save(new Tag(null, "Accuntancy"));
-						repository.save(new Tag(null, "Law"));
-						repository.save(new Tag(null, "Human Resources"));
-						repository.save(new Tag(null, "Marketing"));
-						repository.save(new Tag(null, "Medicine"));
-						repository.save(new Tag(null, "Nursery"));
-						repository.save(new Tag(null, "Teaching"));
-						repository.save(new Tag(null, "Assistant"));
-						repository.save(new Tag(null, "Customer Service"));
-						repository.save(new Tag(null, "Data"));
-						repository.save(new Tag(null, "UI/UX"));
-						repository.save(new Tag(null, "Sales"));
-						repository.save(new Tag(null, "Secretary"));
-					}
-				};
-			} */
 }

@@ -53,3 +53,39 @@
     color: var(--color8);
     border: 2px solid black;
 }
+
+.responsiveMenu {
+    font-size: 20px;
+    display: none;
+}
+
+.responsiveMenuContainer {
+    position: absolute;
+    margin-top: 70px;
+    height: 100vh;
+    width: 100%;
+    display: none;
+}
+
+@media only screen and (max-width: 991px) {
+    .responsiveMenu {
+        display: block;
+    }
+
+    .links a {
+        display: none;
+    }
+
+    .responsiveMenuContainer {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
+
+    .responsiveMenuContainer a {
+        color: var(--blueishblack);
+        margin: 10px 0px;
+    }
+}

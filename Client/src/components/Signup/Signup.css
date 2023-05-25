@@ -167,7 +167,7 @@ input:focus {
     }
     
     .signupContent {
-        width: 95%;
+        width: 90%;
         padding: 0px;
     }
 
@@ -181,5 +181,11 @@ input:focus {
 
     .signupContent section input {
         font-size: 20px;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .isCompanySignup {
+        flex-direction: column;
     }
 }

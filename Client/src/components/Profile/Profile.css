@@ -270,3 +270,28 @@
     color: white;
     cursor: pointer;
 }
+
+@media only screen and (max-width:991px) {
+    .profileContent {
+        width: 95%;
+    }
+
+    .profileWorkerInformation {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .profileWorkerName {
+        flex-direction: column;
+    }
+
+    .profileWorkerName h1 {
+        width: fit-content;
+        font-size: 20px !important;
+    }
+
+    .profileWorkerInformation p {
+        font-size: 25px !important;
+    }
+}

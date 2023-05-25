@@ -1,6 +1,5 @@
 package com.yahir.Workaholic.JobTypes;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
