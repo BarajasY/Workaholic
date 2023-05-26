@@ -8,7 +8,7 @@
 }
 
 .jobApplyContent {
-    margin-top: 90px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -141,4 +141,37 @@
     font-weight: 800;
     font-size: 30px;
     color: var(--color4);
+}
+
+@media only screen and (max-width: 991px) {
+        .jobApplyContent {
+            width: 90%;
+        }
+
+        .jobApplyLetter textarea{
+            width: 90%;
+            padding: 5px;
+        }
+}
+
+@media only screen and (max-width: 600px) {
+    .jobApplyContent {
+        font-size: 10px;
+    }
+
+    .jobApplyNames section h1{
+        font-size: 20px;
+    }
+
+    .jobApplyEmail h1 {
+        font-size: 20px;
+    }
+
+    .jobApplyResume iframe {
+        width: 300px !important;
+    }
+
+    .jobApplyLetter textarea {
+        height: 300px;
+    }
 }

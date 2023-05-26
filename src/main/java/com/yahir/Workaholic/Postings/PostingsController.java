@@ -129,19 +129,14 @@ public class PostingsController {
     }
 
     record newPostDeleteRequest(
-        Integer post_id,
-        User company
+        Integer post_id
     ){}
 
     @PostMapping("/delete/")
     public Object deletePost(@RequestBody newPostDeleteRequest request) {
         Postings deletePost = repository.findPostingsById(request.post_id());
-        if(deletePost.getUser().equals(request.company())) {
-            repository.delete(deletePost);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        repository.delete(deletePost);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     record newPostEditRequest(
@@ -153,7 +148,7 @@ public class PostingsController {
         String currency,
         Number duration,
         String[] jobType
-        ) {}
+    ){}
 
     @PostMapping("/edit/")
     public Object editPost(@RequestBody newPostEditRequest request) {

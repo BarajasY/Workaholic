@@ -71,8 +71,7 @@ const Profile = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        post_id: post.id,
-        company: post.user
+        post_id: post.id
       })
     });
     if(request.status === 400) {

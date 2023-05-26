@@ -51,7 +51,7 @@ const JobApplications = () => {
                 exit={{ opacity: 0 }}
                 src={FileURL}
                 width="500px"
-                height="600px"
+                height="500px"
               ></motion.iframe>
               <button
                 className="closeCVButton"
@@ -74,7 +74,7 @@ const JobApplications = () => {
           <h1>CV</h1>
         </div>
         {data.length > 0 ? (
-          <>
+          <section>
             {data.map((app: jobApplicationInterface) => (
               <div className="application">
                 <h1>{app.user.name}</h1>
@@ -86,7 +86,7 @@ const JobApplications = () => {
                 />
               </div>
             ))}
-          </>
+          </section>
         ) : (
           <h1>No applications found</h1>
         )}

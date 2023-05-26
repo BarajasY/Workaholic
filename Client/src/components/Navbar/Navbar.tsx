@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import {CgList, CgProfile} from 'react-icons/cg';
+import {CgClose, CgList, CgProfile} from 'react-icons/cg';
 import {useDispatch, useSelector } from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom'
 import './Navbar.css';
 import { userType} from '../../types';
 import Cookies from 'universal-cookie';
-import { AiOutlineMenu, AiOutlineSetting } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineMenuFold, AiOutlineSetting } from 'react-icons/ai';
 import { storeUser } from '../../redux/userSlice';
 import { useQuery } from '@tanstack/react-query';
 
@@ -58,7 +58,12 @@ const Navbar = () => {
             <Link to="./signup" id="signup">Signup</Link>
           </>
           }
+          {Menu 
+          ?
+          <CgClose className="responsiveMenu" onClick={() => setMenu(!Menu)}/> 
+          :
           <AiOutlineMenu className="responsiveMenu" onClick={() => setMenu(!Menu)}/>
+          }
         </div>
         {Menu &&
         <div className="responsiveMenuContainer">

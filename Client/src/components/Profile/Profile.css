@@ -23,7 +23,7 @@
 }
 
 .profileWorkerInformation {
-    width: 50%;
+    width: 60%;
     border-radius: 10px;
     padding-top: 20px;
     border: 2px solid var(--eblue);
@@ -80,19 +80,23 @@
 }
 
 .profileCompanyData {
-    width: 50%;
+    width: 70%;
+    padding: 30px;
+    overflow-y: scroll;
+    height: 400px;
+    overflow-x: hidden;
 }
 
 .profileCompanyPost {
     border: 2px solid var(--blueishblack);
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
     padding: 5px;
     margin: 5px 0px;
     border-radius: 5px;
     color: var(--blueishblack);
-    align-items: center;
     font-size: 12px;
 }
 
@@ -100,7 +104,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 500px;
 }
 
 .profileCompanyPost h1:nth-child(1):hover {
@@ -162,7 +165,7 @@
     position: absolute;
     border: 2px solid var(--blueishblack);
     width: 70%;
-    height: 70%;
+    height: 90%;
     z-index: 2;
     display: flex;
     flex-direction: column;
@@ -173,6 +176,10 @@
 .editContent section {
     width: 60%;
     margin: 5px 0px;
+/*     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
 }
 
 .editContent section p {
@@ -204,7 +211,7 @@
 }
 
 #editSalary article select {
-    width: 15% !important;
+    width: 25% !important;
     font-size: 20px;
     padding: 5px;
     border-radius: 5px;
@@ -279,19 +286,75 @@
     .profileWorkerInformation {
         width: 90%;
     }
+
+    .profileCompanyData {
+        width: 90%;
+    }
+
+    .profileCompanyPost {
+        flex-direction: column;
+        font-size: 10px;
+        height: 150px;   
+    }
+
+    .profileCompanyPost h1:nth-child(1) {
+        font-size: 20px;
+    }
+
+    .profileCompanyPost h1:nth-child(2) {
+        font-size: 20px;
+        width: 300px;
+        text-align: center;
+    }
+
+    .editContent {
+        width: 95%;
+    }
+
+    .editContent section {
+        width: 95%;
+    }
+
+    .editContent section p, .editContent section input {
+        font-size: 20px;
+    }
+
+    .editContent section input, .editContent section textarea {
+        width: 90%;
+    }
 }
 
 @media only screen and (max-width:600px) {
+    .profileWorkerInformation {
+        width: 350px;
+        padding: 10px;
+    }
+    
     .profileWorkerName {
         flex-direction: column;
+        padding: 0;
     }
 
     .profileWorkerName h1 {
         width: fit-content;
         font-size: 20px !important;
+        padding: 0;
+    }
+    
+    .profileWorkerInformation p {
+        padding: 0;
+        font-size: 25px !important;
     }
 
-    .profileWorkerInformation p {
-        font-size: 25px !important;
+    .editContent section p, .editContent section input, .editContent section article {
+        font-size: 15px;
+    }
+
+    #editSalary article select {
+        font-size: 15px !important;
+    }
+
+    #editJobType article h1 {
+        font-size: 15px !important;
     }
 }

@@ -28,3 +28,25 @@
 .deleteIcon {
     font-size: 30px;
 }
+
+.deleteIcon:hover {
+    cursor: pointer;
+    color: var(--cherryred);
+}
+
+.postsContainer section {
+    width: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 500px;
+}
+
+@media only screen and (max-width:991px) {
+    .postWrapper {
+        flex-direction: column;
+    }
+
+    .postRecord {
+        flex-direction: column;
+    }
+}

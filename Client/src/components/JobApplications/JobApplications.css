@@ -7,11 +7,15 @@
 }
 
 .applicationsContent {
-    width: 60%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.applicationsContent h1:nth-child(1) {
+    text-align: center;
 }
 
 .applicationsContent h1:nth-child(1) span{
@@ -28,6 +32,14 @@
     color: var(--blueishblack);
     border-radius: 5px;
     align-items: center;
+}
+
+.applicationsColumns h1{
+    font-size: 20px;
+}
+
+.application {
+    width: 95% !important;
 }
 
 .application h1 {
@@ -57,7 +69,7 @@
     align-items: center;
     justify-content: center;
     width: 60%;
-    height: 80%;
+    height: 90%;
     border: 2px solid var(--blueishblack);
 }
 
@@ -102,4 +114,41 @@
     padding: 10px;
     border-radius: 5px;
     font-size: 10px;
+}
+
+.applicationsContent section {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 300px;
+    width: 100%;
+    padding: 5px;
+}
+
+@media only screen and (max-width: 991px) {
+    .applicationsContent {
+        width: 100%;
+    }
+
+    .applicationsColumns {
+        width: 90%;
+    }
+
+    .application{
+        flex-direction: column;
+    }
+
+    .applicationCV {
+        width: 100%;
+        height: 100%;
+    }
+
+    .applicationCV iframe {
+        width: 400px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .application{
+        width: 90% !important;   
+    }
 }
