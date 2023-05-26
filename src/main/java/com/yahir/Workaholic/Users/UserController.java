@@ -116,4 +116,15 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    record newUserDeleteRequest(
+        Number user_id
+    ){}
+
+    @PostMapping("/delete")
+    public Object userDelete(@RequestBody newUserDeleteRequest request) {
+        User user = repository.findUserById(request.user_id());
+        repository.delete(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
