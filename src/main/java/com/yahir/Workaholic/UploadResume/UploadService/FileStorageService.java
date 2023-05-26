@@ -10,6 +10,8 @@ public interface FileStorageService {
 
     public Object load(String email);
 
+    public void delete(String email);
+
     /* public Resource load(String filename); */
 
     /* public void deleteAll();

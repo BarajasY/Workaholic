@@ -64,6 +64,10 @@ public class UploadResumeController {
         return new ResponseEntity<>(file, headers, HttpStatus.OK);
     }
 
+    public void deleteFile(String email) {
+        storageService.delete(email);
+    }
+
 
     @GetMapping("/test")
     public Object test() {

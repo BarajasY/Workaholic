@@ -7,22 +7,58 @@
     align-items: center;
 }
 
-.usersTable {
+.usersTableColumns h1{
+    font-size: 20px;
+}
+
+.usersTable2 {
     width: 80%;
     display: flex;
     flex-direction: column;
+    justify-content: unset;
+    align-items:unset;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 300px;
 }
 
-.usersTable section {
+.usersTable2 section {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: center;
 }
 
-.userDelete {
+.userRecord h1 {
     font-size: 20px;
+}
+
+.userDelete {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.userDelete:hover {
+    color: var(--cherryred);
+}
+
+@media only screen and (max-width: 991px) {
+    .usersTableColumns {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .usersTable2 {
+        height: 400px;
+        width: 90%;
+    }
+
+    .usersTable2 section {
+        flex-direction: column;
+        margin: 10px 0px;
+    }
+
+    .userRecord {
+        flex-direction: column;
+        text-align: center;
+    }
 }

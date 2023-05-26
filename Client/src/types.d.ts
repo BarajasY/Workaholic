@@ -1,11 +1,11 @@
 export interface userStateInterface {
-    id: Number,
+    id: number,
     name: String,
     email: string,
     country: CountryType,
     role: RoleType,
     logged: Boolean,
-    password: String
+    password: string
 }
 
 export type RoleType = {

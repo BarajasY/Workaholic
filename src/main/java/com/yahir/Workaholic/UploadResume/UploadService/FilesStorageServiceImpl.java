@@ -50,4 +50,15 @@ public class FilesStorageServiceImpl implements FileStorageService{
             return e;
         }
     }
+
+    @Override
+    public void delete(String email) {
+        try {
+            String filename = email + ".pdf";
+            Path path = root.toAbsolutePath().resolve(filename);
+            Files.delete(path);
+        } catch (Exception e) {
+            
+        }
+    }
 }

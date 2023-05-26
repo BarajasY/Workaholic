@@ -19,14 +19,15 @@ const Users = () => {
   if(isLoading) return <h1>Loading</h1>
   if(error) console.log(error)
 
-  const deleteUser = async (id:Number) => {
-    const post = await fetch("http://localhost:8080/api/v1/user/delete", {
+  const deleteUser = async (id:number, email:string) => {
+    const post = await fetch("http://localhost:8080/api/v1/user/delete/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        user_id: id
+        user_id: id,
+        email
       })
     })
     if(post.ok) {
@@ -44,7 +45,7 @@ const Users = () => {
         <h1>Country</h1>
         <h1>Role</h1>
       </div>
-      <div className="usersTable">
+      <div className="usersTable2">
         {data.map((user:userStateInterface) => (
           <section>
             <div className="userRecord">
@@ -54,7 +55,7 @@ const Users = () => {
               <h1>{user.country.name}</h1>
               <h1>{user.role.name}</h1>
             </div>
-            <AiFillDelete className='userDelete' onClick={() => deleteUser(user.id)}/>
+            <AiFillDelete className='userDelete' onClick={() => deleteUser(user.id, user.email)}/>
           </section>
           ))}
       </div>
