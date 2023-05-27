@@ -2,8 +2,22 @@ import React from 'react'
 import './jobApp.css';
 import { useQuery } from '@tanstack/react-query';
 import { jobApplicationInterface } from '../../../types';
+import { Chart } from 'react-chartjs-2';
+import {Chart as ChartJS} from 'chart.js/auto';
+import "chart.js/auto";
+ChartJS.register()
 
 const jobApp = () => {
+
+  const test = {
+    type: "bar",
+    labels: ['Hola', "Adios", "jeje"],
+    datasets: [{
+      label: "Testing",
+      data: [[0,1], [4,5], [1,2]],
+      type: "line",
+    }]
+  }
 
   const {isLoading, error, data} = useQuery({
     queryKey: ["QueryAllApplications"],
@@ -24,6 +38,7 @@ const jobApp = () => {
         <h1>User Name</h1>
         <h1>Company Name</h1>
       </div>
+      <Chart data={test} />
       {data.length > 0 
         ?
         <>
