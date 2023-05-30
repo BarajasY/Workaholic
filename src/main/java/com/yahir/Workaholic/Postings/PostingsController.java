@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yahir.Workaholic.Currencies.Currency;
 import com.yahir.Workaholic.Currencies.CurrencyRepository;
+import com.yahir.Workaholic.JobApplications.JobApplications;
+import com.yahir.Workaholic.JobApplications.JobApplicationsRepository;
 import com.yahir.Workaholic.JobTypes.JobType;
 import com.yahir.Workaholic.JobTypes.JobTypeRepository;
 import com.yahir.Workaholic.Rates.Rate;
@@ -33,14 +35,16 @@ public class PostingsController {
     private final CurrencyRepository currencyRepository;
     private final JobTypeRepository jobTypeRepository;
     private final RateRepository rateRepository;
+    private final JobApplicationsRepository jobApplicationsRepository;
 
     public PostingsController(PostingsRepository repository, UserRepository userRepository,
-            CurrencyRepository currencyRepository, JobTypeRepository jobTypeRepository, RateRepository rateRepository) {
+            CurrencyRepository currencyRepository, JobTypeRepository jobTypeRepository, RateRepository rateRepository, JobApplicationsRepository jobApplicationsRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
         this.currencyRepository = currencyRepository;
         this.jobTypeRepository = jobTypeRepository;
         this.rateRepository = rateRepository;
+        this.jobApplicationsRepository = jobApplicationsRepository;
     }
 
     record newPostingRequest(
@@ -118,6 +122,12 @@ public class PostingsController {
         return repository.findAll();
     }
 
+    @GetMapping("all/{contains}")
+    public List<Postings> showAllContaining(@PathVariable String contains) {
+        List<Postings> posts = repository.findAllPostingsByTitleContainingIgnoreCase(contains);
+        return posts;
+    }
+
     @GetMapping("/user/{id}")
     public Object showPostingsByUserId(@PathVariable Number id) {
         User user = userRepository.findUserById(id);
@@ -129,11 +139,14 @@ public class PostingsController {
     }
 
     record newPostDeleteRequest(
-        Integer post_id
+        Number post_id
     ){}
 
     @PostMapping("/delete/")
     public Object deletePost(@RequestBody newPostDeleteRequest request) {
+        /* Set<JobApplications> applications = jobApplicationsRepository.findAllByPostingId(request.post_id());
+        jobApplicationsRepository.; */
+        jobApplicationsRepository.deleteAllByPostingId(request.post_id());
         Postings deletePost = repository.findPostingsById(request.post_id());
         repository.delete(deletePost);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -28,10 +28,10 @@ public class JobApplications {
         generator = "jobApplication_id_generator"
     )
     private Integer id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="user_id", nullable = false)
     private User user;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="posting_id", nullable = false)
     private Postings posting;
     private String coverLetter;

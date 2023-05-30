@@ -18,4 +18,7 @@ public interface JobApplicationsRepository extends JpaRepository<JobApplications
 
     @Transactional
     void deleteAllByUserId(Number UserId);
+
+    @Transactional
+    void deleteAllByPostingId(Number id);
 }

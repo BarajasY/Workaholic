@@ -11,4 +11,6 @@ public interface PostingsRepository extends JpaRepository<Postings, Integer> {
     Postings findPostingsById(Number id);
 
     List<Postings> findAllPostingsByUser(User user);
+    
+    List<Postings> findAllPostingsByTitleContainingIgnoreCase(String title);
 }

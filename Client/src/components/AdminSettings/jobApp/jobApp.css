@@ -7,12 +7,70 @@
     flex-direction: column;
 }
 
-.jobappTableColumns, .jobApplicationRecord {
+.jobappTableColumns {
     width: 60%;
+}
+
+.jobappTableColumns, .jobApplicationRecord {
     padding: 10px;
     margin: 10px 0px;
     display: flex;
     justify-content: space-around;
     border: 2px solid var(--blueishblack);
     border-radius: 5px;
+}
+
+.jobappTableColumns h1{
+    font-size: 20px;
+}
+
+
+.jobApplicationRecord h1 {
+    font-size: 20px;
+}
+
+.chart {
+    height: 300px;
+    width: 600px;
+    padding: 30px;
+}
+
+.JobApplicationTable {
+    width: 60%;
+    padding: 20px;
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.jobApplicationRecord {
+    width: 90% !important;
+    height: 30px;
+}
+
+@media only screen and (max-width: 991px) {
+    .jobappTableColumns {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .JobApplicationTable {
+        width: 95%;
+        padding: 0px;
+    }
+
+    .jobApplicationRecord {
+        width: 50% !important;
+        flex-direction: column;
+        text-align: center;
+        height: 100px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .chart {
+        width: 350px;
+    }
 }

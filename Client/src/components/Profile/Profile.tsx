@@ -65,7 +65,7 @@ const Profile = () => {
   }
 
   const deletePost = async(post:PostingInterface) => {
-    const request = await fetch(`http://localhost:8080/api/v1/postings/delete/`, {
+    const request = await fetch("http://localhost:8080/api/v1/postings/delete/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const Profile = () => {
     if(request.status === 400) {
       DisappearingMessage("Bad petition")
     } else {
-      navigate(0)
+      navigate(0);
       setTimeout(() => {
         DisappearingMessage("Post eliminated")
       }, 2000)
